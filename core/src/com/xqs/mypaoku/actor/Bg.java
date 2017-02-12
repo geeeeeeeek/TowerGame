@@ -11,7 +11,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
  * Created by Administrator on 2017/1/15 0015.
  */
 
-public class BgActor extends BaseImageActor {
+public class Bg extends BaseImageActor {
 
     private Texture texture;
     private TextureRegion region;
@@ -22,7 +22,7 @@ public class BgActor extends BaseImageActor {
 
     private int x=0;
 
-    public BgActor(MyPaokuGame mainGame) {
+    public Bg(MyPaokuGame mainGame) {
         super(mainGame);
 
         texture = new Texture(Gdx.files.internal("bg.png"));

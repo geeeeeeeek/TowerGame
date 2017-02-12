@@ -12,8 +12,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
+import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyPaokuGame extends Game {
 
@@ -35,6 +39,7 @@ public class MyPaokuGame extends Game {
 
 	/** 主游戏场景 */
 	private GameScreen gameScreen;
+
 
 	/** 显示帧率所需要的位图字体 */
 	private BitmapFont fpsBitmapFont;
@@ -86,6 +91,7 @@ public class MyPaokuGame extends Game {
 
 		// 设置当前场景
 		setScreen(gameScreen);
+
 
 		// 判断是否需要显示帧率, 如果需要, 则进行初始化
 		if (SHOW_FPS) {

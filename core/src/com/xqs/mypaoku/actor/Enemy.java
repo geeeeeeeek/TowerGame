@@ -10,11 +10,13 @@ import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/1/18 0018.
  */
 
-public class EnemyActor extends AnimationActor {
+public class Enemy extends AnimationActor {
 
     public MyPaokuGame mainGame;
 
@@ -35,7 +37,7 @@ public class EnemyActor extends AnimationActor {
     private Animation deadAnimation;
 
 
-    public EnemyActor(MyPaokuGame mainGame) {
+    public Enemy(MyPaokuGame mainGame) {
 
         this.mainGame=mainGame;
 
@@ -54,7 +56,7 @@ public class EnemyActor extends AnimationActor {
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
         int length=deadAnimation.getKeyFrames().length;
-        Gdx.app.log("length:",length+"");
+
 
 
 
@@ -63,6 +65,15 @@ public class EnemyActor extends AnimationActor {
         x=this.mainGame.getWorldWidth();
 
         setPosition(x,48);
+    }
+
+
+    public void setState(int state){
+        this.state=state;
+    }
+
+    public int getState(){
+        return state;
     }
 
 
@@ -78,13 +89,13 @@ public class EnemyActor extends AnimationActor {
 //        stateTime += Gdx.graphics.getDeltaTime();
 
         if(x<200&&this.state==WALK){
-            setCurrentAnimation(DEAD);
+//            setCurrentAnimation(DEAD);
         }
 
 
         switch (this.state){
             case WALK:
-                x-=(delta*20);
+                x-=(delta*100);
                 setX(x);
                 break;
             case DEAD:

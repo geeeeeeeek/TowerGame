@@ -283,4 +283,18 @@ road
   orig:511,48
   offset:0,0
   index:-1
+bullet
+  rotate:false
+  xy:1001,461
+  size:73,30
+  orig:73,30
+  offset:0,0
+  index:-1
+bullet2
+  rotate:false
+  xy:1091,461
+  size:73,30
+  orig:73,30
+  offset:0,0
+  index:-1
 

@@ -37,6 +37,9 @@ public abstract class BaseStage extends Stage {
         this.visible = visible;
     }
 
+
+
+
 }
 
 

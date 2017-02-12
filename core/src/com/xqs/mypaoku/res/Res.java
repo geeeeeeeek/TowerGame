@@ -31,11 +31,15 @@ public interface Res {
 
         /* 纹理图集中的小图名称 */
 
-        public static final String IMAGE_BIRD_YELLOW_01_TO_03 = "bird_yellow";
+        String IMAGE_BIRD_YELLOW_01_TO_03 = "bird_yellow";
 
-        public static final String IMAGE_ENEMY = "enemy";
+        String IMAGE_ENEMY = "enemy";
 
         String IMAGE_ENEMY_DEAD="enemy_dead";
+
+        String IMAGE_BULLET="bullet";
+
+        String IMAGE_BULLET_2="bullet2";
     }
 
 

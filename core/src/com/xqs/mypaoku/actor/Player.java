@@ -9,7 +9,7 @@ import com.xqs.mypaoku.res.Res;
  * Created by Administrator on 2017/1/17 0017.
  */
 
-public class PlayerActor extends AnimationActor {
+public class Player extends AnimationActor {
 
     public static final int READY=0;
     public static final int DEATH=1;
@@ -18,7 +18,7 @@ public class PlayerActor extends AnimationActor {
 
     public int state;
 
-    public PlayerActor(MyPaokuGame mainGame) {
+    public Player(MyPaokuGame mainGame) {
         this.mainGame=mainGame;
 
         // 创建动画
