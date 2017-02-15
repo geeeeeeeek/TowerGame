@@ -95,11 +95,11 @@ public class GameStage extends BaseStage {
 	/**
 	 * 生成子弹
 	 */
-	private void generateBullet(int bulletType){
-		Bullet bullet=new Bullet(getMainGame(),bulletType);
+	private void generateBullet(int bulletType,int screenX){
+		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX);
 
 		if(bulletType==1){
-			bullet.setPosition(playerActor.getX(),playerActor.getY());
+//			bullet.setPosition(playerActor.getX(),300);
 		}
 		addActor(bullet);
 		bulletList.add(bullet);
@@ -125,7 +125,7 @@ public class GameStage extends BaseStage {
 
 
 //			generateBullet(1);
-			generateEnemy(1);
+//			generateEnemy(1);
 		}
 
 		//子弹与敌人碰撞检测
@@ -172,7 +172,8 @@ public class GameStage extends BaseStage {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if (gameState == GameState.ready) {
-			generateBullet(1);
+			Util.log("touch:",screenX+" "+screenY+ " "+pointer+" "+button);
+			generateBullet(1,screenX);
 		}
 
 

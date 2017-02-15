@@ -1,7 +1,11 @@
 package com.xqs.mypaoku.actor;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
@@ -16,19 +20,38 @@ public class Bullet extends AnimationActor{
     public static int LIVE=0;
     public static int DEAD=1;
 
+    //子弹位置
+    public Vector2 position=new Vector2();
+
+    //速率
+    public Vector2 velocity=new Vector2();
+
+    //上次位置
+    public Vector2 lastPos=new Vector2();
+
+    //距离
+    public Vector2 disVel=new Vector2();
+
+    //参数
+    private float maxVelocity;
+
+    //子弹状态
     public int state;
 
     public MyPaokuGame game;
 
+    //子弹类型
     public int bulletType;
 
     public TextureAtlas.AtlasRegion region;
 
-    public float x;
+    //角度
+    private float degree;
 
-    public float y;
+    private int clickX;
 
-    public Bullet(MyPaokuGame game,int type){
+
+    public Bullet(MyPaokuGame game,int type,int screenX){
         this.game=game;
 
         state=LIVE;
@@ -36,6 +59,28 @@ public class Bullet extends AnimationActor{
         bulletType=type;
 
         setType(type);
+
+
+        //y速率
+        velocity.y=900f;
+        maxVelocity=1800f;
+
+        position.x=0f;
+        position.y=100f;
+
+        //初始化上次向量
+        lastPos.x=position.x;
+        lastPos.y=position.y;
+
+        this.clickX=screenX;
+
+
+        //x速率
+        velocity.x=this.clickX*1.36f;
+
+
+
+        Util.log("velocity.X",velocity.x+"");
 
     }
 
@@ -61,34 +106,51 @@ public class Bullet extends AnimationActor{
         }
     }
 
-    float x2;
+
+
 
     @Override
     public void act(float delta) {
         super.act(delta);
 
+
         switch (bulletType){
             case 0:
-                x=getX()-10;
-                setPosition(x,getY());
+                position.x=getX()-10;
+                setPosition(position.x,getY());
                 break;
             case 1:
-                x=getX()+10;
-                x2=x-100;
-                float a=-0.0031f;
-                float b=2.79f;
-                float c=-1.48f;
-                y=a*x2*x2+b*x2;
-                Util.log("bullet ",x+" "+y+ " "+getHeight());
-                setPosition(x,y);
+
+                velocity.y-=maxVelocity*(delta);
+
+                //最新位置
+                position.x=position.x+(velocity.x*delta);
+                position.y=position.y+(velocity.y*delta);
+
+
+                //计算差值
+                disVel.y=position.y-lastPos.y;
+                disVel.x=position.x-lastPos.x;
+
+                //计算角度
+                degree=MathUtils.atan2(disVel.y,disVel.x)/MathUtils.PI*180;
+
+                setPosition(position.x,position.y);
+                setRotation(degree);
+
+                //记住坐标
+                lastPos.x=position.x;
+                lastPos.y=position.y;
+
                 break;
         }
 
-        if(x>game.getWorldWidth()||x<-getWidth()||y>game.getWorldHeight()||y<-getHeight()){
+        if(position.x>game.getWorldWidth()||position.x<-getWidth()||position.y>game.getWorldHeight()||position.y<-getHeight()){
             this.remove();
             setState(DEAD);
         }
 
 
     }
+
 }
