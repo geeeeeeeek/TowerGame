@@ -1,5 +1,6 @@
 package com.xqs.mypaoku.actor;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -62,11 +63,16 @@ public class Bullet extends AnimationActor{
 
 
         //y速率
-        velocity.y=900f;
-        maxVelocity=1800f;
+//        velocity.y=1000f;
+//        maxVelocity=2000f;
+        velocity.y=800f;
+        maxVelocity=1600f;
 
-        position.x=0f;
-        position.y=100f;
+
+//        position.x=0f;
+//        position.y=0f;
+        position.x=170f;
+        position.y=320f;
 
         //初始化上次向量
         lastPos.x=position.x;
@@ -74,9 +80,14 @@ public class Bullet extends AnimationActor{
 
         this.clickX=screenX;
 
+        float ratio=game.getWorldWidth()/Gdx.graphics.getWidth();
+
 
         //x速率
-        velocity.x=this.clickX*1.36f;
+//        velocity.x=this.clickX*1.36f;
+        velocity.x=this.clickX*ratio;
+
+//        velocity.x=this.clickX*1f;
 
 
 

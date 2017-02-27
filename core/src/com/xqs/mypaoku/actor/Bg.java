@@ -13,19 +13,16 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
 
 public class Bg extends BaseImageActor {
 
+    public static String bgPicName="bg01.png";
+
     private Texture texture;
     private TextureRegion region;
 
-    private float moveVelocity=20f;
-
-    private float offX;
-
-    private int x=0;
 
     public Bg(MyPaokuGame mainGame) {
         super(mainGame);
 
-        texture = new Texture(Gdx.files.internal("bg.png"));
+        texture = new Texture(Gdx.files.internal(bgPicName));
 
         region=new TextureRegion(texture);
     }
@@ -33,7 +30,6 @@ public class Bg extends BaseImageActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        offX+=delta*moveVelocity;
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.actor.Enemy;
 import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Road;
+import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
@@ -29,6 +30,9 @@ public class GameStage extends BaseStage {
 
 	/** 主角 **/
 	private Player playerActor;
+
+	/** 塔 **/
+	private Tower tower;
 
 	/**路面**/
 	private Road roadActor;
@@ -59,6 +63,13 @@ public class GameStage extends BaseStage {
          */
         bgActor = new Bg(this.getMainGame());
         addActor(bgActor);
+
+		/**
+		 * 创建tower
+		 */
+		tower=new Tower(this.getMainGame());
+		addActor(tower);
+
 		/*
 		 * 创建player
 		 */
@@ -125,7 +136,7 @@ public class GameStage extends BaseStage {
 
 
 //			generateBullet(1);
-//			generateEnemy(1);
+			generateEnemy(1);
 		}
 
 		//子弹与敌人碰撞检测

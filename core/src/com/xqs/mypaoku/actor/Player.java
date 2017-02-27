@@ -1,9 +1,11 @@
 package com.xqs.mypaoku.actor;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.util.TextureUtil;
 
 /**
  * Created by Administrator on 2017/1/17 0017.
@@ -16,22 +18,27 @@ public class Player extends AnimationActor {
 
     public MyPaokuGame mainGame;
 
+    private TextureAtlas.AtlasRegion shootRegion;
+
+    private Animation shootAnimation;
+
     public int state;
 
     public Player(MyPaokuGame mainGame) {
         this.mainGame=mainGame;
 
-        // 创建动画
-        Animation animation = new Animation(
-                0.2F,
-                this.mainGame.getAtlas().findRegions(Res.Atlas.IMAGE_BIRD_YELLOW_01_TO_03)
-        );
-        // 动画循环播放
-        animation.setPlayMode(Animation.PlayMode.LOOP);
-        // 设置动画
-        setAnimation(animation);
+        shootRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_PLAYER_SHOOT);
 
-        setPosition(100,100);
+        // 射击动画
+        shootAnimation = new Animation(0.1F, TextureUtil.getTextureRegions(shootRegion,1,5));
+
+
+        // 动画循环播放
+        shootAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        // 设置动画
+        setAnimation(shootAnimation);
+
+        setPosition(90,300);
 
     }
 

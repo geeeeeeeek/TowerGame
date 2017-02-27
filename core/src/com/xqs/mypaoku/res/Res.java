@@ -4,7 +4,7 @@ package com.xqs.mypaoku.res;
  * 资源常量
  *
  */
-public interface Res {
+public class Res {
 
     /** 宽度根据实际屏幕比例换算 */
     public static final float FIX_WORLD_HEIGHT=720;
@@ -15,7 +15,7 @@ public interface Res {
     /**
      * 相关物理参数（调节物理参数可改变游戏难度）
      */
-    public static interface Physics {
+    public static class Physics {
 
         /** 水管和地板的移动速度, 单位: px/s */
         public static final float MOVE_VELOCITY = -150.0F;
@@ -24,22 +24,23 @@ public interface Res {
     /**
      * 纹理图集
      */
-    public static interface Atlas {
+    public static class Atlas {
 
         /** 纹理图集 文件路径 */
         public static final String ATLAS_PATH = "atlas/images.atlas";
 
         /* 纹理图集中的小图名称 */
 
-        String IMAGE_BIRD_YELLOW_01_TO_03 = "bird_yellow";
 
-        String IMAGE_ENEMY = "enemy";
+        public static final String IMAGE_PLAYER_SHOOT="player_shoot";
 
-        String IMAGE_ENEMY_DEAD="enemy_dead";
+        public static final String IMAGE_ENEMY = "enemy";
 
-        String IMAGE_BULLET="bullet";
+        public static final String IMAGE_ENEMY_DEAD="enemy_dead";
 
-        String IMAGE_BULLET_2="bullet2";
+        public static final String IMAGE_BULLET="bullet";
+
+        public static final String IMAGE_BULLET_2="bullet2";
     }
 
 
