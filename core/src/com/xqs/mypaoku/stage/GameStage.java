@@ -84,6 +84,7 @@ public class GameStage extends BaseStage {
 
 
 		// mock data
+
 		enemyOrderMap.put(1,1);
 		enemyOrderMap.put(11,1);
 		enemyOrderMap.put(12,1);
