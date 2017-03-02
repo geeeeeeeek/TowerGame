@@ -10,6 +10,20 @@ player_shoot
   orig:438,70
   offset:0,0
   index:-1
+dacong_walk
+  rotate:false
+  xy:1,83
+  size:337,96
+  orig:337,96
+  offset:0,0
+  index:-1
+dacong_dead
+  rotate:false
+  xy:1,189
+  size:603,96
+  orig:603,96
+  offset:0,0
+  index:-1
 enemy
   rotate: false
   xy: 1000, 1

@@ -36,6 +36,11 @@ public class Res {
 
         public static final String IMAGE_ENEMY = "enemy";
 
+        public static final String IMAGE_ENEMY_DACONG_WALK="dacong_walk";
+
+        public static final String IMAGE_ENEMY_DACONG_DEAD="dacong_dead";
+
+
         public static final String IMAGE_ENEMY_DEAD="enemy_dead";
 
         public static final String IMAGE_BULLET="bullet";

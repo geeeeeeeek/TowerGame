@@ -21,6 +21,10 @@ public class Bullet extends AnimationActor{
     public static int LIVE=0;
     public static int DEAD=1;
 
+
+    public static float START_X=180f;
+    public static float START_Y=300f;
+
     //子弹位置
     public Vector2 position=new Vector2();
 
@@ -49,10 +53,12 @@ public class Bullet extends AnimationActor{
     //角度
     private float degree;
 
-    private int clickX;
+    private int mClickX;
+
+    private int mClickY;
 
 
-    public Bullet(MyPaokuGame game,int type,int screenX){
+    public Bullet(MyPaokuGame game, int type, int screenX, int screenY){
         this.game=game;
 
         state=LIVE;
@@ -62,32 +68,32 @@ public class Bullet extends AnimationActor{
         setType(type);
 
 
-        //y速率
-//        velocity.y=1000f;
-//        maxVelocity=2000f;
-        velocity.y=800f;
-        maxVelocity=1600f;
+        //y速率 公式： velocity.y-=maxVelocity*(delta);
 
 
-//        position.x=0f;
-//        position.y=0f;
-        position.x=170f;
-        position.y=320f;
+
+        position.x=START_X;
+        position.y=START_Y;
 
         //初始化上次向量
         lastPos.x=position.x;
         lastPos.y=position.y;
 
-        this.clickX=screenX;
+        this.mClickX=screenX;
+        this.mClickY=screenY;
 
-        float ratio=game.getWorldWidth()/Gdx.graphics.getWidth();
+        float ratio=(game.getWorldWidth())/Gdx.graphics.getWidth();
 
 
         //x速率
 //        velocity.x=this.clickX*1.36f;
-        velocity.x=this.clickX*ratio;
+        velocity.x=(this.mClickX)*ratio-START_X;
 
-//        velocity.x=this.clickX*1f;
+        velocity.y=velocity.x/ratio;
+
+
+        maxVelocity=velocity.x*ratio+300f;
+
 
 
 
@@ -123,6 +129,8 @@ public class Bullet extends AnimationActor{
     @Override
     public void act(float delta) {
         super.act(delta);
+
+
 
 
         switch (bulletType){

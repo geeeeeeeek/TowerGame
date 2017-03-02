@@ -38,7 +38,7 @@ public class Player extends AnimationActor {
         // 设置动画
         setAnimation(shootAnimation);
 
-        setPosition(90,300);
+        setPosition(100,290);
 
     }
 

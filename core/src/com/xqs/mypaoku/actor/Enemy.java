@@ -3,12 +3,16 @@ package com.xqs.mypaoku.actor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
+import com.badlogic.gdx.math.Vector2;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.base.MyAnimation;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
+import com.xqs.mypaoku.util.Util;
 
 import java.util.List;
 
@@ -18,23 +22,32 @@ import java.util.List;
 
 public class Enemy extends AnimationActor {
 
-    public MyPaokuGame mainGame;
+    public static final int STOP_X=230;
+
+    public static final int positionY=120;
 
     public static final int WALK=0;
 
     public static final int DEAD=1;
 
+    public static final int HURT=2;
+
     private int state=-1;
 
-    private float x;
+    private Vector2 position=new Vector2();
 
-    private TextureAtlas.AtlasRegion region;
+    public MyPaokuGame mainGame;
+
+    private TextureAtlas.AtlasRegion walkRegion;
 
     private TextureAtlas.AtlasRegion deadRegion;
 
-    private Animation walkAnimation;
+    private int deadAnimationFrameLength;
 
-    private Animation deadAnimation;
+    private  Animation walkAnimation;
+
+    private  Animation hurtAnimation;
+
 
 
     public Enemy(MyPaokuGame mainGame) {
@@ -42,40 +55,46 @@ public class Enemy extends AnimationActor {
         this.mainGame=mainGame;
 
 
-        region=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY);
-        deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_DEAD);
+        walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_DACONG_WALK);
+        deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_DACONG_DEAD);
 
 
 
         // 行走动画
-        walkAnimation = new Animation(0.1F, TextureUtil.getTextureRegions(region,1,8));
+        walkAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(walkRegion,1,6));
 
         // 死亡动画
-        deadAnimation = new Animation(0.6F, TextureUtil.getTextureRegions(deadRegion,1,6));
+        hurtAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(deadRegion,1,6));
 
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
-        int length=deadAnimation.getKeyFrames().length;
+        deadAnimationFrameLength=hurtAnimation.getKeyFrames().length;
 
 
 
 
-        setCurrentAnimation(WALK);
 
-        x=this.mainGame.getWorldWidth();
+        setState(WALK);
 
-        setPosition(x,48);
+        position.x=this.mainGame.getWorldWidth();
+        position.y=120;
+
+        setPosition(position.x,position.y);
     }
 
 
+    /**
+     * 设置状态和动画
+     * @param state
+     */
     public void setState(int state){
         this.state=state;
+        setCurrentAnimation(state);
     }
 
     public int getState(){
         return state;
     }
-
 
     @Override
     public void act(float delta) {
@@ -86,27 +105,26 @@ public class Enemy extends AnimationActor {
 
         super.act(delta);
 
-//        stateTime += Gdx.graphics.getDeltaTime();
-
-        if(x<200&&this.state==WALK){
-//            setCurrentAnimation(DEAD);
-        }
 
 
         switch (this.state){
             case WALK:
-                x-=(delta*100);
-                setX(x);
+                position.x-=(delta*100);
+                if(position.x<STOP_X){
+                    position.x=STOP_X;
+                }
+                setX(position.x);
+                break;
+            case HURT:
+                position.x+=(delta*20);
+                setX(position.x);
+                int index=hurtAnimation.getKeyFrameIndex(getStateTime());
+                if(index==(deadAnimationFrameLength-1)){
+                    this.state=DEAD;
+                }
                 break;
             case DEAD:
-
-                x+=(delta*20);
-                setX(x);
-                int index=deadAnimation.getKeyFrameIndex(getStateTime());
-                if(index==3){
-                    GameStage.gameState=GameState.pause;
-                }
-                Gdx.app.log("index",index+"");
+                this.remove();
                 break;
         }
     }
@@ -114,17 +132,10 @@ public class Enemy extends AnimationActor {
     public void setCurrentAnimation(int st){
         switch (st){
             case WALK:
-                if(this.state!=WALK) {
-                    setAnimation(walkAnimation);
-                    this.state = WALK;
-                }
+                setAnimation(walkAnimation);
                 break;
-            case DEAD:
-                if(this.state!=DEAD) {
-                    setAnimation(deadAnimation);
-                    deadAnimation.setPlayMode(Animation.PlayMode.NORMAL);
-                    state = DEAD;
-                }
+            case HURT:
+                setAnimation(hurtAnimation);
                 break;
         }
     }

@@ -1,6 +1,5 @@
 package com.xqs.mypaoku.stage;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
@@ -15,6 +14,7 @@ import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +24,8 @@ import java.util.List;
  *
  */
 public class GameStage extends BaseStage {
+
+	private static final String TAG="GameStage";
 
     /** 背景 */
     private Bg bgActor;
@@ -46,9 +48,9 @@ public class GameStage extends BaseStage {
 	/** 游戏状态 */
 	public static GameState gameState;
 
-	private float timeCounter;
+	/** 敌人顺序 **/
+	private HashMap<Integer,Integer> enemyOrderMap=new HashMap<Integer,Integer>();
 
-	private int next=1;
 
     public GameStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
@@ -81,6 +83,12 @@ public class GameStage extends BaseStage {
 		addActor(roadActor);
 
 
+		// mock data
+		enemyOrderMap.put(1,1);
+		enemyOrderMap.put(11,1);
+		enemyOrderMap.put(12,1);
+		enemyOrderMap.put(30,1);
+		enemyOrderMap.put(50,1);
 
 		/*
 		 * 初始为游戏准备状态
@@ -100,14 +108,13 @@ public class GameStage extends BaseStage {
 		}
 		bulletList.clear();
 
-		timeCounter=0.0f;
 	}
 
 	/**
 	 * 生成子弹
 	 */
-	private void generateBullet(int bulletType,int screenX){
-		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX);
+	private void generateBullet(int bulletType, int screenX, int screenY){
+		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY);
 
 		if(bulletType==1){
 //			bullet.setPosition(playerActor.getX(),300);
@@ -129,15 +136,6 @@ public class GameStage extends BaseStage {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-		timeCounter+=delta;
-		if((int)timeCounter>next){
-			Util.log("计时器timeCounter",(int)timeCounter+"");
-			next++;
-
-
-//			generateBullet(1);
-			generateEnemy(1);
-		}
 
 		//子弹与敌人碰撞检测
 		for(Bullet bullet:bulletList){
@@ -146,10 +144,10 @@ public class GameStage extends BaseStage {
 					Util.log("collision:","yes");
 
 					getRoot().removeActor(bullet);
-					getRoot().removeActor(enemy);
+//					getRoot().removeActor(enemy);
 
 					bullet.setState(Bullet.DEAD);
-					enemy.setState(Enemy.DEAD);
+					enemy.setState(Enemy.HURT);
 				}
 			}
 		}
@@ -167,10 +165,20 @@ public class GameStage extends BaseStage {
 		Iterator<Enemy> enemyIterator= enemyList.iterator();
 		while (enemyIterator.hasNext()){
 			Enemy enemy=enemyIterator.next();
-			if(enemy.getState()==Bullet.DEAD){
+			if(enemy.getState()==Enemy.DEAD){
 				enemyIterator.remove();
 			}
 		}
+	}
+
+	@Override
+	public void orderAct(float delta, int counter) {
+		Util.log(TAG,"计时器="+counter);
+		if(enemyOrderMap.containsKey(counter)){
+			int type=enemyOrderMap.get(counter);
+			generateEnemy(type);
+		}
+
 	}
 
 
@@ -180,18 +188,17 @@ public class GameStage extends BaseStage {
 		super.dispose();
 	}
 
+
 	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (gameState == GameState.ready) {
 			Util.log("touch:",screenX+" "+screenY+ " "+pointer+" "+button);
-			generateBullet(1,screenX);
+			generateBullet(1,screenX,screenY);
 		}
 
 
 		return true;
 	}
-
-
 }
 
 
