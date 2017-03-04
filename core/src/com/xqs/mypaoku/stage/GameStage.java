@@ -1,5 +1,9 @@
 package com.xqs.mypaoku.stage;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
@@ -9,6 +13,7 @@ import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.stage.base.BaseStage;
+import com.xqs.mypaoku.util.Box2DUtil;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
@@ -26,6 +31,8 @@ import java.util.List;
 public class GameStage extends BaseStage {
 
 	private static final String TAG="GameStage";
+
+	public World world;
 
     /** 背景 */
     private Bg bgActor;
@@ -60,6 +67,7 @@ public class GameStage extends BaseStage {
     private void init() {
 
 
+
         /*
          * 创建背景
          */
@@ -82,6 +90,10 @@ public class GameStage extends BaseStage {
 		roadActor=new Road(this.getMainGame());
 		addActor(roadActor);
 
+		world = Box2DUtil.createWorld();
+		Bullet bullet=new Bullet(this.getMainGame(),1,100,300,world);
+		addActor(bullet);
+
 
 		// mock data
 
@@ -90,6 +102,9 @@ public class GameStage extends BaseStage {
 		enemyOrderMap.put(12,1);
 		enemyOrderMap.put(30,1);
 		enemyOrderMap.put(50,1);
+		enemyOrderMap.put(50,1);
+		enemyOrderMap.put(60,1);
+		enemyOrderMap.put(70,1);
 
 		/*
 		 * 初始为游戏准备状态
@@ -115,7 +130,7 @@ public class GameStage extends BaseStage {
 	 * 生成子弹
 	 */
 	private void generateBullet(int bulletType, int screenX, int screenY){
-		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY);
+		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY, world);
 
 		if(bulletType==1){
 //			bullet.setPosition(playerActor.getX(),300);
@@ -148,7 +163,7 @@ public class GameStage extends BaseStage {
 //					getRoot().removeActor(enemy);
 
 					bullet.setState(Bullet.DEAD);
-					enemy.setState(Enemy.HURT);
+					enemy.hurt();
 				}
 			}
 		}
@@ -168,6 +183,24 @@ public class GameStage extends BaseStage {
 			Enemy enemy=enemyIterator.next();
 			if(enemy.getState()==Enemy.DEAD){
 				enemyIterator.remove();
+			}
+		}
+	}
+
+	@Override
+	public void draw() {
+		super.draw();
+		world.step(1/30f,6,2);
+
+		Array<Body> bodies = new Array<Body>();
+		world.getBodies(bodies);
+
+		for (Body b : bodies) {
+			Bullet e = (Bullet) b.getUserData();
+
+			if (e != null) {
+				e.setPosition(b.getPosition().x, b.getPosition().y);
+				e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
 			}
 		}
 	}

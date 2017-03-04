@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.math.Vector2;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.actor.base.MyAnimation;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
@@ -20,21 +21,14 @@ import java.util.List;
  * Created by Administrator on 2017/1/18 0018.
  */
 
-public class Enemy extends AnimationActor {
+public class Enemy extends BaseEnemy {
 
     public static final int STOP_X=230;
 
     public static final int positionY=120;
 
-    public static final int WALK=0;
-
-    public static final int DEAD=1;
-
-    public static final int HURT=2;
-
     private int state=-1;
 
-    private Vector2 position=new Vector2();
 
     public MyPaokuGame mainGame;
 
@@ -48,11 +42,15 @@ public class Enemy extends AnimationActor {
 
     private  Animation hurtAnimation;
 
+    private int life;
+
 
 
     public Enemy(MyPaokuGame mainGame) {
 
         this.mainGame=mainGame;
+
+        life=100;
 
 
         walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_DACONG_WALK);
@@ -72,24 +70,28 @@ public class Enemy extends AnimationActor {
 
 
 
-
-
-        setState(WALK);
-
         position.x=this.mainGame.getWorldWidth();
         position.y=120;
 
         setPosition(position.x,position.y);
+
+        walk();
     }
 
 
-    /**
-     * 设置状态和动画
-     * @param state
-     */
+    public void walk(){
+        setState(WALK);
+        setCurrentAnimation(WALK);
+    }
+
+    public void hurt(){
+        setState(HURT);
+        setCurrentAnimation(HURT);
+    }
+
+
     public void setState(int state){
         this.state=state;
-        setCurrentAnimation(state);
     }
 
     public int getState(){
@@ -129,8 +131,8 @@ public class Enemy extends AnimationActor {
         }
     }
 
-    public void setCurrentAnimation(int st){
-        switch (st){
+    public void setCurrentAnimation(int state){
+        switch (state){
             case WALK:
                 setAnimation(walkAnimation);
                 break;
@@ -139,4 +141,5 @@ public class Enemy extends AnimationActor {
                 break;
         }
     }
+
 }

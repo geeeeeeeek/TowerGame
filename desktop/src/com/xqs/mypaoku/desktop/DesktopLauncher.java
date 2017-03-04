@@ -7,9 +7,9 @@ import com.xqs.mypaoku.MyPaokuGame;
 public class DesktopLauncher {
 
 
-	public static final float PIX_WIDTH = 854;
+	public static final float PIX_WIDTH = 1280;
 
-	public static final float PIX_HEIGHT = 480;
+	public static final float PIX_HEIGHT = 720;
 
 
 
@@ -24,7 +24,7 @@ public class DesktopLauncher {
 		config.width = (int) (PIX_WIDTH * SCALE);         		// 窗口宽度
 		config.height = (int) (PIX_HEIGHT * SCALE);	            // 窗口高度
 
-		config.resizable = false;				                 // 窗口设置为大小不可改变
+		config.resizable = true;				                 // 窗口设置为大小不可改变
 
 		new LwjglApplication(new MyPaokuGame(), config);
 	}

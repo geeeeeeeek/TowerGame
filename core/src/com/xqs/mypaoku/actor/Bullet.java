@@ -7,9 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.util.Box2DUtil;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -58,7 +61,7 @@ public class Bullet extends AnimationActor{
     private int mClickY;
 
 
-    public Bullet(MyPaokuGame game, int type, int screenX, int screenY){
+    public Bullet(MyPaokuGame game, int type, int screenX, int screenY, World world){
         this.game=game;
 
         state=LIVE;
@@ -87,13 +90,19 @@ public class Bullet extends AnimationActor{
 
         //x速率
 //        velocity.x=this.clickX*1.36f;
-        velocity.x=(this.mClickX)*ratio-START_X;
-
-        velocity.y=velocity.x/ratio;
 
 
-        maxVelocity=velocity.x*ratio+300f;
 
+
+
+//        velocity.x=(this.mClickX)*ratio-START_X;
+//        velocity.y=velocity.x/ratio;
+//        maxVelocity=velocity.x*ratio+300f;
+
+
+        Body body= Box2DUtil.createBody(world);
+        body.setUserData(this);
+        body.applyLinearImpulse(100.0f, 0.0f, body.getPosition().x,body.getPosition().y, true);
 
 
 
@@ -134,34 +143,34 @@ public class Bullet extends AnimationActor{
 
 
         switch (bulletType){
-            case 0:
-                position.x=getX()-10;
-                setPosition(position.x,getY());
-                break;
-            case 1:
-
-                velocity.y-=maxVelocity*(delta);
-
-                //最新位置
-                position.x=position.x+(velocity.x*delta);
-                position.y=position.y+(velocity.y*delta);
-
-
-                //计算差值
-                disVel.y=position.y-lastPos.y;
-                disVel.x=position.x-lastPos.x;
-
-                //计算角度
-                degree=MathUtils.atan2(disVel.y,disVel.x)/MathUtils.PI*180;
-
-                setPosition(position.x,position.y);
-                setRotation(degree);
-
-                //记住坐标
-                lastPos.x=position.x;
-                lastPos.y=position.y;
-
-                break;
+//            case 0:
+//                position.x=getX()-10;
+//                setPosition(position.x,getY());
+//                break;
+//            case 1:
+//
+//                velocity.y-=maxVelocity*(delta);
+//
+//                //最新位置
+//                position.x=position.x+(velocity.x*delta);
+//                position.y=position.y+(velocity.y*delta);
+//
+//
+//                //计算差值
+//                disVel.y=position.y-lastPos.y;
+//                disVel.x=position.x-lastPos.x;
+//
+//                //计算角度
+//                degree=MathUtils.atan2(disVel.y,disVel.x)/MathUtils.PI*180;
+//
+//                setPosition(position.x,position.y);
+//                setRotation(degree);
+//
+//                //记住坐标
+//                lastPos.x=position.x;
+//                lastPos.y=position.y;
+//
+//                break;
         }
 
         if(position.x>game.getWorldWidth()||position.x<-getWidth()||position.y>game.getWorldHeight()||position.y<-getHeight()){

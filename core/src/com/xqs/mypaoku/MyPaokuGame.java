@@ -60,7 +60,7 @@ public class MyPaokuGame extends Game {
 
 		// 为了不压扁或拉长图片, 按实际屏幕比例计算世界宽高
 		worldHeight = Res.FIX_WORLD_HEIGHT;
-		worldWidth =Res.FIX_WORLD_HEIGHT*ratio;
+		worldWidth = Res.FIX_WORLD_WIDTH;
 
         //取整
 		worldWidth=(int)worldWidth;
