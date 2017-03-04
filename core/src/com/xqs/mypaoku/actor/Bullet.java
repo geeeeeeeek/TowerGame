@@ -1,18 +1,18 @@
 package com.xqs.mypaoku.actor;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
-import com.xqs.mypaoku.util.Box2DUtil;
+import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -25,7 +25,7 @@ public class Bullet extends AnimationActor{
     public static int DEAD=1;
 
 
-    public static float START_X=180f;
+    public static float START_X=100f;
     public static float START_Y=300f;
 
     //子弹位置
@@ -59,6 +59,8 @@ public class Bullet extends AnimationActor{
     private int mClickX;
 
     private int mClickY;
+
+    Body body;
 
 
     public Bullet(MyPaokuGame game, int type, int screenX, int screenY, World world){
@@ -100,10 +102,16 @@ public class Bullet extends AnimationActor{
 //        maxVelocity=velocity.x*ratio+300f;
 
 
-        Body body= Box2DUtil.createBody(world);
+        body= Box2DManager.createBody(world);
+        Fixture fixture=Box2DManager.createFixture(body);
+        fixture.setUserData(this);
         body.setUserData(this);
-        body.applyLinearImpulse(100.0f, 0.0f, body.getPosition().x,body.getPosition().y, true);
 
+
+        body.applyLinearImpulse(new Vector2((this.mClickX*ratio-100)/14,0),body.getWorldCenter(),true);
+//        body.applyForceToCenter(new Vector2(30f,0),true);
+
+        setPosition(100,300);
 
 
         Util.log("velocity.X",velocity.x+"");
@@ -139,38 +147,38 @@ public class Bullet extends AnimationActor{
     public void act(float delta) {
         super.act(delta);
 
-
-
+        position.x=this.getX();
+        position.y=this.getY();
 
         switch (bulletType){
-//            case 0:
-//                position.x=getX()-10;
-//                setPosition(position.x,getY());
-//                break;
-//            case 1:
-//
+            case 0:
+                position.x=getX()-10;
+                setPosition(position.x,getY());
+                break;
+            case 1:
+
 //                velocity.y-=maxVelocity*(delta);
 //
 //                //最新位置
 //                position.x=position.x+(velocity.x*delta);
 //                position.y=position.y+(velocity.y*delta);
-//
-//
-//                //计算差值
-//                disVel.y=position.y-lastPos.y;
-//                disVel.x=position.x-lastPos.x;
-//
-//                //计算角度
-//                degree=MathUtils.atan2(disVel.y,disVel.x)/MathUtils.PI*180;
-//
+
+
+                //计算差值
+                disVel.y=position.y-lastPos.y;
+                disVel.x=position.x-lastPos.x;
+
+                //计算角度
+                degree= MathUtils.atan2(disVel.y,disVel.x)/MathUtils.PI*180;
+
 //                setPosition(position.x,position.y);
-//                setRotation(degree);
-//
-//                //记住坐标
-//                lastPos.x=position.x;
-//                lastPos.y=position.y;
-//
-//                break;
+                setRotation(degree);
+
+                //记住坐标
+                lastPos.x=position.x;
+                lastPos.y=position.y;
+
+                break;
         }
 
         if(position.x>game.getWorldWidth()||position.x<-getWidth()||position.y>game.getWorldHeight()||position.y<-getHeight()){

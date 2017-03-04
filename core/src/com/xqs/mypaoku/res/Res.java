@@ -6,7 +6,7 @@ package com.xqs.mypaoku.res;
  */
 public class Res {
 
-    /** 宽度根据实际屏幕比例换算 */
+    /** 世界宽高 */
     public static final float FIX_WORLD_HEIGHT=720;
     public static final float FIX_WORLD_WIDTH=1280;
 

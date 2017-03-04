@@ -13,7 +13,7 @@ import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.stage.base.BaseStage;
-import com.xqs.mypaoku.util.Box2DUtil;
+import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
@@ -90,9 +90,10 @@ public class GameStage extends BaseStage {
 		roadActor=new Road(this.getMainGame());
 		addActor(roadActor);
 
-		world = Box2DUtil.createWorld();
+		world = Box2DManager.createWorld();
 		Bullet bullet=new Bullet(this.getMainGame(),1,100,300,world);
 		addActor(bullet);
+
 
 
 		// mock data
@@ -153,6 +154,7 @@ public class GameStage extends BaseStage {
 	public void act(float delta) {
 		super.act(delta);
 
+
 		//子弹与敌人碰撞检测
 		for(Bullet bullet:bulletList){
 			for(Enemy enemy:enemyList){
@@ -163,7 +165,9 @@ public class GameStage extends BaseStage {
 //					getRoot().removeActor(enemy);
 
 					bullet.setState(Bullet.DEAD);
-					enemy.hurt();
+					if(enemy.getState()==Enemy.WALK) {
+						enemy.hurt();
+					}
 				}
 			}
 		}
@@ -187,20 +191,22 @@ public class GameStage extends BaseStage {
 		}
 	}
 
+
+
 	@Override
 	public void draw() {
 		super.draw();
-		world.step(1/30f,6,2);
+		Box2DManager.doPhysicsStep(world);
 
 		Array<Body> bodies = new Array<Body>();
 		world.getBodies(bodies);
 
-		for (Body b : bodies) {
-			Bullet e = (Bullet) b.getUserData();
+		for (Body body : bodies) {
+			Bullet e = (Bullet) body.getUserData();
 
 			if (e != null) {
-				e.setPosition(b.getPosition().x, b.getPosition().y);
-				e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
+				e.setPosition(body.getPosition().x, body.getPosition().y);
+				e.setRotation(MathUtils.radiansToDegrees * body.getAngle());
 			}
 		}
 	}
