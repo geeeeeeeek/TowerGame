@@ -37,9 +37,15 @@ public class Res {
 
         public static final String IMAGE_ENEMY = "enemy";
 
-        public static final String IMAGE_ENEMY_DACONG_WALK="dacong_walk";
 
+        /** 大葱 **/
+        public static final String IMAGE_ENEMY_DACONG_WALK="dacong_walk";
         public static final String IMAGE_ENEMY_DACONG_DEAD="dacong_dead";
+
+
+        /** 菜花 **/
+        public static final String IMAGE_ENEMY_CAIHUA_WALK="caihua_walk";
+        public static final String IMAGE_ENEMY_CAIHUA_DEAD="caihua_dead";
 
 
         public static final String IMAGE_ENEMY_DEAD="enemy_dead";

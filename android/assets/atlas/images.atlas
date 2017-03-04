@@ -24,6 +24,20 @@ dacong_dead
   orig:603,96
   offset:0,0
   index:-1
+caihua_walk
+  rotate:false
+  xy:1,303
+  size:521,110
+  orig:521,110
+  offset:0,0
+  index:-1
+caihua_dead
+  rotate:false
+  xy:1,426
+  size:695,110
+  orig:695,110
+  offset:0,0
+  index:-1
 enemy
   rotate: false
   xy: 1000, 1

@@ -109,7 +109,7 @@ public class Bullet extends AnimationActor{
 
 
         body.applyLinearImpulse(new Vector2((this.mClickX*ratio-100)/14,0),body.getWorldCenter(),true);
-//        body.applyForceToCenter(new Vector2(30f,0),true);
+
 
         setPosition(100,300);
 

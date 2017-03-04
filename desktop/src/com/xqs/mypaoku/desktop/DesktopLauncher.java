@@ -7,9 +7,9 @@ import com.xqs.mypaoku.MyPaokuGame;
 public class DesktopLauncher {
 
 
-	public static final float PIX_WIDTH = 1280;
+	public static final float PIX_WIDTH = 854;
 
-	public static final float PIX_HEIGHT = 720;
+	public static final float PIX_HEIGHT = 480;
 
 
 

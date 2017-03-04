@@ -8,10 +8,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
 import com.xqs.mypaoku.actor.Bullet;
-import com.xqs.mypaoku.actor.Enemy;
+import com.xqs.mypaoku.actor.CaihuaEnemy;
+import com.xqs.mypaoku.actor.DacongEnemy;
 import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
+import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
@@ -47,7 +49,7 @@ public class GameStage extends BaseStage {
 	private Road roadActor;
 
 	/** 敌人容器 **/
-	private List<Enemy> enemyList=new ArrayList<Enemy>();
+	private List<BaseEnemy> enemyList=new ArrayList<BaseEnemy>();
 
 	/**子弹容器**/
 	private List<Bullet> bulletList=new ArrayList<Bullet>();
@@ -100,12 +102,12 @@ public class GameStage extends BaseStage {
 
 		enemyOrderMap.put(1,1);
 		enemyOrderMap.put(11,1);
-		enemyOrderMap.put(12,1);
-		enemyOrderMap.put(30,1);
+		enemyOrderMap.put(12,2);
+		enemyOrderMap.put(30,2);
 		enemyOrderMap.put(50,1);
-		enemyOrderMap.put(50,1);
-		enemyOrderMap.put(60,1);
-		enemyOrderMap.put(70,1);
+		enemyOrderMap.put(50,2);
+		enemyOrderMap.put(60,2);
+		enemyOrderMap.put(70,2);
 
 		/*
 		 * 初始为游戏准备状态
@@ -144,9 +146,16 @@ public class GameStage extends BaseStage {
 	 * 生成敌人
      */
 	private void generateEnemy(int type){
-		Enemy enemy=new Enemy(getMainGame());
-		addActor(enemy);
-		enemyList.add(enemy);
+		if(type==1){
+			DacongEnemy enemy=new DacongEnemy(getMainGame());
+			addActor(enemy);
+			enemyList.add(enemy);
+		}else if(type==2){
+			CaihuaEnemy enemy=new CaihuaEnemy(getMainGame());
+			addActor(enemy);
+			enemyList.add(enemy);
+		}
+
 	}
 
 
@@ -157,15 +166,16 @@ public class GameStage extends BaseStage {
 
 		//子弹与敌人碰撞检测
 		for(Bullet bullet:bulletList){
-			for(Enemy enemy:enemyList){
+			for(BaseEnemy enemy:enemyList){
 				if(CollisionUtils.isCollision(bullet,enemy,10)){
 					Util.log("collision:","yes");
 
 					getRoot().removeActor(bullet);
-//					getRoot().removeActor(enemy);
 
 					bullet.setState(Bullet.DEAD);
-					if(enemy.getState()==Enemy.WALK) {
+
+					if(enemy.getState()== DacongEnemy.WALK) {
+
 						enemy.hurt();
 					}
 				}
@@ -182,10 +192,10 @@ public class GameStage extends BaseStage {
 		}
 
 		//移除死亡的敌人
-		Iterator<Enemy> enemyIterator= enemyList.iterator();
+		Iterator<BaseEnemy> enemyIterator= enemyList.iterator();
 		while (enemyIterator.hasNext()){
-			Enemy enemy=enemyIterator.next();
-			if(enemy.getState()==Enemy.DEAD){
+			BaseEnemy enemy=enemyIterator.next();
+			if(enemy.getState()== DacongEnemy.DEAD){
 				enemyIterator.remove();
 			}
 		}
