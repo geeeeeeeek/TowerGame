@@ -47,6 +47,11 @@ public class Res {
         public static final String IMAGE_ENEMY_CAIHUA_WALK="caihua_walk";
         public static final String IMAGE_ENEMY_CAIHUA_DEAD="caihua_dead";
 
+        /** 飞机 **/
+        public static final String IMAGE_ENEMY_PLANE_WALK="plane_walk";
+        public static final String IMAGE_ENEMY_PLANE_FIRE="plane_fire";
+        public static final String IMAGE_ENEMY_PLANE_DEAD="plane_dead";
+
 
         public static final String IMAGE_ENEMY_DEAD="enemy_dead";
 

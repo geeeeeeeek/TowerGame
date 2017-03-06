@@ -12,14 +12,16 @@ import com.xqs.mypaoku.actor.framework.AnimationActor;
 public abstract class BaseEnemy extends AnimationActor{
 
     public static final int WALK=0;
-    public static final int DEAD=1;
-    public static final int HURT=2;
+    public static final int FIRE=1;
+    public static final int DEAD=2;
+    public static final int HURT=3;
 
+
+    public int state=-1;
 
     public MyPaokuGame mainGame;
-    public int state=-1;
-    public int type;
 
+    public int type;
 
     private Animation walkAnimation;
     private Animation hurtAnimation;

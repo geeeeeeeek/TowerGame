@@ -38,6 +38,27 @@ caihua_dead
   orig:695,110
   offset:0,0
   index:-1
+plane_walk
+  rotate:false
+  xy:1,561
+  size:326,120
+  orig:326,120
+  offset:0,0
+  index:-1
+plane_fire
+  rotate:false
+  xy:1,682
+  size:326,120
+  orig:326,120
+  offset:0,0
+  index:-1
+plane_dead
+  rotate:false
+  xy:1,815
+  size:977,120
+  orig:977,120
+  offset:0,0
+  index:-1
 enemy
   rotate: false
   xy: 1000, 1

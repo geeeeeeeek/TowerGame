@@ -2,7 +2,6 @@ package com.xqs.mypaoku.actor;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.res.Res;
@@ -11,21 +10,19 @@ import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
- * Created by Administrator on 2017/3/4 0004.
+ * Created by Administrator on 2017/3/6 0006.
  */
 
-public class CaihuaEnemy extends BaseEnemy {
+public class PlaneEnemy extends BaseEnemy {
 
 
-
-
-    public CaihuaEnemy(MyPaokuGame mainGame) {
+    public PlaneEnemy(MyPaokuGame mainGame) {
         super(mainGame);
 
         this.mainGame=mainGame;
 
         position.x=this.mainGame.getWorldWidth();
-        position.y=150;
+        position.y=300;
 
         setStopX(220);
 
@@ -37,14 +34,14 @@ public class CaihuaEnemy extends BaseEnemy {
 
     @Override
     public Animation getWalkAnimation() {
-        TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_CAIHUA_WALK);
-        Animation walkAnimation = new  Animation(0.08F, TextureUtil.getTextureRegions(walkRegion,1,6));
+        TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_PLANE_WALK);
+        Animation walkAnimation = new  Animation(0.2F, TextureUtil.getTextureRegions(walkRegion,1,2));
         return walkAnimation;
     }
 
     @Override
     public Animation getHurtAnimation() {
-        TextureAtlas.AtlasRegion deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_CAIHUA_DEAD);
+        TextureAtlas.AtlasRegion deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_PLANE_DEAD);
         Animation hurtAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(deadRegion,1,6));
         return hurtAnimation;
     }

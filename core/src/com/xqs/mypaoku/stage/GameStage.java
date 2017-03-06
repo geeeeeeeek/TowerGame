@@ -10,6 +10,7 @@ import com.xqs.mypaoku.actor.Bg;
 import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.actor.CaihuaEnemy;
 import com.xqs.mypaoku.actor.DacongEnemy;
+import com.xqs.mypaoku.actor.PlaneEnemy;
 import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
@@ -108,6 +109,11 @@ public class GameStage extends BaseStage {
 		enemyOrderMap.put(50,2);
 		enemyOrderMap.put(60,2);
 		enemyOrderMap.put(70,2);
+		enemyOrderMap.put(30,2);
+		enemyOrderMap.put(50,3);
+		enemyOrderMap.put(50,3);
+		enemyOrderMap.put(60,3);
+		enemyOrderMap.put(70,3);
 
 		/*
 		 * 初始为游戏准备状态
@@ -152,6 +158,10 @@ public class GameStage extends BaseStage {
 			enemyList.add(enemy);
 		}else if(type==2){
 			CaihuaEnemy enemy=new CaihuaEnemy(getMainGame());
+			addActor(enemy);
+			enemyList.add(enemy);
+		}else if(type==3){
+			PlaneEnemy enemy=new PlaneEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
 		}
