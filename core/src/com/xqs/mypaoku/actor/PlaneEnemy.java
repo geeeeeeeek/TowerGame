@@ -22,7 +22,7 @@ public class PlaneEnemy extends BaseEnemy {
         this.mainGame=mainGame;
 
         position.x=this.mainGame.getWorldWidth();
-        position.y=300;
+        position.y=500;
 
         setStopX(220);
 
