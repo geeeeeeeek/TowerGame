@@ -43,6 +43,11 @@ public class CaihuaEnemy extends BaseEnemy {
     }
 
     @Override
+    public Animation getFireAnimation() {
+        return null;
+    }
+
+    @Override
     public Animation getHurtAnimation() {
         TextureAtlas.AtlasRegion deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_CAIHUA_DEAD);
         Animation hurtAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(deadRegion,1,6));

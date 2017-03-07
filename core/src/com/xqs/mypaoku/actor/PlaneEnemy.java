@@ -15,6 +15,14 @@ import com.xqs.mypaoku.util.TextureUtil;
 
 public class PlaneEnemy extends BaseEnemy {
 
+    public static final int MAX_Y=600;
+    public static final int MIN_Y=200;
+
+    public static final int UP=0;
+    public static final int DOWN=1;
+
+    public int mDirection=UP;
+
 
     public PlaneEnemy(MyPaokuGame mainGame) {
         super(mainGame);
@@ -22,9 +30,9 @@ public class PlaneEnemy extends BaseEnemy {
         this.mainGame=mainGame;
 
         position.x=this.mainGame.getWorldWidth();
-        position.y=500;
+        position.y=MIN_Y;
 
-        setStopX(220);
+        setStopX(-500);
 
         setPosition(position.x,position.y);
 
@@ -37,6 +45,11 @@ public class PlaneEnemy extends BaseEnemy {
         TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_PLANE_WALK);
         Animation walkAnimation = new  Animation(0.2F, TextureUtil.getTextureRegions(walkRegion,1,2));
         return walkAnimation;
+    }
+
+    @Override
+    public Animation getFireAnimation() {
+        return null;
     }
 
     @Override
@@ -53,5 +66,22 @@ public class PlaneEnemy extends BaseEnemy {
             return;
         }
         super.act(delta);
+
+        switch (mDirection){
+            case UP:
+                position.y+=0.8;
+                if(position.y>MAX_Y){
+                    mDirection=DOWN;
+                }
+                break;
+            case DOWN:
+                position.y-=0.8;
+                if(position.y<MIN_Y){
+                    mDirection=UP;
+                }
+                break;
+        }
+        setY(position.y);
+
     }
 }

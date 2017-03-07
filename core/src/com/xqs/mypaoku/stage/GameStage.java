@@ -103,7 +103,7 @@ public class GameStage extends BaseStage {
 
 		enemyOrderMap.put(1,1);
 		enemyOrderMap.put(11,1);
-		enemyOrderMap.put(12,2);
+		enemyOrderMap.put(12,3);
 		enemyOrderMap.put(30,2);
 		enemyOrderMap.put(50,1);
 		enemyOrderMap.put(50,2);
@@ -113,7 +113,13 @@ public class GameStage extends BaseStage {
 		enemyOrderMap.put(50,3);
 		enemyOrderMap.put(50,3);
 		enemyOrderMap.put(60,3);
-		enemyOrderMap.put(70,3);
+		enemyOrderMap.put(170,3);
+		enemyOrderMap.put(270,2);
+		enemyOrderMap.put(330,2);
+		enemyOrderMap.put(450,3);
+		enemyOrderMap.put(550,3);
+		enemyOrderMap.put(660,3);
+		enemyOrderMap.put(770,3);
 
 		/*
 		 * 初始为游戏准备状态
@@ -237,6 +243,10 @@ public class GameStage extends BaseStage {
 		if(enemyOrderMap.containsKey(counter)){
 			int type=enemyOrderMap.get(counter);
 			generateEnemy(type);
+		}
+
+		if(enemyList!=null){
+			Util.log(TAG,"Enemy个数="+enemyList.size());
 		}
 
 	}

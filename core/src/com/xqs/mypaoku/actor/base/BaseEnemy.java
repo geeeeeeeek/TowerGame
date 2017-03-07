@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
+import com.xqs.mypaoku.util.Util;
 
 /**
  * Created by Administrator on 2017/3/2 0002.
@@ -24,6 +25,7 @@ public abstract class BaseEnemy extends AnimationActor{
     public int type;
 
     private Animation walkAnimation;
+    private Animation fireAnimation;
     private Animation hurtAnimation;
 
     private int deadAnimationFrameLength;
@@ -36,6 +38,7 @@ public abstract class BaseEnemy extends AnimationActor{
     public BaseEnemy(MyPaokuGame mainGame){
         this.mainGame=mainGame;
         walkAnimation=getWalkAnimation();
+        fireAnimation=getFireAnimation();
         hurtAnimation=getHurtAnimation();
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
         deadAnimationFrameLength=hurtAnimation.getKeyFrames().length;
@@ -49,7 +52,7 @@ public abstract class BaseEnemy extends AnimationActor{
      * apis
      */
     public abstract Animation getWalkAnimation();
-
+    public abstract Animation getFireAnimation();
     public abstract Animation getHurtAnimation();
 
 
@@ -64,6 +67,11 @@ public abstract class BaseEnemy extends AnimationActor{
     public void walk(){
         setState(WALK);
         setCurrentAnimation(WALK);
+    }
+
+    public void fire(){
+        setState(FIRE);
+        setCurrentAnimation(FIRE);
     }
 
     public void hurt(){
@@ -85,6 +93,9 @@ public abstract class BaseEnemy extends AnimationActor{
             case WALK:
                 setAnimation(walkAnimation);
                 break;
+            case FIRE:
+                setAnimation(fireAnimation);
+                break;
             case HURT:
                 setAnimation(hurtAnimation);
                 break;
@@ -102,6 +113,13 @@ public abstract class BaseEnemy extends AnimationActor{
                 }
                 setX(position.x);
                 break;
+            case FIRE:
+                position.x-=(delta*100);
+                if(position.x<stopX){
+                    position.x=stopX;
+                }
+                setX(position.x);
+                break;
             case HURT:
                 position.x+=(delta*20);
                 setX(position.x);
@@ -113,6 +131,10 @@ public abstract class BaseEnemy extends AnimationActor{
             case DEAD:
                 this.remove();
                 break;
+        }
+
+        if(getRightX()<0){
+            setState(DEAD);
         }
     }
 }
