@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
@@ -61,15 +63,27 @@ public class GameStage extends BaseStage {
 	/** 敌人顺序 **/
 	private HashMap<Integer,Integer> enemyOrderMap=new HashMap<Integer,Integer>();
 
+	private static GameStage instance;
 
-    public GameStage(MyPaokuGame mainGame, Viewport viewport) {
+    private GameStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
         init();
     }
 
-    private void init() {
+	public static synchronized GameStage getInstance(MyPaokuGame game){
+		if (instance == null) {
+			instance = new GameStage(
+					game,
+					new ScalingViewport(Scaling.fit,
+							game.getWorldWidth(),
+							game.getWorldHeight()
+					)
+			);
+		}
+		return instance;
+	}
 
-
+    public void init() {
 
         /*
          * 创建背景

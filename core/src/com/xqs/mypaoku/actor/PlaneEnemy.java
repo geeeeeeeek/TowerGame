@@ -49,7 +49,9 @@ public class PlaneEnemy extends BaseEnemy {
 
     @Override
     public Animation getFireAnimation() {
-        return null;
+        TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_PLANE_FIRE);
+        Animation fireAnimation = new  Animation(0.2F, TextureUtil.getTextureRegions(walkRegion,1,2));
+        return fireAnimation;
     }
 
     @Override
@@ -57,6 +59,11 @@ public class PlaneEnemy extends BaseEnemy {
         TextureAtlas.AtlasRegion deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_PLANE_DEAD);
         Animation hurtAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(deadRegion,1,6));
         return hurtAnimation;
+    }
+
+    public void fire(){
+        super.fire();
+
     }
 
 
@@ -72,12 +79,14 @@ public class PlaneEnemy extends BaseEnemy {
                 position.y+=0.8;
                 if(position.y>MAX_Y){
                     mDirection=DOWN;
+                    fire();
                 }
                 break;
             case DOWN:
                 position.y-=0.8;
                 if(position.y<MIN_Y){
                     mDirection=UP;
+                    fire();
                 }
                 break;
         }

@@ -28,6 +28,7 @@ public abstract class BaseEnemy extends AnimationActor{
     private Animation fireAnimation;
     private Animation hurtAnimation;
 
+    private int fireAnimationFrameLength;
     private int deadAnimationFrameLength;
 
     public Vector2 position=new Vector2();
@@ -41,6 +42,9 @@ public abstract class BaseEnemy extends AnimationActor{
         fireAnimation=getFireAnimation();
         hurtAnimation=getHurtAnimation();
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        if(null!=fireAnimation){
+            fireAnimationFrameLength=fireAnimation.getKeyFrames().length;
+        }
         deadAnimationFrameLength=hurtAnimation.getKeyFrames().length;
     }
 
@@ -111,20 +115,21 @@ public abstract class BaseEnemy extends AnimationActor{
                 if(position.x<stopX){
                     position.x=stopX;
                 }
-                setX(position.x);
                 break;
             case FIRE:
                 position.x-=(delta*100);
                 if(position.x<stopX){
                     position.x=stopX;
                 }
-                setX(position.x);
+                int fireKeyFrameIndex=fireAnimation.getKeyFrameIndex(getStateTime());
+                if(fireKeyFrameIndex==(fireAnimationFrameLength-1)){
+                    walk();
+                }
                 break;
             case HURT:
                 position.x+=(delta*20);
-                setX(position.x);
-                int index=hurtAnimation.getKeyFrameIndex(getStateTime());
-                if(index==(deadAnimationFrameLength-1)){
+                int hurtKeyFrameIndex=hurtAnimation.getKeyFrameIndex(getStateTime());
+                if(hurtKeyFrameIndex==(deadAnimationFrameLength-1)){
                     this.state=DEAD;
                 }
                 break;
@@ -132,6 +137,8 @@ public abstract class BaseEnemy extends AnimationActor{
                 this.remove();
                 break;
         }
+
+        setX(position.x);
 
         if(getRightX()<0){
             setState(DEAD);
