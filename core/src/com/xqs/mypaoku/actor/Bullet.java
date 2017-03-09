@@ -1,6 +1,7 @@
 package com.xqs.mypaoku.actor;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
@@ -13,6 +14,7 @@ import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.util.Box2DManager;
+import com.xqs.mypaoku.util.TextureUtil;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -53,6 +55,8 @@ public class Bullet extends AnimationActor{
 
     public TextureAtlas.AtlasRegion region;
 
+    private Animation flyAnimation;
+
     //角度
     private float degree;
 
@@ -91,15 +95,7 @@ public class Bullet extends AnimationActor{
 
 
         //x速率
-//        velocity.x=this.clickX*1.36f;
 
-
-
-
-
-//        velocity.x=(this.mClickX)*ratio-START_X;
-//        velocity.y=velocity.x/ratio;
-//        maxVelocity=velocity.x*ratio+300f;
 
 
         body= Box2DManager.createBody(world);
@@ -133,8 +129,11 @@ public class Bullet extends AnimationActor{
                 setRegion(region);
                 break;
             case 1:
-                region=game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_2);
-                setRegion(region);
+                region=game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_ONE_FLY);
+//                setRegion(region);
+                flyAnimation= new Animation(0.1F, TextureUtil.getTextureRegions(region,1,2));
+                flyAnimation.setPlayMode(Animation.PlayMode.LOOP);
+                setAnimation(flyAnimation);
                 break;
 
         }

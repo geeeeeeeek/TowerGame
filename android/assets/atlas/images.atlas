@@ -94,4 +94,18 @@ bullet2
   orig:73,30
   offset:0,0
   index:-1
+bullet_one_fly
+  rotate:false
+  xy:27,990
+  size:145,28
+  orig:145,28
+  offset:0,0
+  index:-1
+bullet_one_explode
+  rotate:false
+  xy:750,1
+  size:229,100
+  orig:229,100
+  offset:0,0
+  index:-1
 

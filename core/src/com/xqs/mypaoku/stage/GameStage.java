@@ -158,7 +158,7 @@ public class GameStage extends BaseStage {
 	/**
 	 * 生成子弹
 	 */
-	private void generateBullet(int bulletType, int screenX, int screenY){
+	public void generateBullet(int bulletType, int screenX, int screenY){
 		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY, world);
 
 		if(bulletType==1){

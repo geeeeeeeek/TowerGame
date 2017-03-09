@@ -37,6 +37,8 @@ public class Res {
 
         public static final String IMAGE_ENEMY = "enemy";
 
+        /** 子弹 **/
+        public static final String IMAGE_BULLET_ONE_FLY="bullet_one_fly";
 
         /** 大葱 **/
         public static final String IMAGE_ENEMY_DACONG_WALK="dacong_walk";

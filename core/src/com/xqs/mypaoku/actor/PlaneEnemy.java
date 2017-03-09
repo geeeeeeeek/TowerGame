@@ -63,7 +63,7 @@ public class PlaneEnemy extends BaseEnemy {
 
     public void fire(){
         super.fire();
-
+        GameStage.getInstance(mainGame).generateBullet(1,600,100);
     }
 
 
