@@ -2,6 +2,7 @@ package com.xqs.mypaoku.actor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
@@ -31,9 +32,6 @@ public class Bullet extends AnimationActor{
     public final static int PLAYER=0;
     public final static int CAIHUA=1;
 
-
-    public static float START_X=100f;
-    public static float START_Y=300f;
 
     //子弹位置
     public Vector2 position=new Vector2();

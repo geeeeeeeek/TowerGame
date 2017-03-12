@@ -9,13 +9,14 @@ import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
+import com.xqs.mypaoku.util.Util;
 
 /**
  * Created by Administrator on 2017/3/4 0004.
  */
 
 public class CaihuaEnemy extends BaseEnemy {
-
+    public final static String TAG="CaihuaEnemy";
 
 
 
@@ -37,7 +38,7 @@ public class CaihuaEnemy extends BaseEnemy {
     @Override
     public void fire() {
         super.fire();
-        GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA,getX(),getY());
+        GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA,getX(),getY()+getHeight()/2);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class CaihuaEnemy extends BaseEnemy {
     @Override
     public void orderAct(float delta, int counter) {
         if(counter%10==0) {
-            GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA, getX(), getY());
+            fire();
         }
     }
 }

@@ -256,7 +256,6 @@ public class GameStage extends BaseStage {
 		super.draw();
 		Box2DManager.doPhysicsStep(world);
 
-
 		drawBullets();
 
 	}
@@ -298,8 +297,10 @@ public class GameStage extends BaseStage {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (gameState == GameState.ready) {
+			float x=playerActor.getRightX();
+			float y=playerActor.getY()+playerActor.getHeight()/2;
 			Util.log("touch:",screenX+" "+screenY+ " "+pointer+" "+button);
-			generatePlayerBullet(Bullet.PLAYER,screenX,screenY,100f,300f);
+			generatePlayerBullet(Bullet.PLAYER,screenX,screenY,x,y);
 		}
 
 

@@ -55,12 +55,11 @@ public class Box2DManager {
         return fixture;
     }
 
-    static float ct=0;
+
     public static void doPhysicsStep(World world){
         for(int i=0;i<6;i++) {
             world.step(Box2DManager.TIME_STEP, Box2DManager.VELOCITY_ITERATIONS, Box2DManager.POSITION_ITERATIONS);
         }
-        ct+=TIME_STEP;
     }
 
 
