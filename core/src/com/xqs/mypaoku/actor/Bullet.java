@@ -108,10 +108,11 @@ public class Bullet extends AnimationActor{
 
         switch (type){
             case PLAYER:
-                body.applyLinearImpulse(new Vector2((this.mClickX * ratio - 100) / 14, -9.8f), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2((this.mClickX * ratio - 100) / 6, 20f), body.getWorldCenter(), true);
                 break;
             case CAIHUA:
                 body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
+                body.setGravityScale(0); // 无重力
                 break;
         }
 

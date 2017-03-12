@@ -22,7 +22,7 @@ public class Box2DManager {
 
     public static World createWorld(){
 
-        World world = new World(new Vector2(0, 0), true);
+        World world = new World(new Vector2(0, -9.8f), true);
 
         return world;
 

@@ -161,7 +161,6 @@ public class GameStage extends BaseStage {
 	 */
 	public void generatePlayerBullet(int bulletType, int screenX, int screenY,float positionX,float positionY){
 		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY,positionX,positionY, world);
-
 		addActor(bullet);
 		bulletList.add(bullet);
 	}
@@ -171,8 +170,6 @@ public class GameStage extends BaseStage {
 	 */
 	public void generateEnemyBullet(int bulletType, float positionX,float positionY){
 		Bullet bullet=new Bullet(getMainGame(),bulletType, positionX,positionY, world);
-
-
 		addActor(bullet);
 		bulletList.add(bullet);
 	}
@@ -204,27 +201,30 @@ public class GameStage extends BaseStage {
 		super.act(delta);
 
 
-		//子弹与敌人碰撞检测
+		//子弹与其他碰撞检测
 		for(Bullet bullet:bulletList){
+			//与敌人
 			for(BaseEnemy enemy:enemyList){
-				if(CollisionUtils.isCollision(bullet,enemy,10)){
-
-					if(bullet.getState()==Bullet.FLY) {
-//						bullet.explode();
+				if(CollisionUtils.isCollision(bullet,enemy,10)&&enemy.getState()==BaseEnemy.WALK){
+					switch (bullet.bulletType){
+						case Bullet.PLAYER:
+							//此子弹会自爆
+							if(bullet.getState()==Bullet.EXPLODE) {
+								enemy.hurt();
+							}
+							break;
 					}
 
-					if(enemy.getState()== BaseEnemy.WALK&&bullet.getState()==Bullet.EXPLODE) {
-
-						enemy.hurt();
-					}
 				}
 			}
-			//与塔 // TODO: 2017/3/11 0011 碰撞 
-			if(CollisionUtils.isCollision(bullet,tower,10)){
- 
-				if(bullet.getState()==Bullet.FLY){
-					bullet.explode();
+			//与塔
+			if(CollisionUtils.isCollision(bullet,tower,0)&&bullet.getState()==Bullet.FLY){
+				switch (bullet.bulletType){
+					case Bullet.CAIHUA:
+						bullet.explode();
+						break;
 				}
+
 			}
 		}
 
@@ -283,10 +283,6 @@ public class GameStage extends BaseStage {
 		if(enemyOrderMap.containsKey(counter)){
 			int type=enemyOrderMap.get(counter);
 			generateEnemy(type);
-		}
-
-		if(enemyList!=null){
-			Util.log(TAG,"Enemy个数="+enemyList.size());
 		}
 
 	}

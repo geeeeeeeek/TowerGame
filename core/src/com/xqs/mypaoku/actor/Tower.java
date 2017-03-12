@@ -23,11 +23,14 @@ public class Tower extends BaseImageActor {
         texture = new Texture(Gdx.files.internal(towerPicName));
 
         region=new TextureRegion(texture);
+
+        setRegion(region);
+
+        setPosition(50,100);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(region,50,100);
     }
 }
