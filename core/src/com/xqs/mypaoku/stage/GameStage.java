@@ -2,6 +2,7 @@ package com.xqs.mypaoku.stage;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
@@ -107,9 +108,9 @@ public class GameStage extends BaseStage {
 		roadActor=new Road(this.getMainGame());
 		addActor(roadActor);
 
+		/** 子弹世界 **/
 		world = Box2DManager.createWorld();
-		Bullet bullet=new Bullet(this.getMainGame(),1,100,300,world);
-		addActor(bullet);
+
 
 
 
@@ -156,17 +157,26 @@ public class GameStage extends BaseStage {
 	}
 
 	/**
-	 * 生成子弹
+	 * 生成player子弹
 	 */
-	public void generateBullet(int bulletType, int screenX, int screenY){
-		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY, world);
+	public void generatePlayerBullet(int bulletType, int screenX, int screenY,float positionX,float positionY){
+		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY,positionX,positionY, world);
 
-		if(bulletType==1){
-//			bullet.setPosition(playerActor.getX(),300);
-		}
 		addActor(bullet);
 		bulletList.add(bullet);
 	}
+
+	/**
+	 * 生成敌人子弹
+	 */
+	public void generateEnemyBullet(int bulletType, float positionX,float positionY){
+		Bullet bullet=new Bullet(getMainGame(),bulletType, positionX,positionY, world);
+
+
+		addActor(bullet);
+		bulletList.add(bullet);
+	}
+
 
 	/**
 	 * 生成敌人
@@ -198,19 +208,27 @@ public class GameStage extends BaseStage {
 		for(Bullet bullet:bulletList){
 			for(BaseEnemy enemy:enemyList){
 				if(CollisionUtils.isCollision(bullet,enemy,10)){
-					Util.log("collision:","yes");
 
-					getRoot().removeActor(bullet);
+					if(bullet.getState()==Bullet.FLY) {
+//						bullet.explode();
+					}
 
-					bullet.setState(Bullet.DEAD);
-
-					if(enemy.getState()== DacongEnemy.WALK) {
+					if(enemy.getState()== BaseEnemy.WALK&&bullet.getState()==Bullet.EXPLODE) {
 
 						enemy.hurt();
 					}
 				}
 			}
+			//与塔 // TODO: 2017/3/11 0011 碰撞 
+			if(CollisionUtils.isCollision(bullet,tower,10)){
+ 
+				if(bullet.getState()==Bullet.FLY){
+					bullet.explode();
+				}
+			}
 		}
+
+
 
 		//移除死亡的子弹
 	    Iterator<Bullet> bulletIterator= bulletList.iterator();
@@ -238,17 +256,25 @@ public class GameStage extends BaseStage {
 		super.draw();
 		Box2DManager.doPhysicsStep(world);
 
+
+		drawBullets();
+
+	}
+
+	private synchronized void drawBullets() {
 		Array<Body> bodies = new Array<Body>();
 		world.getBodies(bodies);
-
 		for (Body body : bodies) {
 			Bullet e = (Bullet) body.getUserData();
 
-			if (e != null) {
+			if (e != null&&e.getState()==Bullet.FLY) {
 				e.setPosition(body.getPosition().x, body.getPosition().y);
 				e.setRotation(MathUtils.radiansToDegrees * body.getAngle());
+			}else if(e.getState()==Bullet.EXPLODE){
+				e.setRotation(0);
 			}
 		}
+
 	}
 
 	@Override
@@ -277,7 +303,7 @@ public class GameStage extends BaseStage {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (gameState == GameState.ready) {
 			Util.log("touch:",screenX+" "+screenY+ " "+pointer+" "+button);
-			generateBullet(1,screenX,screenY);
+			generatePlayerBullet(Bullet.PLAYER,screenX,screenY,100f,300f);
 		}
 
 

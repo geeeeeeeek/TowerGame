@@ -34,6 +34,11 @@ public class CaihuaEnemy extends BaseEnemy {
         walk();
     }
 
+    @Override
+    public void fire() {
+        super.fire();
+        GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA,getX(),getY());
+    }
 
     @Override
     public Animation getWalkAnimation() {
@@ -44,7 +49,7 @@ public class CaihuaEnemy extends BaseEnemy {
 
     @Override
     public Animation getFireAnimation() {
-        return null;
+        return getWalkAnimation(); // 与walk相同
     }
 
     @Override
@@ -61,5 +66,12 @@ public class CaihuaEnemy extends BaseEnemy {
             return;
         }
         super.act(delta);
+    }
+
+    @Override
+    public void orderAct(float delta, int counter) {
+        if(counter%10==0) {
+            GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA, getX(), getY());
+        }
     }
 }

@@ -22,16 +22,17 @@ public class Box2DManager {
 
     public static World createWorld(){
 
-        World world = new World(new Vector2(0, -2f), true);
+        World world = new World(new Vector2(0, 0), true);
 
         return world;
 
     }
 
-    public static Body createBody(World world){
+    public static Body createBody(World world,float positionX,float positionY){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(100, 300);
+        bodyDef.position.set(positionX,positionY);
+
 
         Body body = world.createBody(bodyDef);
 
@@ -44,6 +45,7 @@ public class Box2DManager {
         circle.setRadius(4f);
 
         FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.isSensor=true;
         fixtureDef.shape = circle;
         fixtureDef.density = .0f;
         fixtureDef.friction = 0.0f;

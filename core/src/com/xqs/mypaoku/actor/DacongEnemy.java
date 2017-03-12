@@ -70,5 +70,8 @@ public class DacongEnemy extends BaseEnemy {
         super.act(delta);
     }
 
+    @Override
+    public void orderAct(float delta, int counter) {
 
+    }
 }

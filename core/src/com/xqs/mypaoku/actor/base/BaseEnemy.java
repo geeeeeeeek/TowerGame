@@ -36,6 +36,11 @@ public abstract class BaseEnemy extends AnimationActor{
     //停止线
     private int stopX;
 
+    /**计数相关**/
+    private float timeCounter=0f;
+    private float next=0f;
+    private int counter=0;
+
     public BaseEnemy(MyPaokuGame mainGame){
         this.mainGame=mainGame;
         walkAnimation=getWalkAnimation();
@@ -143,5 +148,17 @@ public abstract class BaseEnemy extends AnimationActor{
         if(getRightX()<0){
             setState(DEAD);
         }
+
+        timeCounter+=delta;
+
+        if((float)timeCounter>next){
+            next+=0.1f;
+            counter++;
+            orderAct(delta,counter);
+        }
     }
+
+
+    //api
+    public abstract void orderAct(float delta,int counter);
 }

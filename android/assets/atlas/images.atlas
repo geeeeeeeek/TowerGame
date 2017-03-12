@@ -108,4 +108,11 @@ bullet_one_explode
   orig:229,100
   offset:0,0
   index:-1
+bullet_two_fly
+  rotate:false
+  xy:189,991
+  size:120,30
+  orig:120,30
+  offset:0,0
+  index:-1
 
