@@ -210,6 +210,7 @@ public class GameStage extends BaseStage {
 						case Bullet.PLAYER:
 							//此子弹会自爆
 							if(bullet.getState()==Bullet.EXPLODE) {
+								Util.log(TAG,"enemy====="+enemy.getState());
 								enemy.hurt();
 							}
 							break;
