@@ -1,2 +1,2 @@
 # my-paoku
-一个libGDX游戏demo
+A small game based on libGDX
