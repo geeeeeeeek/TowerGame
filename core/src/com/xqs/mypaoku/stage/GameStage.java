@@ -279,10 +279,13 @@ public class GameStage extends BaseStage {
 
 	@Override
 	public void orderAct(float delta, int counter) {
-		Util.log(TAG,"计时器="+counter);
+//		Util.log(TAG,"计时器="+counter);
 		if(enemyOrderMap.containsKey(counter)){
 			int type=enemyOrderMap.get(counter);
 			generateEnemy(type);
+		}
+		if(MathUtils.random(1,100)==2){
+			generateEnemy(2);
 		}
 
 	}

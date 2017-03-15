@@ -11,6 +11,7 @@ import com.xqs.mypaoku.util.Util;
  */
 
 public abstract class BaseEnemy extends AnimationActor{
+    public final static String TAG="BaseEnemy";
 
     public static final int WALK=0;
     public static final int FIRE=1;
@@ -79,8 +80,10 @@ public abstract class BaseEnemy extends AnimationActor{
     }
 
     public void fire(){
-        setState(FIRE);
-        setCurrentAnimation(FIRE);
+        if(state==WALK) {
+            setState(FIRE);
+            setCurrentAnimation(FIRE);
+        }
     }
 
     public void hurt(){
@@ -134,8 +137,10 @@ public abstract class BaseEnemy extends AnimationActor{
             case HURT:
                 position.x+=(delta*20);
                 int hurtKeyFrameIndex=hurtAnimation.getKeyFrameIndex(getStateTime());
+                Util.log(TAG,"hurtKeyFrameIndex====="+hurtKeyFrameIndex+" "+deadAnimationFrameLength);
                 if(hurtKeyFrameIndex==(deadAnimationFrameLength-1)){
                     this.state=DEAD;
+                    Util.log(TAG,"dead=====yes");
                 }
                 break;
             case DEAD:

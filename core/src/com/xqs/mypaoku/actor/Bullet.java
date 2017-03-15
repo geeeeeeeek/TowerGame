@@ -49,7 +49,7 @@ public class Bullet extends AnimationActor{
     private float maxVelocity;
 
     //子弹状态
-    public int state;
+    public int state=-1;
 
     public MyPaokuGame game;
 
