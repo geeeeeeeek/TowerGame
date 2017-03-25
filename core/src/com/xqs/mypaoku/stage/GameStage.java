@@ -12,12 +12,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
 import com.xqs.mypaoku.actor.Bullet;
+import com.xqs.mypaoku.actor.CaihuaBullet;
 import com.xqs.mypaoku.actor.CaihuaEnemy;
 import com.xqs.mypaoku.actor.DacongEnemy;
+import com.xqs.mypaoku.actor.PlaneBullet;
 import com.xqs.mypaoku.actor.PlaneEnemy;
 import com.xqs.mypaoku.actor.Player;
+import com.xqs.mypaoku.actor.PlayerBullet;
 import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
+import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
@@ -57,7 +61,7 @@ public class GameStage extends BaseStage {
 	private List<BaseEnemy> enemyList=new ArrayList<BaseEnemy>();
 
 	/**子弹容器**/
-	private List<Bullet> bulletList=new ArrayList<Bullet>();
+	private List<BaseBullet> bulletList=new ArrayList<BaseBullet>();
 
 	/** 游戏状态 */
 	public static GameState gameState;
@@ -150,7 +154,7 @@ public class GameStage extends BaseStage {
 		gameState = GameState.ready;
 
 		//清空子弹
-		for(Bullet bullet:bulletList){
+		for(BaseBullet bullet:bulletList){
 			getRoot().removeActor(bullet);
 		}
 		bulletList.clear();
@@ -161,7 +165,7 @@ public class GameStage extends BaseStage {
 	 * 生成player子弹
 	 */
 	public void generatePlayerBullet(int bulletType, int screenX, int screenY,float positionX,float positionY){
-		Bullet bullet=new Bullet(getMainGame(),bulletType,screenX,screenY,positionX,positionY, world);
+		PlayerBullet bullet=new PlayerBullet(getMainGame(),screenX,screenY,positionX,positionY, world);
 		addActor(bullet);
 		bulletList.add(bullet);
 	}
@@ -170,9 +174,16 @@ public class GameStage extends BaseStage {
 	 * 生成敌人子弹
 	 */
 	public void generateEnemyBullet(int bulletType, float positionX,float positionY){
-		Bullet bullet=new Bullet(getMainGame(),bulletType, positionX,positionY, world);
-		addActor(bullet);
-		bulletList.add(bullet);
+
+		if(bulletType== BaseBullet.CAIHUA){
+			CaihuaBullet bullet=new CaihuaBullet(getMainGame(),positionX,positionY,world);
+			addActor(bullet);
+			bulletList.add(bullet);
+		}else if(bulletType==BaseBullet.PLANE){
+			PlaneBullet bullet=new PlaneBullet(getMainGame(),positionX,positionY,world);
+			addActor(bullet);
+			bulletList.add(bullet);
+		}
 	}
 
 
@@ -203,12 +214,12 @@ public class GameStage extends BaseStage {
 
 
 		//子弹与其他碰撞检测
-		for(Bullet bullet:bulletList){
+		for(BaseBullet bullet:bulletList){
 			//与敌人
 			for(BaseEnemy enemy:enemyList){
 				if(CollisionUtils.isCollision(bullet,enemy,10)&&enemy.getState()==BaseEnemy.WALK){
-					switch (bullet.bulletType){
-						case Bullet.PLAYER:
+					switch (bullet.getBulletType()){
+						case BaseBullet.PLAYER:
 							//此子弹会自爆
 							if(bullet.getState()==Bullet.EXPLODE) {
 								enemy.hurt();
@@ -218,10 +229,15 @@ public class GameStage extends BaseStage {
 
 				}
 			}
+
+
 			//与塔
-			if(CollisionUtils.isCollision(bullet,tower,0)&&bullet.getState()==Bullet.FLY){
-				switch (bullet.bulletType){
-					case Bullet.CAIHUA:
+			if(CollisionUtils.isCollision(bullet,tower,0)&&bullet.getState()==BaseBullet.FLY){
+				switch (bullet.getBulletType()){
+					case BaseBullet.CAIHUA:
+						bullet.explode();
+						break;
+					case BaseBullet.PLANE:
 						bullet.explode();
 						break;
 				}
@@ -232,9 +248,9 @@ public class GameStage extends BaseStage {
 
 
 		//移除死亡的子弹
-	    Iterator<Bullet> bulletIterator= bulletList.iterator();
+	    Iterator<BaseBullet> bulletIterator= bulletList.iterator();
 		while (bulletIterator.hasNext()){
-			Bullet bullet=bulletIterator.next();
+			BaseBullet bullet=bulletIterator.next();
 			if(bullet.getState()==Bullet.DEAD){
 				bulletIterator.remove();
 			}
@@ -265,13 +281,14 @@ public class GameStage extends BaseStage {
 		Array<Body> bodies = new Array<Body>();
 		world.getBodies(bodies);
 		for (Body body : bodies) {
-			Bullet e = (Bullet) body.getUserData();
 
-			if (e != null&&e.getState()==Bullet.FLY) {
+			BaseBullet e = (BaseBullet) body.getUserData();
+
+			if (e != null&&e.getState()==BaseBullet.FLY) {
 				e.setPosition(body.getPosition().x, body.getPosition().y);
-				e.setRotation(MathUtils.radiansToDegrees * body.getAngle());
+//				e.setRotation(MathUtils.radiansToDegrees * body.getAngle());
 			}else if(e.getState()==Bullet.EXPLODE){
-				e.setRotation(0);
+//				e.setRotation(0);
 			}
 		}
 

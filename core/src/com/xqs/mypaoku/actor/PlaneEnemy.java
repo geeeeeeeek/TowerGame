@@ -63,7 +63,7 @@ public class PlaneEnemy extends BaseEnemy {
 
     public void fire(){
         super.fire();
-        GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA,getX(),getY()+getHeight()/2);
+        GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.PLANE,getX()-50,getY()+getHeight()/3);
     }
 
 

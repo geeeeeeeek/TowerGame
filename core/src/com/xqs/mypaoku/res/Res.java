@@ -44,6 +44,9 @@ public class Res {
         public static final String IMAGE_BULLET_TWO_FLY="bullet_two_fly";
         public static final String IMAGE_BULLET_TWO_EXPLODE="bullet_two_explode";
 
+        public static final String IMAGE_BULLET_THREE_FlY="bullet_three_fly";
+        public static final String IMAGE_BULLET_THREE_EXPLODE="bullet_three_explode";
+
         /** 大葱 **/
         public static final String IMAGE_ENEMY_DACONG_WALK="dacong_walk";
         public static final String IMAGE_ENEMY_DACONG_DEAD="dacong_dead";

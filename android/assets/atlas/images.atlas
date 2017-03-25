@@ -122,3 +122,10 @@ bullet_two_explode
   orig:180,45
   offset:0,0
   index:-1
+bullet_three_fly
+  rotate:false
+  xy:360,991
+  size:83,20
+  orig:83,20
+  offset:0,0
+  index:-1
