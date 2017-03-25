@@ -137,10 +137,8 @@ public abstract class BaseEnemy extends AnimationActor{
             case HURT:
                 position.x+=(delta*20);
                 int hurtKeyFrameIndex=hurtAnimation.getKeyFrameIndex(getStateTime());
-                Util.log(TAG,"hurtKeyFrameIndex====="+hurtKeyFrameIndex+" "+deadAnimationFrameLength);
                 if(hurtKeyFrameIndex==(deadAnimationFrameLength-1)){
                     this.state=DEAD;
-                    Util.log(TAG,"dead=====yes");
                 }
                 break;
             case DEAD:

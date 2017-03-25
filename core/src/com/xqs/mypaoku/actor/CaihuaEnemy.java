@@ -17,6 +17,7 @@ import com.xqs.mypaoku.util.Util;
 
 public class CaihuaEnemy extends BaseEnemy {
     public final static String TAG="CaihuaEnemy";
+    public final static int StopX=220;
 
 
 
@@ -28,7 +29,7 @@ public class CaihuaEnemy extends BaseEnemy {
         position.x=this.mainGame.getWorldWidth();
         position.y=150;
 
-        setStopX(220);
+        setStopX(StopX);
 
         setPosition(position.x,position.y);
 
@@ -72,7 +73,9 @@ public class CaihuaEnemy extends BaseEnemy {
     @Override
     public void orderAct(float delta, int counter) {
         if(counter%10==0) {
-            fire();
+            if(getX()>StopX) {
+                fire();
+            }
         }
     }
 }

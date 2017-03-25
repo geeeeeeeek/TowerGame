@@ -40,7 +40,9 @@ public class Res {
         /** 子弹 **/
         public static final String IMAGE_BULLET_ONE_FLY="bullet_one_fly";
         public static final String IMAGE_BULLET_ONE_EXPLODE="bullet_one_explode";
+
         public static final String IMAGE_BULLET_TWO_FLY="bullet_two_fly";
+        public static final String IMAGE_BULLET_TWO_EXPLODE="bullet_two_explode";
 
         /** 大葱 **/
         public static final String IMAGE_ENEMY_DACONG_WALK="dacong_walk";

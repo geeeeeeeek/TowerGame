@@ -115,4 +115,10 @@ bullet_two_fly
   orig:120,30
   offset:0,0
   index:-1
-
+bullet_two_explode
+  rotate:false
+  xy:760,115
+  size:180,45
+  orig:180,45
+  offset:0,0
+  index:-1

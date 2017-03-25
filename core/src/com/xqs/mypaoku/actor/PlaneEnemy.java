@@ -63,7 +63,7 @@ public class PlaneEnemy extends BaseEnemy {
 
     public void fire(){
         super.fire();
-//        GameStage.getInstance(mainGame).generateBullet(1,600,100,getX(),getY());
+        GameStage.getInstance(mainGame).generateEnemyBullet(Bullet.CAIHUA,getX(),getY()+getHeight()/2);
     }
 
 
@@ -96,6 +96,8 @@ public class PlaneEnemy extends BaseEnemy {
 
     @Override
     public void orderAct(float delta, int counter) {
-
+        if(counter%10==0) {
+            fire();
+        }
     }
 }

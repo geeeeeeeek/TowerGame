@@ -1,5 +1,6 @@
 package com.xqs.mypaoku.stage;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -210,7 +211,6 @@ public class GameStage extends BaseStage {
 						case Bullet.PLAYER:
 							//此子弹会自爆
 							if(bullet.getState()==Bullet.EXPLODE) {
-								Util.log(TAG,"enemy====="+enemy.getState());
 								enemy.hurt();
 							}
 							break;

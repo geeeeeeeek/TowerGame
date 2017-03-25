@@ -106,7 +106,9 @@ public class Bullet extends AnimationActor{
 
         switch (type){
             case PLAYER:
-                body.applyLinearImpulse(new Vector2((this.mClickX * ratio - 100) / 6, 20f), body.getWorldCenter(), true);
+                float vx=(this.mClickX*ratio-100)/6;
+                Gdx.app.log(TAG,"vx="+vx);
+                body.applyLinearImpulse(new Vector2((this.mClickX * ratio - 100) / 6, 0f), body.getWorldCenter(), true);
                 break;
             case CAIHUA:
                 body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
@@ -145,10 +147,10 @@ public class Bullet extends AnimationActor{
                 break;
             case Bullet.CAIHUA:
                 flyRegion=game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_TWO_FLY);
-                explodeRegion=game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_ONE_EXPLODE);
+                explodeRegion=game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_TWO_EXPLODE);
 
                 flyAnimation= new Animation(0.1F, TextureUtil.getTextureRegions(flyRegion,1,4));
-                explodeAnimation=new Animation(0.1f,TextureUtil.getTextureRegions(explodeRegion,1,3));
+                explodeAnimation=new Animation(0.1f,TextureUtil.getTextureRegions(explodeRegion,1,4));
                 flyAnimation.setPlayMode(Animation.PlayMode.LOOP);
                 explodeAnimationFrameLength=explodeAnimation.getKeyFrames().length;
                 setAnimation(flyAnimation);
@@ -179,6 +181,7 @@ public class Bullet extends AnimationActor{
                 switch (state){
                     case FLY:
                         if(position.y<100){
+                            Gdx.app.log(TAG,"position="+position.x+" "+position.y);
                             explode();
                         }
 
