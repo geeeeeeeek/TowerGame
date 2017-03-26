@@ -1,9 +1,13 @@
-package com.xqs.mypaoku.actor;
+package com.xqs.mypaoku.actor.bullet;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseBullet;
@@ -18,8 +22,9 @@ public class PlayerBullet extends BaseBullet {
 
     public PlayerBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
         super(game,screenX,screenY, positionX, positionY, world);
-        body.applyLinearImpulse(new Vector2(100, 0), body.getWorldCenter(), true);
-        body.setGravityScale(2); // 重力
+        body.applyLinearImpulse(new Vector2(120, 0), body.getWorldCenter(), true);
+
+//        body.setGravityScale(2); // 重力
     }
 
     @Override
@@ -40,6 +45,7 @@ public class PlayerBullet extends BaseBullet {
     public int getBulletType() {
         return PLAYER;
     }
+
 
     @Override
     public void act(float delta) {

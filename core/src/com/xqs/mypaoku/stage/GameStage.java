@@ -1,9 +1,12 @@
 package com.xqs.mypaoku.stage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
@@ -12,13 +15,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
 import com.xqs.mypaoku.actor.Bullet;
-import com.xqs.mypaoku.actor.CaihuaBullet;
-import com.xqs.mypaoku.actor.CaihuaEnemy;
-import com.xqs.mypaoku.actor.DacongEnemy;
-import com.xqs.mypaoku.actor.PlaneBullet;
-import com.xqs.mypaoku.actor.PlaneEnemy;
+import com.xqs.mypaoku.actor.bullet.CaihuaBullet;
+import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
+import com.xqs.mypaoku.actor.enemy.DacongEnemy;
+import com.xqs.mypaoku.actor.bullet.PlaneBullet;
+import com.xqs.mypaoku.actor.enemy.PlaneEnemy;
 import com.xqs.mypaoku.actor.Player;
-import com.xqs.mypaoku.actor.PlayerBullet;
+import com.xqs.mypaoku.actor.bullet.PlayerBullet;
 import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
@@ -267,10 +270,22 @@ public class GameStage extends BaseStage {
 	}
 
 
+	private static final float PXTM = 30;//每30个像素就是1米
+	float w = getMainGame().getWorldWidth();
+	float h = getMainGame().getWorldHeight();
+	//camera宽高
+	float cameraWidth = w / PXTM;
+	float cameraHeight = h / PXTM;
+	Box2DDebugRenderer renderer = new Box2DDebugRenderer();
+//	ShapeRenderer renderer=new ShapeRenderer();//渲染器
+	OrthographicCamera camera = new OrthographicCamera(cameraWidth, cameraHeight);
 
 	@Override
 	public void draw() {
 		super.draw();
+
+		renderer.render(world, camera.combined);
+
 		Box2DManager.doPhysicsStep(world);
 
 		drawBullets();

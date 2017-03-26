@@ -1,4 +1,4 @@
-package com.xqs.mypaoku.actor;
+package com.xqs.mypaoku.actor.bullet;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

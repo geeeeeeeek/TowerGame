@@ -1,6 +1,9 @@
 package com.xqs.mypaoku.util;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -20,9 +23,13 @@ public class Box2DManager {
     public static final int VELOCITY_ITERATIONS=6;
     public static final int POSITION_ITERATIONS=2;
 
+    private static final float PXTM = 30;//每30个像素就是1米
+
+    private Box2DDebugRenderer renderer = new Box2DDebugRenderer();//渲染器
+
     public static World createWorld(){
 
-        World world = new World(new Vector2(0, -9.8f), true);
+        World world = new World(new Vector2(0, -4.9f), true);
 
         return world;
 
@@ -41,14 +48,15 @@ public class Box2DManager {
     }
 
     public static Fixture createFixture(Body body){
-        CircleShape circle = new CircleShape();
-        circle.setRadius(4f);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(4f, 2f);//凡是与物理世界相关的都是以米为单位
+
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.isSensor=true;
-        fixtureDef.shape = circle;
-        fixtureDef.density = .0f;
-        fixtureDef.friction = 0.0f;
+        fixtureDef.shape = shape;
+        fixtureDef.density = 0f;
+        fixtureDef.friction = 0.2f;
         fixtureDef.restitution = 0.0f;
 
         Fixture fixture = body.createFixture(fixtureDef);
@@ -57,7 +65,7 @@ public class Box2DManager {
 
 
     public static void doPhysicsStep(World world){
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<10;i++) {
             world.step(Box2DManager.TIME_STEP, Box2DManager.VELOCITY_ITERATIONS, Box2DManager.POSITION_ITERATIONS);
         }
     }

@@ -1,9 +1,10 @@
-package com.xqs.mypaoku.actor;
+package com.xqs.mypaoku.actor.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.GameStage;
