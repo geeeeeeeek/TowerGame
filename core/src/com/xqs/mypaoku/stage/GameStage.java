@@ -270,21 +270,10 @@ public class GameStage extends BaseStage {
 	}
 
 
-	private static final float PXTM = 30;//每30个像素就是1米
-	float w = getMainGame().getWorldWidth();
-	float h = getMainGame().getWorldHeight();
-	//camera宽高
-	float cameraWidth = w / PXTM;
-	float cameraHeight = h / PXTM;
-	Box2DDebugRenderer renderer = new Box2DDebugRenderer();
-//	ShapeRenderer renderer=new ShapeRenderer();//渲染器
-	OrthographicCamera camera = new OrthographicCamera(cameraWidth, cameraHeight);
-
 	@Override
 	public void draw() {
 		super.draw();
 
-		renderer.render(world, camera.combined);
 
 		Box2DManager.doPhysicsStep(world);
 
@@ -335,7 +324,8 @@ public class GameStage extends BaseStage {
 		if (gameState == GameState.ready) {
 			float x=playerActor.getRightX();
 			float y=playerActor.getY()+playerActor.getHeight()/2;
-			Util.log("touch:",screenX+" "+screenY+ " "+pointer+" "+button);
+			Util.log("touch:",screenX+" "+screenY+ " "+x+" "+y
+			);
 			generatePlayerBullet(Bullet.PLAYER,screenX,screenY,x,y);
 		}
 

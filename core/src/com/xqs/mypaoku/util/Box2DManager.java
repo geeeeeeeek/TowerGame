@@ -19,26 +19,25 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Box2DManager {
 
-    public static final float TIME_STEP=1/60f;
-    public static final int VELOCITY_ITERATIONS=6;
-    public static final int POSITION_ITERATIONS=2;
+    public static final float TIME_STEP = 1 / 60f;
+    public static final int VELOCITY_ITERATIONS = 6;
+    public static final int POSITION_ITERATIONS = 2;
 
-    private static final float PXTM = 30;//每30个像素就是1米
+    public static final float Gravity = 4.9f;
 
-    private Box2DDebugRenderer renderer = new Box2DDebugRenderer();//渲染器
 
-    public static World createWorld(){
+    public static World createWorld() {
 
-        World world = new World(new Vector2(0, -4.9f), true);
+        World world = new World(new Vector2(0, -Gravity), true);
 
         return world;
 
     }
 
-    public static Body createBody(World world,float positionX,float positionY){
+    public static Body createBody(World world, float positionX, float positionY) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(positionX,positionY);
+        bodyDef.position.set(positionX, positionY);
 
 
         Body body = world.createBody(bodyDef);
@@ -47,13 +46,13 @@ public class Box2DManager {
 
     }
 
-    public static Fixture createFixture(Body body){
+    public static Fixture createFixture(Body body) {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(4f, 2f);//凡是与物理世界相关的都是以米为单位
 
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.isSensor=true;
+        fixtureDef.isSensor = true;
         fixtureDef.shape = shape;
         fixtureDef.density = 0f;
         fixtureDef.friction = 0.2f;
@@ -64,8 +63,8 @@ public class Box2DManager {
     }
 
 
-    public static void doPhysicsStep(World world){
-        for(int i=0;i<10;i++) {
+    public static void doPhysicsStep(World world) {
+        for (int i = 0; i < 10; i++) {
             world.step(Box2DManager.TIME_STEP, Box2DManager.VELOCITY_ITERATIONS, Box2DManager.POSITION_ITERATIONS);
         }
     }

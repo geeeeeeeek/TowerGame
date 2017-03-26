@@ -63,9 +63,9 @@ public abstract class BaseBullet extends AnimationActor {
     // 角度
     public float degree;
 
-    private int mClickX;
+    public int mClickX;
 
-    private int mClickY;
+    public int mClickY;
 
     public Body body;
 
@@ -100,6 +100,8 @@ public abstract class BaseBullet extends AnimationActor {
         this.mClickY = screenY;
 
         float ratio = (game.getWorldWidth()) / Gdx.graphics.getWidth();
+
+        this.mClickX=(int)(this.mClickX*ratio);
 
         // x速率
         body = Box2DManager.createBody(world, position.x, position.y);

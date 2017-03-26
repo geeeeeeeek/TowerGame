@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
@@ -20,11 +22,26 @@ import com.xqs.mypaoku.util.TextureUtil;
 
 public class PlayerBullet extends BaseBullet {
 
-    public PlayerBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
-        super(game,screenX,screenY, positionX, positionY, world);
-        body.applyLinearImpulse(new Vector2(120, 0), body.getWorldCenter(), true);
+    public static final int EXPLODE_Y = 100;
 
-//        body.setGravityScale(2); // 重力
+    public PlayerBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
+        super(game, screenX, screenY, positionX, positionY, world);
+
+
+        mClickX = (int) (mClickX - positionX);
+
+        // 弹射运动方程
+        // y = viy • t + 0.5 • ay • t2
+        // x = vix • t + 0.5 • ax • t2
+
+        int dy = (int) (positionY - EXPLODE_Y);
+
+        float t = (float) Math.sqrt(dy / (0.5 * Box2DManager.Gravity));
+
+        float vx = mClickX / t;
+
+        body.applyLinearImpulse(new Vector2(vx, 0), body.getWorldCenter(), true);
+
     }
 
     @Override
@@ -54,8 +71,9 @@ public class PlayerBullet extends BaseBullet {
         switch (state) {
             case FLY:
                 setRotation(degree);
-                if(position.y<100){
+                if (position.y < EXPLODE_Y) {
                     explode();
+                    Gdx.app.log(TAG, "xy=" + getX() + " " + getY());
                 }
                 break;
             case EXPLODE:
