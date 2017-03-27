@@ -48,7 +48,7 @@ public class Box2DManager {
 
     public static Fixture createFixture(Body body) {
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(4f, 2f);//凡是与物理世界相关的都是以米为单位
+        shape.setAsBox(2f, 2f);//凡是与物理世界相关的都是以米为单位
 
 
         FixtureDef fixtureDef = new FixtureDef();

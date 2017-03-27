@@ -18,7 +18,6 @@ public class CaihuaBullet extends BaseBullet {
     public CaihuaBullet(MyPaokuGame game, float positionX, float positionY, World world){
         super(game,positionX,positionY,world);
 
-
         body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
         body.setGravityScale(0); // 无重力
     }

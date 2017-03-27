@@ -1,14 +1,9 @@
 package com.xqs.mypaoku.actor.bullet;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseBullet;
@@ -22,7 +17,7 @@ import com.xqs.mypaoku.util.TextureUtil;
 
 public class PlayerBullet extends BaseBullet {
 
-    public static final int EXPLODE_Y = 100;
+    public static final int EXPLODE_Y = 150;
 
     public PlayerBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
         super(game, screenX, screenY, positionX, positionY, world);
@@ -73,7 +68,6 @@ public class PlayerBullet extends BaseBullet {
                 setRotation(degree);
                 if (position.y < EXPLODE_Y) {
                     explode();
-                    Gdx.app.log(TAG, "xy=" + getX() + " " + getY());
                 }
                 break;
             case EXPLODE:

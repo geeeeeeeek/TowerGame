@@ -58,6 +58,10 @@ public abstract class BaseEnemy extends AnimationActor{
         this.stopX=stopX;
     }
 
+    public int getStopX(){
+        return this.stopX;
+    }
+
     /**
      * apis
      */

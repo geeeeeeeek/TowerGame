@@ -321,11 +321,14 @@ public class GameStage extends BaseStage {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		float ratio = Gdx.graphics.getWidth()/(getMainGame().getWorldWidth());
 		if (gameState == GameState.ready) {
 			float x=playerActor.getRightX();
 			float y=playerActor.getY()+playerActor.getHeight()/2;
-			Util.log("touch:",screenX+" "+screenY+ " "+x+" "+y
-			);
+
+			if(screenX<(Tower.getStopX()*ratio)){
+				screenX=(int)(Tower.getStopX()*ratio);
+			}
 			generatePlayerBullet(Bullet.PLAYER,screenX,screenY,x,y);
 		}
 

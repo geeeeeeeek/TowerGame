@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.math.Vector2;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.actor.base.MyAnimation;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class DacongEnemy extends BaseEnemy {
 
-
+    public final static int StartY=150;
 
 
     public DacongEnemy(MyPaokuGame mainGame) {
@@ -32,9 +33,9 @@ public class DacongEnemy extends BaseEnemy {
 
 
         position.x=mainGame.getWorldWidth();
-        position.y=120;
+        position.y=StartY;
 
-        setStopX(320);
+        setStopX(Tower.getStopX());
 
         setPosition(position.x,position.y);
 

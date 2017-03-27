@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bullet;
+import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.GameStage;
@@ -17,8 +18,10 @@ import com.xqs.mypaoku.util.Util;
  */
 
 public class CaihuaEnemy extends BaseEnemy {
+
     public final static String TAG="CaihuaEnemy";
-    public final static int StopX=220;
+
+    public final static int StartY=150;
 
 
 
@@ -28,9 +31,9 @@ public class CaihuaEnemy extends BaseEnemy {
         this.mainGame=mainGame;
 
         position.x=this.mainGame.getWorldWidth();
-        position.y=150;
+        position.y=StartY;
 
-        setStopX(StopX);
+        setStopX(Tower.getStopX());
 
         setPosition(position.x,position.y);
 
@@ -74,7 +77,7 @@ public class CaihuaEnemy extends BaseEnemy {
     @Override
     public void orderAct(float delta, int counter) {
         if(counter%10==0) {
-            if(getX()>StopX) {
+            if(getX()>getStopX()) {
                 fire();
             }
         }

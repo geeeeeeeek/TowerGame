@@ -13,6 +13,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
 
 public class Tower extends BaseImageActor {
     public static String towerPicName="tower01.png";
+    public static int Stop_X;
 
     private Texture texture;
     private TextureRegion region;
@@ -27,6 +28,13 @@ public class Tower extends BaseImageActor {
         setRegion(region);
 
         setPosition(50,100);
+
+        Stop_X=(int)getRightX();
+
+    }
+
+    public static int getStopX(){
+        return Stop_X;
     }
 
     @Override
