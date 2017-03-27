@@ -1,12 +1,8 @@
 package com.xqs.mypaoku.stage;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
@@ -22,7 +18,6 @@ import com.xqs.mypaoku.actor.bullet.PlaneBullet;
 import com.xqs.mypaoku.actor.enemy.PlaneEnemy;
 import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.bullet.PlayerBullet;
-import com.xqs.mypaoku.actor.Road;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
@@ -30,7 +25,6 @@ import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
-import com.xqs.mypaoku.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,9 +50,6 @@ public class GameStage extends BaseStage {
 
 	/** 塔 **/
 	private Tower tower;
-
-	/**路面**/
-	private Road roadActor;
 
 	/** 敌人容器 **/
 	private List<BaseEnemy> enemyList=new ArrayList<BaseEnemy>();
@@ -111,10 +102,6 @@ public class GameStage extends BaseStage {
 		 */
 		playerActor=new Player(this.getMainGame());
 		addActor(playerActor);
-
-
-		roadActor=new Road(this.getMainGame());
-		addActor(roadActor);
 
 		/** 子弹世界 **/
 		world = Box2DManager.createWorld();
