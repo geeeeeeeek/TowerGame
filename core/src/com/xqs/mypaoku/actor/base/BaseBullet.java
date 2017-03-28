@@ -28,6 +28,7 @@ public abstract class BaseBullet extends AnimationActor {
     public final static int PLAYER = 0;
     public final static int CAIHUA = 1;
     public final static int PLANE = 2;
+    public final static int PLAYER2=3;
 
 
     //子弹位置

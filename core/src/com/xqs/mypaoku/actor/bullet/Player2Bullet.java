@@ -3,40 +3,38 @@ package com.xqs.mypaoku.actor.bullet;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.res.Res;
-import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
- * Created by Administrator on 2017/3/25 0025.
+ * Created by Administrator on 2017/3/28 0028.
  */
 
-public class PlayerBullet extends BaseBullet {
+public class Player2Bullet extends BaseBullet {
 
-    public static final int EXPLODE_Y = 150;
-
-    public PlayerBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
+    public Player2Bullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world){
         super(game, screenX, screenY, positionX, positionY, world);
 
+        // 转换坐标
+        float widthRatio = (game.getWorldWidth()) / Gdx.graphics.getWidth();
+        float heightRatio = (game.getWorldHeight()) / Gdx.graphics.getHeight();
 
-        mClickX = (int) (mClickX - positionX);
+        float worldScreenX=screenX*widthRatio;
+        float worldScreenY=(Gdx.graphics.getHeight()-screenY)*heightRatio;
 
-        // 弹射运动方程
-        // y = viy • t + 0.5 • ay • t2
-        // x = vix • t + 0.5 • ax • t2
+        float dy=worldScreenY-positionY;
+        float dx=worldScreenX-positionX;
 
-        int dy = (int) (positionY - EXPLODE_Y);
+        float ratio=dy/dx;
 
-        float t = (float) Math.sqrt(dy / (0.5 * Box2DManager.Gravity));
 
-        float vx = mClickX / t;
-
-        body.applyLinearImpulse(new Vector2(vx, 0), body.getWorldCenter(), true);
-
+        body.setGravityScale(0);
+        body.applyLinearImpulse(new Vector2(80,80*ratio), body.getWorldCenter(), true);
 
     }
 
@@ -56,9 +54,8 @@ public class PlayerBullet extends BaseBullet {
 
     @Override
     public int getBulletType() {
-        return PLAYER;
+        return PLAYER2;
     }
-
 
     @Override
     public void act(float delta) {
@@ -67,9 +64,6 @@ public class PlayerBullet extends BaseBullet {
         switch (state) {
             case FLY:
                 setRotation(degree);
-                if (position.y < EXPLODE_Y) {
-                    explode();
-                }
                 break;
             case EXPLODE:
                 int explodeKeyFrameIndex = explodeAnimation.getKeyFrameIndex(getStateTime());

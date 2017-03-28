@@ -12,9 +12,11 @@ import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
 import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.actor.bullet.CaihuaBullet;
+import com.xqs.mypaoku.actor.bullet.Player2Bullet;
 import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
 import com.xqs.mypaoku.actor.enemy.DacongEnemy;
 import com.xqs.mypaoku.actor.bullet.PlaneBullet;
+import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.PlaneEnemy;
 import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.bullet.PlayerBullet;
@@ -112,17 +114,17 @@ public class GameStage extends BaseStage {
 		// mock data
 
 		enemyOrderMap.put(1,1);
-		enemyOrderMap.put(11,1);
+		enemyOrderMap.put(11,4);
 		enemyOrderMap.put(12,3);
 		enemyOrderMap.put(30,2);
 		enemyOrderMap.put(50,1);
 		enemyOrderMap.put(50,2);
-		enemyOrderMap.put(60,2);
+		enemyOrderMap.put(60,4);
 		enemyOrderMap.put(70,2);
 		enemyOrderMap.put(30,2);
 		enemyOrderMap.put(50,3);
 		enemyOrderMap.put(50,3);
-		enemyOrderMap.put(60,3);
+		enemyOrderMap.put(60,4);
 		enemyOrderMap.put(170,3);
 		enemyOrderMap.put(270,2);
 		enemyOrderMap.put(330,2);
@@ -155,7 +157,7 @@ public class GameStage extends BaseStage {
 	 * 生成player子弹
 	 */
 	public void generatePlayerBullet(int bulletType, int screenX, int screenY,float positionX,float positionY){
-		PlayerBullet bullet=new PlayerBullet(getMainGame(),screenX,screenY,positionX,positionY, world);
+		Player2Bullet bullet=new Player2Bullet(getMainGame(),screenX,screenY,positionX,positionY, world);
 		addActor(bullet);
 		bulletList.add(bullet);
 	}
@@ -193,6 +195,10 @@ public class GameStage extends BaseStage {
 			PlaneEnemy enemy=new PlaneEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
+		}else if(type==4){
+			MushuEnemy enemy=new MushuEnemy(getMainGame());
+			addActor(enemy);
+			enemyList.add(enemy);
 		}
 
 	}
@@ -211,8 +217,15 @@ public class GameStage extends BaseStage {
 					switch (bullet.getBulletType()){
 						case BaseBullet.PLAYER:
 							//此子弹会自爆
-							if(bullet.getState()==Bullet.EXPLODE) {
+							if(bullet.getState()==BaseBullet.EXPLODE) {
 								enemy.hurt();
+							}
+							break;
+						case BaseBullet.PLAYER2:
+							//此子弹会自爆
+							if(bullet.getState()==BaseBullet.FLY) {
+								enemy.hurt();
+								bullet.explode();
 							}
 							break;
 					}
