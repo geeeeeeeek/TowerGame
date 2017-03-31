@@ -37,6 +37,9 @@ public class Res {
 
         public static final String IMAGE_ENEMY = "enemy";
 
+        public static final String IMAGE_PLAYER_LIFE="player_life";
+
+
         /** 子弹 **/
         public static final String IMAGE_BULLET_ONE_FLY="bullet_one_fly";
         public static final String IMAGE_BULLET_ONE_EXPLODE="bullet_one_explode";

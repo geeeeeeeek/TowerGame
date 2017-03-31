@@ -37,7 +37,6 @@ public class GameScreen extends ScreenAdapter {
     private void init() {
         // 创建主游戏舞台
         gameStage=GameStage.getInstance(getMainGame());
-        gameStage.init();
 
 
         // 将输入处理设置到主游戏舞台

@@ -23,6 +23,7 @@ import com.xqs.mypaoku.actor.bullet.PlayerBullet;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
+import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
@@ -52,6 +53,9 @@ public class GameStage extends BaseStage {
 
 	/** 塔 **/
 	private Tower tower;
+
+	/** 生命值 **/
+	private List<Life> lifeList=new ArrayList<Life>();
 
 	/** 敌人容器 **/
 	private List<BaseEnemy> enemyList=new ArrayList<BaseEnemy>();
@@ -86,12 +90,14 @@ public class GameStage extends BaseStage {
 	}
 
     public void init() {
+		Gdx.app.log(TAG,"init==========");
 
         /*
          * 创建背景
          */
         bgActor = new Bg(this.getMainGame());
         addActor(bgActor);
+
 
 		/**
 		 * 创建tower
@@ -103,11 +109,13 @@ public class GameStage extends BaseStage {
 		 * 创建player
 		 */
 		playerActor=new Player(this.getMainGame());
+		playerActor.setLife(3);
 		addActor(playerActor);
+
+		updateLifes();
 
 		/** 子弹世界 **/
 		world = Box2DManager.createWorld();
-
 
 
 
@@ -138,8 +146,29 @@ public class GameStage extends BaseStage {
 		 */
 		ready();
     }
-    
-    /**
+
+	 // TODO: 2017/3/31 0031 有待优化
+	public void updateLifes() {
+		Iterator<Life> lifeIterator= lifeList.iterator();
+		while (lifeIterator.hasNext()){
+			Life life=lifeIterator.next();
+			life.remove();
+		}
+		lifeList.clear();
+
+		for(int i=0;i<playerActor.getLife();i++){
+			lifeList.add(new Life(getMainGame()));
+		}
+
+		int LifeLeft=0;
+		for(Life life:lifeList){
+			life.setPosition(LifeLeft,getMainGame().getWorldHeight()-50);
+			addActor(life);
+			LifeLeft+=50;
+		}
+	}
+
+	/**
 	 * 游戏状态改变方法01: 游戏准备状态
 	 */
 	public void ready() {
@@ -241,6 +270,7 @@ public class GameStage extends BaseStage {
 						bullet.explode();
 						break;
 					case BaseBullet.PLANE:
+						playerActor.minusLife();
 						bullet.explode();
 						break;
 				}

@@ -16,9 +16,11 @@ import com.xqs.mypaoku.util.TextureUtil;
  */
 
 public class Player2Bullet extends BaseBullet {
+    private float localDegree;
 
     public Player2Bullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world){
         super(game, screenX, screenY, positionX, positionY, world);
+
 
         // 转换坐标
         float widthRatio = (game.getWorldWidth()) / Gdx.graphics.getWidth();
@@ -29,6 +31,8 @@ public class Player2Bullet extends BaseBullet {
 
         float dy=worldScreenY-positionY;
         float dx=worldScreenX-positionX;
+
+        localDegree = MathUtils.atan2(dy, dx) / MathUtils.PI * 180;
 
         float ratio=dy/dx;
 
@@ -63,7 +67,11 @@ public class Player2Bullet extends BaseBullet {
 
         switch (state) {
             case FLY:
-                setRotation(degree);
+                if(degree==0.0) {
+                    setRotation(localDegree);
+                }else {
+                    setRotation(degree);
+                }
                 break;
             case EXPLODE:
                 int explodeKeyFrameIndex = explodeAnimation.getKeyFrameIndex(getStateTime());

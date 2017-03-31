@@ -10,6 +10,13 @@ player_shoot
   orig:438,70
   offset:0,0
   index:-1
+player_life
+  rotate:false
+  xy:470,980
+  size:40,38
+  orig:40,38
+  offset:0,0
+  index:-1
 mushu_walk
   rotate:false
   xy:750,180

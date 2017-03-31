@@ -1,10 +1,12 @@
 package com.xqs.mypaoku.actor;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
@@ -12,9 +14,12 @@ import com.xqs.mypaoku.util.TextureUtil;
  */
 
 public class Player extends AnimationActor {
+    public static final String TAG="Player";
 
     public static final int READY=0;
     public static final int DEATH=1;
+
+    private int life;
 
     public MyPaokuGame mainGame;
 
@@ -39,7 +44,23 @@ public class Player extends AnimationActor {
         setAnimation(shootAnimation);
 
         setPosition(100,290);
+    }
 
+    public void setLife(int life){
+        this.life=life;
+    }
+
+    public int getLife(){
+        return this.life;
+    }
+
+    public void minusLife(){
+        life--;
+        if(life<=0){
+            life=0;
+        }
+        Gdx.app.log(TAG,"Life="+life);
+        GameStage.getInstance(mainGame).updateLifes();
     }
 
     public void setPlayerState(int state){
