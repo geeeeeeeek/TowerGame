@@ -24,6 +24,7 @@ import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
+import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
@@ -124,11 +125,11 @@ public class GameStage extends BaseStage {
 		enemyOrderMap.put(1,1);
 		enemyOrderMap.put(11,4);
 		enemyOrderMap.put(12,3);
-		enemyOrderMap.put(30,2);
+		enemyOrderMap.put(30,EnemyType.CAIHUA);
 		enemyOrderMap.put(50,1);
 		enemyOrderMap.put(50,2);
 		enemyOrderMap.put(60,4);
-		enemyOrderMap.put(70,2);
+		enemyOrderMap.put(70,EnemyType.DACONG);
 		enemyOrderMap.put(30,2);
 		enemyOrderMap.put(50,3);
 		enemyOrderMap.put(50,3);
@@ -212,11 +213,11 @@ public class GameStage extends BaseStage {
 	 * 生成敌人
      */
 	private void generateEnemy(int type){
-		if(type==1){
+		if(type== EnemyType.DACONG){
 			DacongEnemy enemy=new DacongEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
-		}else if(type==2){
+		}else if(type==EnemyType.CAIHUA){
 			CaihuaEnemy enemy=new CaihuaEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
@@ -224,7 +225,7 @@ public class GameStage extends BaseStage {
 			PlaneEnemy enemy=new PlaneEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
-		}else if(type==4){
+		}else if(type==EnemyType.MUSHU){
 			MushuEnemy enemy=new MushuEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
