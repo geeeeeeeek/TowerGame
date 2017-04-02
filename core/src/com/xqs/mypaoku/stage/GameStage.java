@@ -24,11 +24,14 @@ import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
+import com.xqs.mypaoku.actor.npc.Pause;
+import com.xqs.mypaoku.actor.npc.Weapon;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
+import com.xqs.mypaoku.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +60,9 @@ public class GameStage extends BaseStage {
 
 	/** 生命值 **/
 	private List<Life> lifeList=new ArrayList<Life>();
+
+	/** 暂停 **/
+	private Pause pause;
 
 	/** 敌人容器 **/
 	private List<BaseEnemy> enemyList=new ArrayList<BaseEnemy>();
@@ -99,12 +105,18 @@ public class GameStage extends BaseStage {
         bgActor = new Bg(this.getMainGame());
         addActor(bgActor);
 
+		addActor(new Weapon(getMainGame()));
+
 
 		/**
 		 * 创建tower
 		 */
 		tower=new Tower(this.getMainGame());
 		addActor(tower);
+
+		/** 暂停 **/
+		pause= new Pause(this.getMainGame());
+		addActor(pause);
 
 		/*
 		 * 创建player
@@ -120,19 +132,15 @@ public class GameStage extends BaseStage {
 
 
 
-		// mock data
+		// mock data : don't spell mistakes
 
 		enemyOrderMap.put(1,1);
 		enemyOrderMap.put(11,4);
 		enemyOrderMap.put(12,3);
 		enemyOrderMap.put(30,EnemyType.CAIHUA);
-		enemyOrderMap.put(50,1);
-		enemyOrderMap.put(50,2);
+		enemyOrderMap.put(50,EnemyType.CAIHUA);
 		enemyOrderMap.put(60,4);
 		enemyOrderMap.put(70,EnemyType.DACONG);
-		enemyOrderMap.put(30,2);
-		enemyOrderMap.put(50,3);
-		enemyOrderMap.put(50,3);
 		enemyOrderMap.put(60,4);
 		enemyOrderMap.put(170,3);
 		enemyOrderMap.put(270,2);
@@ -148,8 +156,10 @@ public class GameStage extends BaseStage {
 		ready();
     }
 
-	 // TODO: 2017/3/31 0031 有待优化
+	// update lifes
 	public void updateLifes() {
+
+		// remove old list
 		Iterator<Life> lifeIterator= lifeList.iterator();
 		while (lifeIterator.hasNext()){
 			Life life=lifeIterator.next();
@@ -157,6 +167,7 @@ public class GameStage extends BaseStage {
 		}
 		lifeList.clear();
 
+		// add new list
 		for(int i=0;i<playerActor.getLife();i++){
 			lifeList.add(new Life(getMainGame()));
 		}
@@ -187,7 +198,7 @@ public class GameStage extends BaseStage {
 	 * 生成player子弹
 	 */
 	public void generatePlayerBullet(int bulletType, int screenX, int screenY,float positionX,float positionY){
-		Player2Bullet bullet=new Player2Bullet(getMainGame(),screenX,screenY,positionX,positionY, world);
+		PlayerBullet bullet=new PlayerBullet(getMainGame(),screenX,screenY,positionX,positionY, world);
 		addActor(bullet);
 		bulletList.add(bullet);
 	}
@@ -221,10 +232,6 @@ public class GameStage extends BaseStage {
 			CaihuaEnemy enemy=new CaihuaEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
-		}else if(type==3){
-			PlaneEnemy enemy=new PlaneEnemy(getMainGame());
-			addActor(enemy);
-			enemyList.add(enemy);
 		}else if(type==EnemyType.MUSHU){
 			MushuEnemy enemy=new MushuEnemy(getMainGame());
 			addActor(enemy);
@@ -251,13 +258,6 @@ public class GameStage extends BaseStage {
 								enemy.hurt();
 							}
 							break;
-						case BaseBullet.PLAYER2:
-							//此子弹会自爆
-							if(bullet.getState()==BaseBullet.FLY) {
-								enemy.hurt();
-								bullet.explode();
-							}
-							break;
 					}
 
 				}
@@ -268,6 +268,7 @@ public class GameStage extends BaseStage {
 			if(CollisionUtils.isCollision(bullet,tower,0)&&bullet.getState()==BaseBullet.FLY){
 				switch (bullet.getBulletType()){
 					case BaseBullet.CAIHUA:
+						playerActor.minusLife();
 						bullet.explode();
 						break;
 					case BaseBullet.PLANE:
@@ -336,9 +337,6 @@ public class GameStage extends BaseStage {
 			int type=enemyOrderMap.get(counter);
 			generateEnemy(type);
 		}
-		if(MathUtils.random(1,100)==2){
-			generateEnemy(2);
-		}
 
 	}
 
@@ -363,25 +361,9 @@ public class GameStage extends BaseStage {
 			generatePlayerBullet(Bullet.PLAYER,screenX,screenY,x,y);
 		}
 
-
 		return true;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

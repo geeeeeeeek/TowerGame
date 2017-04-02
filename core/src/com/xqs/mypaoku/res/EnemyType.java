@@ -8,8 +8,8 @@ public class EnemyType {
 
 
     // enemies
-    public static final int DACONG=20;
-    public static final int CAIHUA=21;
-    public static final int MUSHU=22;
+    public static final int DACONG = 20;
+    public static final int CAIHUA = 21;
+    public static final int MUSHU = 22;
 
 }

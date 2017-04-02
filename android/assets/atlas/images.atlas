@@ -17,6 +17,13 @@ player_life
   orig:40,38
   offset:0,0
   index:-1
+npc_btn_pause
+  rotate:false
+  xy:540,970
+  size:50,54
+  orig:50,54
+  offset:0,0
+  index:-1
 mushu_walk
   rotate:false
   xy:750,180

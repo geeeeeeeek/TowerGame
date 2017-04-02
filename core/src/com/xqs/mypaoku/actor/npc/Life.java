@@ -8,6 +8,8 @@ import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.res.Res;
 
+import java.util.Iterator;
+
 /**
  * Created by Administrator on 2017/3/31 0031.
  */
@@ -24,6 +26,7 @@ public class Life extends BaseImageActor {
 
         setRegion(region);
 
-
     }
+
+
 }

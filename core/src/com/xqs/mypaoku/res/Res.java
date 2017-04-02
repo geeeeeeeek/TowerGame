@@ -37,8 +37,11 @@ public class Res {
 
         public static final String IMAGE_ENEMY = "enemy";
 
-        public static final String IMAGE_PLAYER_LIFE="player_life";
+        /** 暂停按钮 **/
+        public static final String IMAGE_NPC_BTN_PAUSE="npc_btn_pause";
 
+        /** 生命 **/
+        public static final String IMAGE_PLAYER_LIFE="player_life";
 
         /** 子弹 **/
         public static final String IMAGE_BULLET_ONE_FLY="bullet_one_fly";

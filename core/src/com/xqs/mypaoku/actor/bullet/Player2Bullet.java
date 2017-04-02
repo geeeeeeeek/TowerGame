@@ -15,6 +15,7 @@ import com.xqs.mypaoku.util.TextureUtil;
  * Created by Administrator on 2017/3/28 0028.
  */
 
+
 public class Player2Bullet extends BaseBullet {
     private float localDegree;
 
