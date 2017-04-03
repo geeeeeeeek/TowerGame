@@ -105,7 +105,6 @@ public class GameStage extends BaseStage {
         bgActor = new Bg(this.getMainGame());
         addActor(bgActor);
 
-		addActor(new Weapon(getMainGame()));
 
 
 		/**
