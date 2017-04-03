@@ -139,9 +139,8 @@ public class GameStage extends BaseStage {
 		enemyOrderMap.put(12,3);
 		enemyOrderMap.put(30,EnemyType.CAIHUA);
 		enemyOrderMap.put(50,EnemyType.CAIHUA);
-		enemyOrderMap.put(60,4);
+		enemyOrderMap.put(60,EnemyType.MUSHU);
 		enemyOrderMap.put(70,EnemyType.DACONG);
-		enemyOrderMap.put(60,4);
 		enemyOrderMap.put(170,3);
 		enemyOrderMap.put(270,2);
 		enemyOrderMap.put(330,2);

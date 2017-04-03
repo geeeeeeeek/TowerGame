@@ -7,13 +7,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
+import com.xqs.mypaoku.res.Res;
 
 /**
  * Created by Administrator on 2017/4/2 0002.
  */
 
 public class Weapon extends BaseImageActor {
-    Texture pixmaptex;
+
+    private Texture pixmaptex;
+    private TextureRegion bgRegion;
+    private TextureRegion bulletRegion;
+
     public Weapon(MyPaokuGame mainGame) {
         super(mainGame);
 
@@ -23,13 +28,17 @@ public class Weapon extends BaseImageActor {
         pixmaptex = new Texture( pixmap );
         pixmap.dispose();
 
-        TextureRegion region=new TextureRegion(pixmaptex);
-        setRegion(region);
-        setPosition(20,mainGame.getWorldHeight()-150);
+        bgRegion=new TextureRegion(pixmaptex);
+
+
+        bulletRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_ONE_FLY);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        batch.draw(bulletRegion,20,getMainGame().getWorldHeight()-140);
+
+        batch.draw(bgRegion,20,getMainGame().getWorldHeight()-140);
     }
 }
