@@ -94,6 +94,20 @@ yutou_dead
   orig:550,110
   offset:0,0
   index:-1
+lajiao_walk
+  rotate:false
+  xy:950,520
+  size:461,110
+  orig:461,110
+  offset:0,0
+  index:-1
+lajiao_dead
+  rotate:false
+  xy:1000,800
+  size:461,110
+  orig:461,110
+  offset:0,0
+  index:-1
 caihua_walk
   rotate:false
   xy:1,303

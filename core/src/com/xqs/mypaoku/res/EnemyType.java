@@ -13,5 +13,6 @@ public class EnemyType {
     public static final int MUSHU = 22;
     public static final int YUTOU = 23;
     public static final int HUANGGUA = 24;
+    public static final int LAJIAO=25;
 
 }

@@ -82,6 +82,10 @@ public class Res {
         public static final String IMAGE_ENEMY_YUTOU_WALK = "yutou_walk";
         public static final String IMAGE_ENEMY_YUTOU_DEAD = "yutou_dead";
 
+        /* 辣椒 */
+        public static final String IMAGE_ENEMY_LAJIAO_WALK = "lajiao_walk";
+        public static final String IMAGE_ENEMY_LAJIAO_DEAD = "lajiao_dead";
+
         /* 木薯 */
         public static final String IMAGE_ENEMY_MUSHU_WALK = "mushu_walk";
         public static final String IMAGE_ENEMY_MUSHU_FIRE = "mushu_fire";
