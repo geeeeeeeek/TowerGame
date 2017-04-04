@@ -16,15 +16,19 @@ import com.xqs.mypaoku.util.TextureUtil;
 public class Player extends AnimationActor {
     public static final String TAG="Player";
 
-    public static final int READY=0;
-    public static final int DEATH=1;
+    public static final int STANDING=1;
+    public static final int SHOOTING=2;
 
     private int life;
 
     public MyPaokuGame mainGame;
 
-    private TextureAtlas.AtlasRegion shootRegion;
+    private int shootingAnimationFrameLength;
 
+    private TextureAtlas.AtlasRegion standingRegion;
+    private Animation standingAnimation;
+
+    private TextureAtlas.AtlasRegion shootRegion;
     private Animation shootAnimation;
 
     public int state;
@@ -32,16 +36,19 @@ public class Player extends AnimationActor {
     public Player(MyPaokuGame mainGame) {
         this.mainGame=mainGame;
 
-        shootRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_PLAYER_SHOOT);
+        standingRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_PLAYER_STANDING);
+        standingAnimation = new Animation(0.8F, TextureUtil.getTextureRegions(standingRegion,1,2));
 
-        // 射击动画
+        shootRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_PLAYER_SHOOT);
         shootAnimation = new Animation(0.1F, TextureUtil.getTextureRegions(shootRegion,1,5));
+
+        shootingAnimationFrameLength=shootAnimation.getKeyFrames().length;
 
 
         // 动画循环播放
-        shootAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        standingAnimation.setPlayMode(Animation.PlayMode.LOOP);
         // 设置动画
-        setAnimation(shootAnimation);
+        setAnimation(standingAnimation);
 
         setPosition(100,290);
     }
@@ -63,17 +70,45 @@ public class Player extends AnimationActor {
         GameStage.getInstance(mainGame).updateLifes();
     }
 
-    public void setPlayerState(int state){
-        this.state=state;
+    public void shoot(){
+        setState(SHOOTING);
+        setCurrentAnimation(SHOOTING);
     }
 
-    public int getPlayerState(){
+
+    public void setCurrentAnimation(int state){
+        switch (state){
+            case STANDING:
+                setAnimation(standingAnimation);
+                break;
+            case SHOOTING:
+                setAnimation(shootAnimation);
+                break;
+        }
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getState(){
         return state;
     }
-
 
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        switch (this.state){
+            case STANDING:
+                break;
+            case SHOOTING:
+                int fireKeyFrameIndex=shootAnimation.getKeyFrameIndex(getStateTime());
+                if(fireKeyFrameIndex==(shootingAnimationFrameLength-1)){
+                    setState(STANDING);
+                    setCurrentAnimation(STANDING);
+                }
+                break;
+        }
     }
 }

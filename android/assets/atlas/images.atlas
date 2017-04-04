@@ -3,6 +3,13 @@ images.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+player_standing
+  rotate:false
+  xy:750,530
+  size:170,60
+  orig:170,60
+  offset:0,0
+  index:-1
 player_shoot
   rotate:false
   xy:1,1
@@ -57,6 +64,34 @@ dacong_dead
   xy:1,189
   size:603,96
   orig:603,96
+  offset:0,0
+  index:-1
+huanggua_walk
+  rotate:false
+  xy:540,300
+  size:183,110
+  orig:183,110
+  offset:0,0
+  index:-1
+huanggua_dead
+  rotate:false
+  xy:940,660
+  size:461,110
+  orig:461,110
+  offset:0,0
+  index:-1
+yutou_walk
+  rotate:false
+  xy:350,550
+  size:363,110
+  orig:363,110
+  offset:0,0
+  index:-1
+yutou_dead
+  rotate:false
+  xy:350,670
+  size:550,110
+  orig:550,110
   offset:0,0
   index:-1
 caihua_walk

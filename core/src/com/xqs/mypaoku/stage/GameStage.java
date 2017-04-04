@@ -16,6 +16,7 @@ import com.xqs.mypaoku.actor.bullet.Player2Bullet;
 import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
 import com.xqs.mypaoku.actor.enemy.DacongEnemy;
 import com.xqs.mypaoku.actor.bullet.PlaneBullet;
+import com.xqs.mypaoku.actor.enemy.HuangguaEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.PlaneEnemy;
 import com.xqs.mypaoku.actor.Player;
@@ -23,10 +24,12 @@ import com.xqs.mypaoku.actor.bullet.PlayerBullet;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
+import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Pause;
 import com.xqs.mypaoku.actor.npc.Weapon;
 import com.xqs.mypaoku.res.EnemyType;
+import com.xqs.mypaoku.res.Level;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
@@ -77,6 +80,8 @@ public class GameStage extends BaseStage {
 	private HashMap<Integer,Integer> enemyOrderMap=new HashMap<Integer,Integer>();
 
 	private static GameStage instance;
+
+	private int currentLevelIndex;
 
     private GameStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
@@ -133,20 +138,13 @@ public class GameStage extends BaseStage {
 
 		// mock data : don't spell mistakes
 
-		enemyOrderMap.put(1,1);
-		enemyOrderMap.put(11,4);
-		enemyOrderMap.put(12,3);
-		enemyOrderMap.put(30,EnemyType.CAIHUA);
-		enemyOrderMap.put(50,EnemyType.CAIHUA);
-		enemyOrderMap.put(60,EnemyType.MUSHU);
-		enemyOrderMap.put(70,EnemyType.DACONG);
-		enemyOrderMap.put(170,3);
-		enemyOrderMap.put(270,2);
-		enemyOrderMap.put(330,2);
-		enemyOrderMap.put(450,3);
-		enemyOrderMap.put(550,3);
-		enemyOrderMap.put(660,3);
-		enemyOrderMap.put(770,3);
+		currentLevelIndex=1;
+		int currentLevel[][]=Level.levels[currentLevelIndex];
+		for(int i=0;i<currentLevel.length;i++){
+			int enemy[]=currentLevel[i];
+			enemyOrderMap.put(enemy[0],enemy[1]);
+		}
+
 
 		/*
 		 * 初始为游戏准备状态
@@ -199,6 +197,7 @@ public class GameStage extends BaseStage {
 		PlayerBullet bullet=new PlayerBullet(getMainGame(),screenX,screenY,positionX,positionY, world);
 		addActor(bullet);
 		bulletList.add(bullet);
+		playerActor.shoot();
 	}
 
 	/**
@@ -232,6 +231,14 @@ public class GameStage extends BaseStage {
 			enemyList.add(enemy);
 		}else if(type==EnemyType.MUSHU){
 			MushuEnemy enemy=new MushuEnemy(getMainGame());
+			addActor(enemy);
+			enemyList.add(enemy);
+		}else if(type==EnemyType.YUTOU){
+			YutouEnemy enemy=new YutouEnemy(getMainGame());
+			addActor(enemy);
+			enemyList.add(enemy);
+		}else if(type==EnemyType.HUANGGUA){
+			HuangguaEnemy enemy=new HuangguaEnemy(getMainGame());
 			addActor(enemy);
 			enemyList.add(enemy);
 		}
