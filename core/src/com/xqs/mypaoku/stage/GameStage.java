@@ -25,6 +25,7 @@ import com.xqs.mypaoku.actor.bullet.PlayerBullet;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
+import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Pause;
@@ -261,6 +262,10 @@ public class GameStage extends BaseStage {
             LajiaoEnemy enemy = new LajiaoEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
+        }else if (type == EnemyType.WONIU) {
+            WoniuEnemy enemy = new WoniuEnemy(getMainGame());
+            addActor(enemy);
+            enemyList.add(enemy);
         }
 
     }
@@ -275,7 +280,7 @@ public class GameStage extends BaseStage {
         for (BaseBullet bullet : bulletList) {
             //与敌人
             for (BaseEnemy enemy : enemyList) {
-                if (CollisionUtils.isCollision(bullet, enemy, 10) && enemy.getState() == BaseEnemy.WALK) {
+                if (CollisionUtils.isCollision(bullet, enemy, 12) && enemy.getState() == BaseEnemy.WALK) {
                     switch (bullet.getBulletType()) {
                         case BaseBullet.PLAYER:
                             //此子弹会自爆
@@ -290,7 +295,7 @@ public class GameStage extends BaseStage {
 
 
             //与塔
-            if (CollisionUtils.isCollision(bullet, tower, 0) && bullet.getState() == BaseBullet.FLY) {
+            if (CollisionUtils.isCollision(bullet, tower, 10) && bullet.getState() == BaseBullet.FLY) {
                 switch (bullet.getBulletType()) {
                     case BaseBullet.CAIHUA:
                         playerActor.minusLife();

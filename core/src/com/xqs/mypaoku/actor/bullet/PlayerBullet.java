@@ -37,13 +37,13 @@ public class PlayerBullet extends BaseBullet {
 
         body.applyLinearImpulse(new Vector2(vx, 0), body.getWorldCenter(), true);
 
-
+        setScale(0.5f);
     }
 
     @Override
     public Animation getFlyAnimation() {
         TextureAtlas.AtlasRegion region = game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_ONE_FLY);
-        Animation animation = new Animation(0.1F, TextureUtil.getTextureRegions(region, 1, 2));
+        Animation animation = new Animation(0.1F, TextureUtil.getTextureRegions(region, 1, 1));
         return animation;
     }
 

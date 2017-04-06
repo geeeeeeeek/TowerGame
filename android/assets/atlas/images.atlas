@@ -122,6 +122,20 @@ caihua_dead
   orig:695,110
   offset:0,0
   index:-1
+woniu_walk
+  rotate:false
+  xy:1000,0
+  size:1008,120
+  orig:1008,120
+  offset:0,0
+  index:-1
+woniu_dead
+  rotate:false
+  xy:1070,130
+  size:750,120
+  orig:750,120
+  offset:0,0
+  index:-1
 plane_walk
   rotate:false
   xy:1,561
@@ -180,9 +194,9 @@ bullet2
   index:-1
 bullet_one_fly
   rotate:false
-  xy:27,990
-  size:145,28
-  orig:145,28
+  xy:10,980
+  size:70,30
+  orig:70,30
   offset:0,0
   index:-1
 bullet_one_explode

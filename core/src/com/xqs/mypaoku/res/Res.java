@@ -91,6 +91,10 @@ public class Res {
         public static final String IMAGE_ENEMY_MUSHU_FIRE = "mushu_fire";
         public static final String IMAGE_ENEMY_MUSHU_DEAD = "mushu_dead";
 
+        /* 蜗牛 */
+        public static final String IMAGE_ENEMY_WONIU_WALK = "woniu_walk";
+        public static final String IMAGE_ENEMY_WONIU_DEAD = "woniu_dead";
+
         /* 飞机 */
         public static final String IMAGE_ENEMY_PLANE_WALK = "plane_walk";
         public static final String IMAGE_ENEMY_PLANE_FIRE = "plane_fire";
