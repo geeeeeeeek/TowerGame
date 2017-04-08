@@ -1,27 +1,22 @@
 package com.xqs.mypaoku;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
-import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.xqs.mypaoku.screen.MenuScreen;
+import com.xqs.mypaoku.screen.SplashScreen;
 
 public class MyPaokuGame extends Game {
 
-	public static final String TAG = "PK";
+	public static final String TAG = "MyPaokuGame";
 
 	/** 是否显示帧率 */
 	public static final boolean SHOW_FPS = true;
@@ -37,7 +32,9 @@ public class MyPaokuGame extends Game {
 	/** 纹理图集 */
 	private TextureAtlas atlas;
 
-	/** 主游戏场景 */
+	/** 场景 */
+	private SplashScreen splashScreen;
+	private MenuScreen menuScreen;
 	private GameScreen gameScreen;
 
 
@@ -88,11 +85,13 @@ public class MyPaokuGame extends Game {
 		fpsBitmapFont = assetManager.get(Res.FPS_BITMAP_FONT_PATH, BitmapFont.class);
 
 
-		// 创建主游戏场景
+		// --- 场景 ---
+		splashScreen = new SplashScreen(this);
+		menuScreen = new MenuScreen(this);
 		gameScreen = new GameScreen(this);
 
 		// 设置当前场景
-		setScreen(gameScreen);
+		setScreen(splashScreen);
 
 
 		// 判断是否需要显示帧率, 如果需要, 则进行初始化
@@ -100,6 +99,20 @@ public class MyPaokuGame extends Game {
 			fpsDebug = new FPSDebug();
 			fpsDebug.init(fpsBitmapFont, 24);
 		}
+	}
+
+
+	public void showMenuScreen(){
+		setScreen(menuScreen);
+		// free resources
+		if(splashScreen!=null){
+			splashScreen.dispose();
+			splashScreen=null;
+		}
+	}
+
+	public void showGameScreen(){
+		setScreen(gameScreen);
 	}
 
 	@Override

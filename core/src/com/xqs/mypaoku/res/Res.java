@@ -16,16 +16,6 @@ public class Res {
      */
     public static final String FPS_BITMAP_FONT_PATH = "fps/fps24px.fnt";
 
-    /**
-     * 相关物理参数（调节物理参数可改变游戏难度）
-     */
-    public static class Physics {
-
-        /**
-         * 水管和地板的移动速度, 单位: px/s
-         */
-        public static final float MOVE_VELOCITY = -150.0F;
-    }
 
     /**
      * 纹理图集
