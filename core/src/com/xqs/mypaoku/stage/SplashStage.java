@@ -13,6 +13,8 @@ import com.xqs.mypaoku.util.Util;
 public class SplashStage extends BaseStage {
     public static final String TAG = "SplashStage";
 
+    public static final int WAIT_SECONDS = 5;
+
     public SplashStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
 
@@ -23,7 +25,7 @@ public class SplashStage extends BaseStage {
     @Override
     public void orderAct(float delta, int counter) {
 
-        if(counter>20){
+        if(counter>WAIT_SECONDS){
             getMainGame().showMenuScreen();
         }
     }

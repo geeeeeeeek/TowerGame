@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.stage.SplashStage;
 

@@ -24,7 +24,10 @@ public class MenuScreen extends ScreenAdapter {
         ));
 
 
-        // 将输入处理设置到
+
+    }
+
+    public void init(){
         Gdx.input.setInputProcessor(menuStage);
     }
 

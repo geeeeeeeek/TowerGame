@@ -31,15 +31,13 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(MyPaokuGame mainGame) {
         this.mainGame = mainGame;
-        init();
     }
 
-    private void init() {
-        // 创建主游戏舞台
+    public void init() {
+        // main game stage
         gameStage=GameStage.getInstance(getMainGame());
 
-
-        // 将输入处理设置到主游戏舞台
+        // set input processor
         Gdx.input.setInputProcessor(gameStage);
     }
 

@@ -103,15 +103,18 @@ public class MyPaokuGame extends Game {
 
 
 	public void showMenuScreen(){
+		menuScreen.init();
 		setScreen(menuScreen);
 		// free resources
 		if(splashScreen!=null){
 			splashScreen.dispose();
 			splashScreen=null;
 		}
+
 	}
 
 	public void showGameScreen(){
+		gameScreen.init();
 		setScreen(gameScreen);
 	}
 
