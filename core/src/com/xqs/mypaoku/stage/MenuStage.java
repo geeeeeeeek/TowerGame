@@ -72,7 +72,6 @@ public class MenuStage extends BaseStage {
     @Override
     public void draw() {
         super.draw();
-
     }
 
     @Override

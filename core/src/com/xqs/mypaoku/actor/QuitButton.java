@@ -12,8 +12,8 @@ import com.xqs.mypaoku.MyPaokuGame;
  */
 
 public class QuitButton extends Button {
-    public static final String BTN_UP="btn_start_default.png";
-    public static final String BTN_DOWN="btn_start_pressed.png";
+    public static final String BTN_UP="images/btn_start_default.png";
+    public static final String BTN_DOWN="images/btn_start_pressed.png";
 
     public static final int MARGIN = 300;
 

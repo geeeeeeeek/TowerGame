@@ -73,7 +73,6 @@ public class MyPaokuGame extends Game {
 		// 加载资源
 		assetManager.load(Res.Atlas.ATLAS_PATH, TextureAtlas.class);
 
-
 		assetManager.load(Res.FPS_BITMAP_FONT_PATH, BitmapFont.class);
 
 
@@ -163,6 +162,10 @@ public class MyPaokuGame extends Game {
 
 	public TextureAtlas getAtlas() {
 		return atlas;
+	}
+
+	public BitmapFont getFpsBitmapFont(){
+		return fpsBitmapFont;
 	}
 
 	public GameScreen getGameScreen() {

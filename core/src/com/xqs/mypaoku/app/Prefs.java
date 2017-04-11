@@ -2,6 +2,7 @@ package com.xqs.mypaoku.app;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.xqs.mypaoku.util.Util;
 
 
 /**
@@ -10,11 +11,11 @@ import com.badlogic.gdx.Preferences;
 
 public class Prefs {
 
-    public static final String PREFS_NAME = "my prefs";
+    public static final String PREFS_NAME = "my_prefs";
 
     public static final String SOUND = "sound";
 
-    public static Prefs get(){
+    public static Prefs getPrefs(){
         return new Prefs();
     }
 
@@ -24,11 +25,11 @@ public class Prefs {
     }
 
     // ------ sound state ------
-    public void setSoundState(boolean state){
-        getInstance().putBoolean(SOUND,state);
+    public void setSoundEffectsEnabled(boolean state){
+        getInstance().putBoolean(SOUND,state).flush();
     }
 
-    public boolean getSoundState(){
+    public boolean isSoundEffectsEnabled(){
         return getInstance().getBoolean(SOUND,true);
     }
 }

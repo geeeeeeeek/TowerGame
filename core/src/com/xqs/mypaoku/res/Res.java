@@ -14,7 +14,7 @@ public class Res {
     /**
      * 帧率显示所需要的位图字体 文件路径
      */
-    public static final String FPS_BITMAP_FONT_PATH = "fps/fps24px.fnt";
+    public static final String FPS_BITMAP_FONT_PATH = "font/my.fnt";
 
 
     /**

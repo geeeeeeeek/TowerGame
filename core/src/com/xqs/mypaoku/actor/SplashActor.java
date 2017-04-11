@@ -11,7 +11,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
  */
 
 public class SplashActor extends BaseImageActor {
-    public static String SPLASH_PICTURE="splash.png";
+    public static String SPLASH_PICTURE="images/splash.png";
 
     private Texture texture;
     private TextureRegion region;

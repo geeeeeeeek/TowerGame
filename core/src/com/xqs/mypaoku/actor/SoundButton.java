@@ -7,15 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.app.Prefs;
+import com.xqs.mypaoku.util.Util;
 
 /**
  * Created by Administrator on 2017/4/10 0010.
  */
 
 public class SoundButton extends BaseImageActor {
+    public static final String TAG = "SoundButton";
 
-    public static final String BTN_SOUND_ON="btn_sound_on.png";
-    public static final String BTN_SOUND_OFF="btn_sound_off.png";
+    public static final String BTN_SOUND_ON="images/btn_sound_on.png";
+    public static final String BTN_SOUND_OFF="images/btn_sound_off.png";
 
     public static final int MARGIN = 10;
 
@@ -41,8 +43,8 @@ public class SoundButton extends BaseImageActor {
     }
 
     public void setCurrentRegion(){
-        boolean pressed = Prefs.get().getSoundState();
-        if(pressed){
+        boolean soundEffectsEnabled = Prefs.getPrefs().isSoundEffectsEnabled();
+        if(soundEffectsEnabled){
             setRegion(onRegion);
         }else {
             setRegion(offRegion);
@@ -50,12 +52,8 @@ public class SoundButton extends BaseImageActor {
     }
 
     public void press() {
-        boolean pressed = Prefs.get().getSoundState();
-        if(pressed){
-            setRegion(offRegion);
-        }else {
-            setRegion(onRegion);
-        }
-        Prefs.get().setSoundState(!pressed);
+        boolean soundEffectsEnabled = Prefs.getPrefs().isSoundEffectsEnabled();
+        Prefs.getPrefs().setSoundEffectsEnabled(!soundEffectsEnabled);
+        setCurrentRegion();
     }
 }

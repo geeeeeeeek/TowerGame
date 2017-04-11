@@ -11,7 +11,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
  */
 
 public class MenuBg extends BaseImageActor {
-    public static String MENUBG_PICTURE="bg01.png";
+    public static String MENUBG_PICTURE="images/bg01.png";
 
     private Texture texture;
     private TextureRegion region;
