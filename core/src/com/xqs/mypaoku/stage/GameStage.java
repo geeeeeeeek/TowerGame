@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
@@ -139,6 +142,15 @@ public class GameStage extends BaseStage {
         /** 暂停 **/
         pause = new Pause(this.getMainGame());
         addActor(pause);
+
+        pause.setTouchable(Touchable.enabled);
+        pause.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getMainGame().showMenuScreen();
+            }
+        });
 
 		/*
          * 创建player
@@ -370,14 +382,12 @@ public class GameStage extends BaseStage {
     }
 
 
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
+
 
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+
         float ratio = Gdx.graphics.getWidth() / (getMainGame().getWorldWidth());
         if (gameState == GameState.ready) {
             float x = playerActor.getRightX();
@@ -389,7 +399,7 @@ public class GameStage extends BaseStage {
             generatePlayerBullet(Bullet.PLAYER, screenX, screenY, x, y);
         }
 
-        return true;
+        return super.touchUp(screenX,screenY,pointer,button);
     }
 }
 

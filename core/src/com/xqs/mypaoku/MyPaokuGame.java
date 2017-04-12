@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
+import com.xqs.mypaoku.screen.LevelScreen;
 import com.xqs.mypaoku.screen.MenuScreen;
 import com.xqs.mypaoku.screen.SplashScreen;
 
@@ -35,6 +36,7 @@ public class MyPaokuGame extends Game {
 	/** 场景 */
 	private SplashScreen splashScreen;
 	private MenuScreen menuScreen;
+	private LevelScreen levelScreen;
 	private GameScreen gameScreen;
 
 
@@ -87,6 +89,7 @@ public class MyPaokuGame extends Game {
 		// --- 场景 ---
 		splashScreen = new SplashScreen(this);
 		menuScreen = new MenuScreen(this);
+		levelScreen = new LevelScreen(this);
 		gameScreen = new GameScreen(this);
 
 		// 设置当前场景
@@ -109,7 +112,11 @@ public class MyPaokuGame extends Game {
 			splashScreen.dispose();
 			splashScreen=null;
 		}
+	}
 
+	public void showLevelScreen(){
+		levelScreen.init();
+		setScreen(levelScreen);
 	}
 
 	public void showGameScreen(){
@@ -136,6 +143,9 @@ public class MyPaokuGame extends Game {
 	public void dispose() {
 		super.dispose();
 		// 应用退出时需要手动销毁场景
+		if(menuScreen != null){
+			menuScreen.dispose();
+		}
 		if (gameScreen != null) {
 			gameScreen.dispose();
 		}
@@ -206,9 +216,11 @@ public class MyPaokuGame extends Game {
 
 		public void render() {
 			// 绘制帧率
-			batch.begin();
-			fpsBitmapFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), x, y);
-			batch.end();
+			if(batch!=null) {
+				batch.begin();
+				fpsBitmapFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), x, y);
+				batch.end();
+			}
 		}
 
 		@Override

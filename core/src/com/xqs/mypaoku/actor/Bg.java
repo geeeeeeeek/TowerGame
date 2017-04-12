@@ -13,7 +13,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
 
 public class Bg extends BaseImageActor {
 
-    public static String bgPicName="bg01.png";
+    public static String PICTURE_BG="images/bg01.png";
 
     private Texture texture;
     private TextureRegion region;
@@ -22,7 +22,7 @@ public class Bg extends BaseImageActor {
     public Bg(MyPaokuGame mainGame) {
         super(mainGame);
 
-        texture = new Texture(Gdx.files.internal(bgPicName));
+        texture = new Texture(Gdx.files.internal(PICTURE_BG));
 
         region=new TextureRegion(texture);
 

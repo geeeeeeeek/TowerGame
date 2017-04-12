@@ -23,8 +23,6 @@ public class MenuScreen extends ScreenAdapter {
                 mainGame.getWorldHeight()
         ));
 
-
-
     }
 
     public void init(){

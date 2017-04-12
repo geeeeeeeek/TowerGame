@@ -61,7 +61,7 @@ public class GameScreen extends ScreenAdapter {
         super.dispose();
         // 场景销毁时, 同时销毁所有的舞台
         if (gameStage != null) {
-            gameStage.dispose();
+//            gameStage.dispose();
         }
     }
 

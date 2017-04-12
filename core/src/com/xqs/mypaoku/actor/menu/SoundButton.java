@@ -1,4 +1,4 @@
-package com.xqs.mypaoku.actor;
+package com.xqs.mypaoku.actor.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

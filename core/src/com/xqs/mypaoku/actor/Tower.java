@@ -12,7 +12,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
  */
 
 public class Tower extends BaseImageActor {
-    public static String towerPicName="tower01.png";
+    public static String towerPicName="images/tower01.png";
     public static int Stop_X;
 
     private Texture texture;
