@@ -56,7 +56,7 @@ public class MenuStage extends BaseStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                mainGame.showLevelScreen();
+                mainGame.showGameScreen();
             }
         });
 

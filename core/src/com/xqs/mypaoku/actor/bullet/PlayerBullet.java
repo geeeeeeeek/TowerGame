@@ -37,7 +37,7 @@ public class PlayerBullet extends BaseBullet {
 
         body.applyLinearImpulse(new Vector2(vx, 0), body.getWorldCenter(), true);
 
-        setScale(0.5f);
+        setScale(0.8f);
     }
 
     @Override

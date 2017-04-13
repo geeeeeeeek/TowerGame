@@ -3,6 +3,7 @@ package com.xqs.mypaoku.stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.SplashActor;
+import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Util;
 
@@ -26,7 +27,7 @@ public class SplashStage extends BaseStage {
     public void orderAct(float delta, int counter) {
 
         if(counter>WAIT_SECONDS){
-            getMainGame().showMenuScreen();
+            getMainGame().showMenuScreen(Constant.SCREEN_SPLASH);
         }
     }
 

@@ -4,11 +4,18 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Disposable;
+import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
 import com.xqs.mypaoku.screen.LevelScreen;
@@ -18,9 +25,14 @@ import com.xqs.mypaoku.screen.SplashScreen;
 public class MyPaokuGame extends Game {
 
 	public static final String TAG = "MyPaokuGame";
+	public static final float FADE_DURATION = 1f;
 
 	/** 是否显示帧率 */
 	public static final boolean SHOW_FPS = true;
+
+	public Actor fadeActor = new Actor();
+	private ShapeRenderer fadeRenderer;
+	private boolean fading;
 
 	/** 世界宽度 */
 	private float worldWidth;
@@ -51,6 +63,8 @@ public class MyPaokuGame extends Game {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
 
+		fadeActor.setColor(Color.CLEAR);
+		fadeRenderer = new ShapeRenderer(8);
 
 		float graWidth=Gdx.graphics.getWidth();
 		float graHeight=Gdx.graphics.getHeight();
@@ -104,9 +118,24 @@ public class MyPaokuGame extends Game {
 	}
 
 
-	public void showMenuScreen(){
+	public void showMenuScreen(int from){
 		menuScreen.init();
-		setScreen(menuScreen);
+
+		if(from == Constant.SCREEN_SPLASH){
+			setScreen(menuScreen);
+		}else {
+			fadeActor.clearActions();
+			fading = true;
+			fadeActor.addAction(Actions.sequence(
+					Actions.alpha(0.5f,FADE_DURATION),
+					Actions.run(new Runnable(){
+						public void run(){
+							setScreen(menuScreen);
+							fading = false;
+						}
+					})));
+		}
+
 		// free resources
 		if(splashScreen!=null){
 			splashScreen.dispose();
@@ -121,7 +150,17 @@ public class MyPaokuGame extends Game {
 
 	public void showGameScreen(){
 		gameScreen.init();
-		setScreen(gameScreen);
+
+		fadeActor.clearActions();
+		fading = true;
+		fadeActor.addAction(
+				Actions.sequence(Actions.alpha(0.5f,FADE_DURATION),
+				Actions.run(new Runnable(){
+					public void run(){
+						setScreen(gameScreen);
+						fading = false;
+					}
+				})));
 	}
 
 	@Override
@@ -130,12 +169,24 @@ public class MyPaokuGame extends Game {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
 		// 父类渲染场景
 		super.render();
 
 		// 判断是否需要渲染帧率
 		if (SHOW_FPS) {
 			fpsDebug.render();
+		}
+
+		// fade effect
+		fadeActor.act(Gdx.graphics.getDeltaTime());
+		if (fading){
+			Gdx.gl.glEnable(GL20.GL_BLEND);
+			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+			fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+			fadeRenderer.setColor(new Color(0, 0, 0, 0.5f));
+			fadeRenderer.rect(0, 0, getWorldWidth(),getWorldHeight());
+			fadeRenderer.end();
 		}
 	}
 

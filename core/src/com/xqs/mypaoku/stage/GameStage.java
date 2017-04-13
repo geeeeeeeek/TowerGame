@@ -33,6 +33,7 @@ import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Pause;
 import com.xqs.mypaoku.actor.npc.Weapon;
+import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
 import com.xqs.mypaoku.stage.base.BaseStage;
@@ -148,7 +149,7 @@ public class GameStage extends BaseStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getMainGame().showMenuScreen();
+                getMainGame().showMenuScreen(Constant.SCREEN_GAME);
             }
         });
 
