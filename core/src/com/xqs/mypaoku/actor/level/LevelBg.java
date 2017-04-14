@@ -13,7 +13,7 @@ import com.xqs.mypaoku.actor.base.BaseImageActor;
 public class LevelBg extends BaseImageActor {
     public static final String TAG = "LevelBg";
 
-    public static String PICTURE_LEVEL="images/bg01.png";
+    public static String PICTURE_LEVEL="images/menu_bg.jpg";
 
     private Texture texture;
     private TextureRegion region;
