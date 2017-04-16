@@ -145,7 +145,18 @@ public class MyPaokuGame extends Game {
 
 	public void showLevelScreen(){
 		levelScreen.init();
-		setScreen(levelScreen);
+
+
+		fadeActor.clearActions();
+		fading = true;
+		fadeActor.addAction(Actions.sequence(
+				Actions.alpha(0.5f,FADE_DURATION),
+				Actions.run(new Runnable(){
+					public void run(){
+						setScreen(levelScreen);
+						fading = false;
+					}
+				})));
 	}
 
 	public void showGameScreen(){
