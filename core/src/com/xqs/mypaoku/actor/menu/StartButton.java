@@ -71,9 +71,10 @@ public class StartButton extends Button {
         layout.setText(bitmapFont,"开始游戏");
         textWidth = layout.width;
         textHeight = layout.height;
-        bitmapFont.draw(batch,"开始游戏",this.getX()+(getWidth()/2-textWidth/2),this.getY()+this.getHeight()-(getHeight()/2-textHeight/2));
         bitmapFont.setColor(Color.RED);
         bitmapFont.getData().setScale(0.5f);
+        bitmapFont.draw(batch,"开始游戏",this.getX()+(getWidth()/2-textWidth/2),this.getY()+this.getHeight()-(getHeight()/2-textHeight/2));
+
     }
 
 

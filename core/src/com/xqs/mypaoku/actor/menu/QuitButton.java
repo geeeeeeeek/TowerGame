@@ -10,12 +10,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.util.Util;
 
 /**
  * Created by Administrator on 2017/4/10 0010.
  */
 
 public class QuitButton extends Button {
+    public static final String TAG = "QuitButton";
+
     public static final String BTN_UP="images/btn_start_default.png";
     public static final String BTN_DOWN="images/btn_start_pressed.png";
 
@@ -39,6 +42,7 @@ public class QuitButton extends Button {
         Button.ButtonStyle style = new Button.ButtonStyle();
         style.up = new TextureRegionDrawable(new TextureRegion(upTexture));
         style.down = new TextureRegionDrawable(new TextureRegion(downTexture));
+        style.checked = new TextureRegionDrawable(new TextureRegion(downTexture));
 
         setStyle(style);
 

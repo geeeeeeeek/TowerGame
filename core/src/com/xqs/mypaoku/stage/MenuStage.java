@@ -64,7 +64,8 @@ public class MenuStage extends BaseStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                mainGame.dispose();
+                quitButton.setChecked(true);
+//                mainGame.dispose();
                 Gdx.app.exit();
             }
         });

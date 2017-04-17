@@ -32,6 +32,7 @@ import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Pause;
+import com.xqs.mypaoku.actor.npc.Popup;
 import com.xqs.mypaoku.actor.npc.Weapon;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.res.EnemyType;
@@ -57,49 +58,24 @@ public class GameStage extends BaseStage {
 
     public World world;
 
-    /**
-     * 背景
-     */
     private Bg bgActor;
 
-    /**
-     * 主角
-     **/
     private Player playerActor;
 
-    /**
-     * 塔
-     **/
     private Tower tower;
 
-    /**
-     * 生命值
-     **/
     private List<Life> lifeList = new ArrayList<Life>();
 
-    /**
-     * 暂停
-     **/
     private Pause pause;
 
-    /**
-     * 敌人容器
-     **/
+    private Popup popup;
+
     private List<BaseEnemy> enemyList = new ArrayList<BaseEnemy>();
 
-    /**
-     * 子弹容器
-     **/
     private List<BaseBullet> bulletList = new ArrayList<BaseBullet>();
 
-    /**
-     * 游戏状态
-     */
     public static GameState gameState;
 
-    /**
-     * 敌人顺序
-     **/
     private HashMap<Integer, Integer> enemyOrderMap = new HashMap<Integer, Integer>();
 
     private static GameStage instance;
@@ -108,7 +84,6 @@ public class GameStage extends BaseStage {
 
     private GameStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
-        init();
     }
 
     public static synchronized GameStage getInstance(MyPaokuGame game) {
@@ -127,6 +102,9 @@ public class GameStage extends BaseStage {
     public void init() {
         Gdx.app.log(TAG, "init==========");
 
+        // clear before actors
+        getRoot().clear();
+
         /*
          * 创建背景
          */
@@ -144,12 +122,16 @@ public class GameStage extends BaseStage {
         pause = new Pause(this.getMainGame());
         addActor(pause);
 
+        /** popup **/
+        popup = new Popup(this.getMainGame());
+        addActor(popup);
+
         pause.setTouchable(Touchable.enabled);
         pause.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getMainGame().showMenuScreen(Constant.SCREEN_GAME);
+                getMainGame().showLevelScreen();
             }
         });
 
