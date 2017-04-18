@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
+import com.xqs.mypaoku.stage.GameStage;
+import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -120,6 +122,10 @@ public abstract class BaseEnemy extends AnimationActor{
 
     @Override
     public void act(float delta) {
+        if(GameStage.getGameState()!= GameState.GAMING){
+            return;
+        }
+
         super.act(delta);
         switch (this.state){
             case WALK:

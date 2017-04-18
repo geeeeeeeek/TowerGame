@@ -65,9 +65,6 @@ public class DacongEnemy extends BaseEnemy {
 
     @Override
     public void act(float delta) {
-        if(GameStage.gameState== GameState.pause){
-            return;
-        }
         super.act(delta);
     }
 

@@ -107,8 +107,9 @@ public class MyPaokuGame extends Game {
 		gameScreen = new GameScreen(this);
 
 		// 设置当前场景
-		setScreen(splashScreen);
-
+//		setScreen(splashScreen);
+		gameScreen.init();
+		setScreen(gameScreen);
 
 		// 判断是否需要显示帧率, 如果需要, 则进行初始化
 		if (SHOW_FPS) {

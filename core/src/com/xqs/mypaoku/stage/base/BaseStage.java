@@ -3,6 +3,7 @@ package com.xqs.mypaoku.stage.base;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
 
 
@@ -21,6 +22,9 @@ public abstract class BaseStage extends Stage {
     private float timeCounter=0f;
     private float next=0f;
     private int counter=0;
+
+    public static int gameState;
+
 
     public BaseStage(MyPaokuGame mainGame, Viewport viewport) {
         super(viewport);
@@ -47,6 +51,12 @@ public abstract class BaseStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        // 非游戏中
+        if(gameState != GameState.GAMING){
+            return;
+        }
+
         timeCounter+=delta;
 
         if((float)timeCounter>next){

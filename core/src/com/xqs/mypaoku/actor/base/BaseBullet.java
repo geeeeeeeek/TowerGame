@@ -11,7 +11,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.Box2DManager;
+import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
@@ -28,7 +30,7 @@ public abstract class BaseBullet extends AnimationActor {
     public final static int PLAYER = 0;
     public final static int CAIHUA = 1;
     public final static int PLANE = 2;
-    public final static int PLAYER2=3;
+    public final static int PLAYER2 = 3;
 
 
     //子弹位置
@@ -71,24 +73,24 @@ public abstract class BaseBullet extends AnimationActor {
     public Body body;
 
 
-    public BaseBullet(MyPaokuGame game,float positionX, float positionY, World world ) {
-        this(game,0,0,positionX,positionY,world);
+    public BaseBullet(MyPaokuGame game, float positionX, float positionY, World world) {
+        this(game, 0, 0, positionX, positionY, world);
     }
 
-    public BaseBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world){
-        this.game=game;
+    public BaseBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
+        this.game = game;
 
-        bulletType=getBulletType();
+        bulletType = getBulletType();
 
         state = FLY;
 
         // load res
-        flyAnimation=getFlyAnimation();
-        explodeAnimation=getExplodeAnimation();
+        flyAnimation = getFlyAnimation();
+        explodeAnimation = getExplodeAnimation();
 
         setAnimation(flyAnimation);
         flyAnimation.setPlayMode(Animation.PlayMode.LOOP);
-        explodeAnimationFrameLength=explodeAnimation.getKeyFrames().length;
+        explodeAnimationFrameLength = explodeAnimation.getKeyFrames().length;
 
         position.x = positionX;
         position.y = positionY;
@@ -102,7 +104,7 @@ public abstract class BaseBullet extends AnimationActor {
 
         float ratio = (game.getWorldWidth()) / Gdx.graphics.getWidth();
 
-        this.mClickX=(int)(this.mClickX*ratio);
+        this.mClickX = (int) (this.mClickX * ratio);
 
         // x速率
         body = Box2DManager.createBody(world, position.x, position.y);
@@ -116,9 +118,10 @@ public abstract class BaseBullet extends AnimationActor {
 
     // apis
     public abstract Animation getFlyAnimation();
-    public abstract Animation getExplodeAnimation();
-    public abstract int getBulletType();
 
+    public abstract Animation getExplodeAnimation();
+
+    public abstract int getBulletType();
 
 
     public void setState(int state) {
@@ -128,7 +131,6 @@ public abstract class BaseBullet extends AnimationActor {
     public int getState() {
         return state;
     }
-
 
 
     public void explode() {
@@ -142,6 +144,8 @@ public abstract class BaseBullet extends AnimationActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+
 
         position.x = this.getX();
         position.y = this.getY();

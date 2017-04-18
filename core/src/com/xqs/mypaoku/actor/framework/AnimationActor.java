@@ -46,6 +46,10 @@ public class AnimationActor extends ImageActor {
     public void act(float delta) {
         super.act(delta);
 
+        if(GameStage.getGameState()!=GameState.GAMING){
+            return;
+        }
+
 
         if (animation != null) {
             TextureRegion region = null;

@@ -8,7 +8,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.Box2DManager;
+import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
@@ -62,6 +64,7 @@ public class PlayerBullet extends BaseBullet {
 
     @Override
     public void act(float delta) {
+
         super.act(delta);
 
         switch (state) {

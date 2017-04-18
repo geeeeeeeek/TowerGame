@@ -28,7 +28,9 @@ import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.Life;
+import com.xqs.mypaoku.actor.npc.Menu;
 import com.xqs.mypaoku.actor.npc.Pause;
+import com.xqs.mypaoku.actor.npc.Play;
 import com.xqs.mypaoku.actor.npc.Popup;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
@@ -48,6 +50,7 @@ import java.util.List;
  */
 public class GameStage extends BaseStage {
 
+
     private static final String TAG = "GameStage";
 
     public World world;
@@ -64,11 +67,13 @@ public class GameStage extends BaseStage {
 
     private Popup popup;
 
+    private Play play;
+
+    private Menu menu;
+
     private List<BaseEnemy> enemyList = new ArrayList<BaseEnemy>();
 
     private List<BaseBullet> bulletList = new ArrayList<BaseBullet>();
-
-    public static GameState gameState;
 
     private HashMap<Integer, Integer> enemyOrderMap = new HashMap<Integer, Integer>();
 
@@ -116,16 +121,16 @@ public class GameStage extends BaseStage {
         pause = new Pause(this.getMainGame());
         addActor(pause);
 
-        /** popup **/
-        popup = new Popup(this.getMainGame());
-        addActor(popup);
+
+
 
         pause.setTouchable(Touchable.enabled);
         pause.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getMainGame().showLevelScreen();
+                gameState = GameState.PAUSE;
+                showPopup();
             }
         });
 
@@ -186,14 +191,23 @@ public class GameStage extends BaseStage {
      * 游戏状态改变方法01: 游戏准备状态
      */
     public void ready() {
-        gameState = GameState.ready;
+        gameState = GameState.GAMING;
 
         //清空子弹
         for (BaseBullet bullet : bulletList) {
             getRoot().removeActor(bullet);
         }
+
         bulletList.clear();
 
+    }
+
+    public static int getGameState(){
+        return gameState;
+    }
+
+    public static void setGameState(int state){
+        gameState = state;
     }
 
     /**
@@ -256,8 +270,39 @@ public class GameStage extends BaseStage {
             addActor(enemy);
             enemyList.add(enemy);
         }
-
     }
+
+    // 弹窗
+    public void showPopup(){
+        hidePopup();
+        /** popup **/
+        popup = new Popup(this.getMainGame());
+        addActor(popup);
+
+        /** play **/
+        play = new Play(this.getMainGame());
+        addActor(play);
+
+        /** menu **/
+        menu = new Menu(this.getMainGame());
+        addActor(menu);
+    }
+
+    public void hidePopup(){
+        if(popup!=null){
+            popup.remove();
+            popup=null;
+        }
+        if(play!=null){
+            play.remove();
+            play=null;
+        }
+        if(menu!=null){
+            menu.remove();
+            menu=null;
+        }
+    }
+
 
 
     @Override
@@ -324,8 +369,9 @@ public class GameStage extends BaseStage {
     public void draw() {
         super.draw();
 
-
-        Box2DManager.doPhysicsStep(world);
+        if(gameState == GameState.GAMING) {
+            Box2DManager.doPhysicsStep(world);
+        }
 
         drawBullets();
 
@@ -366,7 +412,7 @@ public class GameStage extends BaseStage {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
         float ratio = Gdx.graphics.getWidth() / (getMainGame().getWorldWidth());
-        if (gameState == GameState.ready) {
+        if (gameState == GameState.GAMING) {
             float x = playerActor.getRightX();
             float y = playerActor.getY() + playerActor.getHeight() / 2;
 

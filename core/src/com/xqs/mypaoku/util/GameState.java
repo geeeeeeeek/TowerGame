@@ -4,17 +4,9 @@ package com.xqs.mypaoku.util;
  * 游戏状态
  *
  */
-public enum GameState {
-
-    /** 准备状态 */
-    ready,
-
-    /**进行中**/
-    live,
-
-    /**暂停**/
-    pause,
-
-    /** 游戏结束 */
-    gameOver;
+public class GameState {
+    public static final int GAMING = 1;
+    public static final int PAUSE = 2;
+    public static final int PASS = 3;
+    public static final int GAMEOVER = 4;
 }

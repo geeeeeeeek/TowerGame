@@ -32,4 +32,6 @@ public class Popup extends BaseImageActor {
         setPosition(mainGame.getWorldWidth()/2-region.getRegionWidth()/2,mainGame.getWorldHeight()/2-region.getRegionHeight()/2+50);
 
     }
+
+
 }
