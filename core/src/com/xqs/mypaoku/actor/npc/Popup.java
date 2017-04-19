@@ -1,9 +1,15 @@
 package com.xqs.mypaoku.actor.npc;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.res.Res;
@@ -20,8 +26,10 @@ public class Popup extends BaseImageActor {
     private Texture texture;
     private TextureRegion region;
 
+
     public Popup(MyPaokuGame mainGame) {
         super(mainGame);
+
 
         texture = new Texture(Gdx.files.internal(PICTURE_POPUP_BG));
 

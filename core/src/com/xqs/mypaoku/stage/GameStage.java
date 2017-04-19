@@ -27,6 +27,7 @@ import com.xqs.mypaoku.actor.enemy.LajiaoEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
+import com.xqs.mypaoku.actor.npc.Fade;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Menu;
 import com.xqs.mypaoku.actor.npc.Pause;
@@ -64,6 +65,8 @@ public class GameStage extends BaseStage {
     private List<Life> lifeList = new ArrayList<Life>();
 
     private Pause pause;
+
+    private Fade fade;
 
     private Popup popup;
 
@@ -130,6 +133,7 @@ public class GameStage extends BaseStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 gameState = GameState.PAUSE;
+
                 showPopup();
             }
         });
@@ -275,6 +279,11 @@ public class GameStage extends BaseStage {
     // 弹窗
     public void showPopup(){
         hidePopup();
+
+        /** fade **/
+        fade = new Fade(this.getMainGame());
+        addActor(fade);
+
         /** popup **/
         popup = new Popup(this.getMainGame());
         addActor(popup);
@@ -289,6 +298,10 @@ public class GameStage extends BaseStage {
     }
 
     public void hidePopup(){
+        if(fade != null){
+            fade.remove();
+            fade=null;
+        }
         if(popup!=null){
             popup.remove();
             popup=null;

@@ -175,6 +175,10 @@ public class MyPaokuGame extends Game {
 				})));
 	}
 
+	public void setFading(boolean fading){
+		this.fading = fading;
+	}
+
 	@Override
 	public void render() {
 		// 黑色清屏
