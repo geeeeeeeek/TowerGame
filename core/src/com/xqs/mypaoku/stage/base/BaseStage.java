@@ -52,8 +52,14 @@ public abstract class BaseStage extends Stage {
     public void act(float delta) {
         super.act(delta);
 
+        // 通关或死亡
+        if(gameState == GameState.GAMEOVER || gameState == GameState.PASS){
+            counter=0;
+            return;
+        }
+
         // 非游戏中
-        if(gameState != GameState.GAMING){
+        if(gameState == GameState.PAUSE){
             return;
         }
 

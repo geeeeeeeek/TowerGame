@@ -33,12 +33,14 @@ import com.xqs.mypaoku.actor.npc.Menu;
 import com.xqs.mypaoku.actor.npc.Pause;
 import com.xqs.mypaoku.actor.npc.Play;
 import com.xqs.mypaoku.actor.npc.Popup;
+import com.xqs.mypaoku.actor.npc.Replay;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
+import com.xqs.mypaoku.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,6 +73,8 @@ public class GameStage extends BaseStage {
     private Popup popup;
 
     private Play play;
+
+    private Replay replay;
 
     private Menu menu;
 
@@ -125,15 +129,12 @@ public class GameStage extends BaseStage {
         addActor(pause);
 
 
-
-
         pause.setTouchable(Touchable.enabled);
-        pause.addListener(new ClickListener(){
+        pause.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 gameState = GameState.PAUSE;
-
                 showPopup();
             }
         });
@@ -162,7 +163,7 @@ public class GameStage extends BaseStage {
 
 
 		/*
-		 * 初始为游戏准备状态
+         * 初始为游戏准备状态
 		 */
         ready();
     }
@@ -206,11 +207,11 @@ public class GameStage extends BaseStage {
 
     }
 
-    public static int getGameState(){
+    public static int getGameState() {
         return gameState;
     }
 
-    public static void setGameState(int state){
+    public static void setGameState(int state) {
         gameState = state;
     }
 
@@ -269,7 +270,7 @@ public class GameStage extends BaseStage {
             LajiaoEnemy enemy = new LajiaoEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
-        }else if (type == EnemyType.WONIU) {
+        } else if (type == EnemyType.WONIU) {
             WoniuEnemy enemy = new WoniuEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
@@ -277,7 +278,7 @@ public class GameStage extends BaseStage {
     }
 
     // 弹窗
-    public void showPopup(){
+    public void showPopup() {
         hidePopup();
 
         /** fade **/
@@ -288,34 +289,41 @@ public class GameStage extends BaseStage {
         popup = new Popup(this.getMainGame());
         addActor(popup);
 
-        /** play **/
-        play = new Play(this.getMainGame());
-        addActor(play);
+        if (gameState == GameState.PAUSE) {
+            play = new Play(this.getMainGame());
+            addActor(play);
+        } else if (gameState == GameState.GAMEOVER) {
+            replay = new Replay(this.getMainGame());
+            addActor(replay);
+        }
 
         /** menu **/
         menu = new Menu(this.getMainGame());
         addActor(menu);
     }
 
-    public void hidePopup(){
-        if(fade != null){
+    public void hidePopup() {
+        if (fade != null) {
             fade.remove();
-            fade=null;
+            fade = null;
         }
-        if(popup!=null){
+        if (popup != null) {
             popup.remove();
-            popup=null;
+            popup = null;
         }
-        if(play!=null){
+        if (play != null) {
             play.remove();
-            play=null;
+            play = null;
         }
-        if(menu!=null){
+        if (replay != null) {
+            replay.remove();
+            replay = null;
+        }
+        if (menu != null) {
             menu.remove();
-            menu=null;
+            menu = null;
         }
     }
-
 
 
     @Override
@@ -382,7 +390,7 @@ public class GameStage extends BaseStage {
     public void draw() {
         super.draw();
 
-        if(gameState == GameState.GAMING) {
+        if (gameState == GameState.GAMING) {
             Box2DManager.doPhysicsStep(world);
         }
 
@@ -409,16 +417,13 @@ public class GameStage extends BaseStage {
 
     @Override
     public void orderAct(float delta, int counter) {
-//		Util.log(TAG,"计时器="+counter);
+		Util.log(TAG,"计时器="+counter);
         if (enemyOrderMap.containsKey(counter)) {
             int type = enemyOrderMap.get(counter);
             generateEnemy(type);
         }
 
     }
-
-
-
 
 
     @Override
@@ -435,7 +440,7 @@ public class GameStage extends BaseStage {
             generatePlayerBullet(Bullet.PLAYER, screenX, screenY, x, y);
         }
 
-        return super.touchUp(screenX,screenY,pointer,button);
+        return super.touchUp(screenX, screenY, pointer, button);
     }
 }
 
