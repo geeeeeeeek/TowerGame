@@ -105,11 +105,16 @@ public class GameStage extends BaseStage {
         return instance;
     }
 
-    public void init() {
-        Gdx.app.log(TAG, "init==========");
+    public void init(int currentLevelIndex) {
+        Gdx.app.log(TAG, "init level-->"+currentLevelIndex);
+
+        this.currentLevelIndex = currentLevelIndex;
 
         // clear before actors
         getRoot().clear();
+
+        // clear counter
+        clearCounter();
 
         /*
          * 创建背景
@@ -154,7 +159,7 @@ public class GameStage extends BaseStage {
 
         // mock data : don't spell mistakes
 
-        currentLevelIndex = 0;
+
         int currentLevel[][] = Level.levels[currentLevelIndex];
         for (int i = 0; i < currentLevel.length; i++) {
             int enemy[] = currentLevel[i];
@@ -166,6 +171,10 @@ public class GameStage extends BaseStage {
          * 初始为游戏准备状态
 		 */
         ready();
+    }
+
+    public void replay(){
+        init(currentLevelIndex);
     }
 
     // update lifes

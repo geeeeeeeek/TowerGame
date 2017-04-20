@@ -59,7 +59,7 @@ public class LevelIcon extends BaseImageActor {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(level<=(passLevelNum+1)) {
-                    getMainGame().showGameScreen();
+                    getMainGame().showGameScreen(level-1);
                 }
             }
         });

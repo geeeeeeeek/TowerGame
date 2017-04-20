@@ -33,10 +33,10 @@ public class GameScreen extends ScreenAdapter {
         this.mainGame = mainGame;
     }
 
-    public void init() {
+    public void init(int level) {
         // main game stage
         gameStage=GameStage.getInstance(getMainGame());
-        gameStage.init();
+        gameStage.init(level);
 
         // set input processor
         Gdx.input.setInputProcessor(gameStage);

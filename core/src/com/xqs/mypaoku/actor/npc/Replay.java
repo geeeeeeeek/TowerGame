@@ -40,7 +40,7 @@ public class Replay  extends BaseImageActor {
                 super.clicked(event, x, y);
                 GameStage.getInstance(getMainGame()).hidePopup();
 //                GameStage.setGameState(GameState.GAMING);
-                GameStage.getInstance(getMainGame()).init();
+                GameStage.getInstance(getMainGame()).replay();
             }
         });
     }

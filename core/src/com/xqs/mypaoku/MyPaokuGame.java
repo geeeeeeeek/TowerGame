@@ -107,9 +107,9 @@ public class MyPaokuGame extends Game {
 		gameScreen = new GameScreen(this);
 
 		// 设置当前场景
-//		setScreen(splashScreen);
-		gameScreen.init();
-		setScreen(gameScreen);
+		setScreen(splashScreen);
+//		gameScreen.init();
+//		setScreen(gameScreen);
 
 		// 判断是否需要显示帧率, 如果需要, 则进行初始化
 		if (SHOW_FPS) {
@@ -160,8 +160,8 @@ public class MyPaokuGame extends Game {
 				})));
 	}
 
-	public void showGameScreen(){
-		gameScreen.init();
+	public void showGameScreen(int level){
+		gameScreen.init(level);
 
 		fadeActor.clearActions();
 		fading = true;
