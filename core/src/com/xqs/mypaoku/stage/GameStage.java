@@ -34,6 +34,7 @@ import com.xqs.mypaoku.actor.npc.Pause;
 import com.xqs.mypaoku.actor.npc.Play;
 import com.xqs.mypaoku.actor.npc.Popup;
 import com.xqs.mypaoku.actor.npc.Replay;
+import com.xqs.mypaoku.actor.npc.Score;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
 import com.xqs.mypaoku.stage.base.BaseStage;
@@ -71,6 +72,8 @@ public class GameStage extends BaseStage {
     private Fade fade;
 
     private Popup popup;
+
+    private Score score;
 
     private Play play;
 
@@ -143,6 +146,10 @@ public class GameStage extends BaseStage {
                 showPopup();
             }
         });
+
+        /** score **/
+        score = new Score(getMainGame());
+        addActor(score);
 
 		/*
          * 创建player
