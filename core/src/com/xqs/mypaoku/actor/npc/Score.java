@@ -49,7 +49,7 @@ public class Score extends Actor {
         super.draw(batch, parentAlpha);
 
         if(score.length()>1){
-            //// TODO: 2017/4/20 0020 region split 
+            batch.draw(mRegion1,100,100,10,10,30,30,1,1,0);
         }
 
     }
