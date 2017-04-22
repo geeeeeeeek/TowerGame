@@ -1,6 +1,7 @@
 package com.xqs.mypaoku.stage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -357,6 +358,8 @@ public class GameStage extends BaseStage {
                             //此子弹会自爆
                             if (bullet.getState() == BaseBullet.EXPLODE) {
                                 enemy.hurt();
+                                int random = MathUtils.random(1,100);
+                                Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
                             }
                             break;
                     }
@@ -434,6 +437,7 @@ public class GameStage extends BaseStage {
     @Override
     public void orderAct(float delta, int counter) {
 		Util.log(TAG,"计时器="+counter);
+        Score.score=String.valueOf(Integer.parseInt(Score.score)+1);
         if (enemyOrderMap.containsKey(counter)) {
             int type = enemyOrderMap.get(counter);
             generateEnemy(type);
@@ -453,7 +457,10 @@ public class GameStage extends BaseStage {
             if (screenX < (Tower.getStopX() * ratio)) {
                 screenX = (int) (Tower.getStopX() * ratio);
             }
-            generatePlayerBullet(Bullet.PLAYER, screenX, screenY, x, y);
+            Util.log(TAG,"Click --> "+screenX+" "+screenY);
+            if(screenY>Gdx.graphics.getHeight()/4) {
+                generatePlayerBullet(Bullet.PLAYER, screenX, screenY, x, y);
+            }
         }
 
         return super.touchUp(screenX, screenY, pointer, button);

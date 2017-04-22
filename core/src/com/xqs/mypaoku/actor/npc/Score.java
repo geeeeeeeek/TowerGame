@@ -12,8 +12,13 @@ import com.xqs.mypaoku.MyPaokuGame;
  */
 
 public class Score extends Actor {
-    public static final float SX = 600;
-    public static final float SY = 620;
+    public static final float SX1 = 600;
+    public static final float SX2 = 560;
+    public static final float SX3 = 520;
+    public static final float SX4 = 480;
+
+    public static final float SY = 650;
+
     private MyPaokuGame game;
 
     private TextureRegion mRegion0;
@@ -28,7 +33,12 @@ public class Score extends Actor {
     private TextureRegion mRegion9;
 
 //    int score=12;
-    String score="12";
+    public static String score="12";
+
+    private float sx;
+    private float sy;
+
+    private char num;
 
     public Score(MyPaokuGame game){
         this.game = game;
@@ -48,9 +58,77 @@ public class Score extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        if(score.length()>1){
-            batch.draw(mRegion1,100,100,10,10,30,30,1,1,0);
+        if(score.length()==1){
+            num = score.charAt(0);
+            sx=SX1;sy=SY;
+            drawNum(batch,num,sx,sy);
+        }else if(score.length()==2){
+
+            num = score.charAt(1);
+            sx=SX1;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+            num = score.charAt(0);
+            sx=SX2;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+        }else if(score.length()==3){
+            num = score.charAt(2);
+            sx=SX1;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+            num = score.charAt(1);
+            sx=SX2;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+            num = score.charAt(0);
+            sx=SX3;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+        }else if(score.length()==4){
+
+            num = score.charAt(3);
+            sx=SX1;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+            num = score.charAt(2);
+            sx=SX2;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+            num = score.charAt(1);
+            sx=SX3;sy=SY;
+            drawNum(batch,num,sx,sy);
+
+            num = score.charAt(0);
+            sx=SX4;sy=SY;
+            drawNum(batch,num,sx,sy);
+
         }
 
+    }
+
+    // 画数字
+    private void drawNum(Batch batch, char num, float sx, float sy) {
+        if(num=='0'){
+            batch.draw(mRegion0,sx,sy);
+        }else if(num=='1'){
+            batch.draw(mRegion1,sx,sy);
+        }else if(num=='2'){
+            batch.draw(mRegion2,sx,sy);
+        }else if(num=='3'){
+            batch.draw(mRegion3,sx,sy);
+        }else if(num=='4'){
+            batch.draw(mRegion4,sx,sy);
+        }else if(num=='5'){
+            batch.draw(mRegion5,sx,sy);
+        }else if(num=='6'){
+            batch.draw(mRegion6,sx,sy);
+        }else if(num=='7'){
+            batch.draw(mRegion7,sx,sy);
+        }else if(num=='8'){
+            batch.draw(mRegion8,sx,sy);
+        }else if(num=='9'){
+            batch.draw(mRegion9,sx,sy);
+        }
     }
 }
