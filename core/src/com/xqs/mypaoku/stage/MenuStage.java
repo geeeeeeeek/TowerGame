@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.menu.FacebookButton;
 import com.xqs.mypaoku.actor.menu.MenuBg;
 import com.xqs.mypaoku.actor.menu.QuitButton;
 import com.xqs.mypaoku.actor.menu.SoundButton;
@@ -22,6 +23,7 @@ public class MenuStage extends BaseStage {
     private SoundButton soundButton;
     private StartButton startButton;
     private QuitButton quitButton;
+    private FacebookButton facebookButton;
 
 
     public MenuStage(final MyPaokuGame mainGame, Viewport viewport) {
@@ -42,6 +44,10 @@ public class MenuStage extends BaseStage {
         // quit btn
         quitButton = new QuitButton(mainGame);
         addActor(quitButton);
+
+        // facebook share
+        facebookButton = new FacebookButton(mainGame);
+        addActor(facebookButton);
 
         // set listeners
         soundButton.addListener(new ClickListener(){

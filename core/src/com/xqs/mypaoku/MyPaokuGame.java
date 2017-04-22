@@ -29,6 +29,8 @@ public class MyPaokuGame extends Game {
 	public static final String TAG = "MyPaokuGame";
 	public static final float FADE_DURATION = 1f;
 
+	public ActionService mService;
+
 	/** 是否显示帧率 */
 	public static final boolean SHOW_FPS = true;
 
@@ -58,6 +60,17 @@ public class MyPaokuGame extends Game {
 	private BitmapFont fpsBitmapFont;
 	/** 用于调试显示帧率 */
 	private FPSDebug fpsDebug;
+
+	// Android constructor
+	public MyPaokuGame(ActionService actionService) {
+		mService = actionService;
+	}
+
+	// desktop constructor
+	public MyPaokuGame(){
+
+	}
+
 
 	@Override
 	public void create() {
@@ -187,6 +200,10 @@ public class MyPaokuGame extends Game {
 
 	public void setFading(boolean fading){
 		this.fading = fading;
+	}
+
+	public void shareApp(){
+		mService.dosomething();
 	}
 
 	@Override
