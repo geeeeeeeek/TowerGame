@@ -4,6 +4,8 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -90,6 +92,14 @@ public class MyPaokuGame extends Game {
 		assetManager.load(Res.Atlas.ATLAS_PATH, TextureAtlas.class);
 
 		assetManager.load(Res.FPS_BITMAP_FONT_PATH, BitmapFont.class);
+
+		// 音效音乐
+		assetManager.load(Res.Audios.AUDIO_DIE, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_HIT, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_TOUCH, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_RESTART, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_SCORE, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_BG, Music.class);
 
 
 		// 等待资源加载完毕

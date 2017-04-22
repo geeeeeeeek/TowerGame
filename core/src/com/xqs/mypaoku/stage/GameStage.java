@@ -1,6 +1,8 @@
 package com.xqs.mypaoku.stage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -15,6 +17,7 @@ import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bg;
 import com.xqs.mypaoku.actor.Bullet;
 import com.xqs.mypaoku.actor.Player;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
@@ -38,6 +41,7 @@ import com.xqs.mypaoku.actor.npc.Replay;
 import com.xqs.mypaoku.actor.npc.Score;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
+import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
@@ -50,9 +54,6 @@ import java.util.Iterator;
 import java.util.List;
 
 
-/**
- * 主游戏舞台（主要的游戏逻辑都在这里）
- */
 public class GameStage extends BaseStage {
 
 
@@ -81,6 +82,10 @@ public class GameStage extends BaseStage {
     private Replay replay;
 
     private Menu menu;
+
+    /** 音效 */
+    private Sound scoreSound;
+    private Music bgMusic;
 
     private List<BaseEnemy> enemyList = new ArrayList<BaseEnemy>();
 
@@ -120,23 +125,17 @@ public class GameStage extends BaseStage {
         // clear counter
         clearCounter();
 
-        /*
-         * 创建背景
-         */
+        // bg
         bgActor = new Bg(this.getMainGame());
         addActor(bgActor);
 
-
-        /**
-         * 创建tower
-         */
+        // tower
         tower = new Tower(this.getMainGame());
         addActor(tower);
 
-        /** 暂停 **/
+        // pause
         pause = new Pause(this.getMainGame());
         addActor(pause);
-
 
         pause.setTouchable(Touchable.enabled);
         pause.addListener(new ClickListener() {
@@ -167,13 +166,17 @@ public class GameStage extends BaseStage {
 
         // mock data : don't spell mistakes
 
-
         int currentLevel[][] = Level.levels[currentLevelIndex];
         for (int i = 0; i < currentLevel.length; i++) {
             int enemy[] = currentLevel[i];
             enemyOrderMap.put(enemy[0], enemy[1]);
         }
 
+        // sounds
+        scoreSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_SCORE);
+        bgMusic = SoundHelper.getMusic(getMainGame(),Res.Audios.AUDIO_BG);
+
+        bgMusic.play();
 
 		/*
          * 初始为游戏准备状态
@@ -296,7 +299,10 @@ public class GameStage extends BaseStage {
 
     // 弹窗
     public void showPopup() {
+
         hidePopup();
+
+        bgMusic.pause();
 
         /** fade **/
         fade = new Fade(this.getMainGame());
@@ -320,6 +326,7 @@ public class GameStage extends BaseStage {
     }
 
     public void hidePopup() {
+        bgMusic.play();
         if (fade != null) {
             fade.remove();
             fade = null;
@@ -358,6 +365,7 @@ public class GameStage extends BaseStage {
                             //此子弹会自爆
                             if (bullet.getState() == BaseBullet.EXPLODE) {
                                 enemy.hurt();
+                                scoreSound.play();
                                 int random = MathUtils.random(1,100);
                                 Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
                             }

@@ -5,21 +5,26 @@ package com.xqs.mypaoku.res;
  */
 public class Res {
 
-    /**
-     * 世界宽高
-     */
+
     public static final float FIX_WORLD_HEIGHT = 720;
     public static final float FIX_WORLD_WIDTH = 1280;
 
-    /**
-     * 帧率显示所需要的位图字体 文件路径
-     */
+    // 字体
     public static final String FPS_BITMAP_FONT_PATH = "font/my.fnt";
 
+    // sounds
+    public static class Audios{
+        public static final String AUDIO_BASE_DIR	= "audio/";
+        public static final String AUDIO_DIE = AUDIO_BASE_DIR + "die.ogg";
+        public static final String AUDIO_HIT = AUDIO_BASE_DIR + "hit.ogg";
+        public static final String AUDIO_TOUCH = AUDIO_BASE_DIR + "touch.ogg";
+        public static final String AUDIO_RESTART = AUDIO_BASE_DIR + "restart.ogg";
+        public static final String AUDIO_SCORE = AUDIO_BASE_DIR + "score.ogg";
+        public static final String AUDIO_BG = AUDIO_BASE_DIR + "bg.mp3";
+    }
 
-    /**
-     * 纹理图集
-     */
+
+    // 图资源
     public static class Atlas {
 
         /**
