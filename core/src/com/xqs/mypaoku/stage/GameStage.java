@@ -31,6 +31,7 @@ import com.xqs.mypaoku.actor.enemy.LajiaoEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
+import com.xqs.mypaoku.actor.npc.BulletBg;
 import com.xqs.mypaoku.actor.npc.Fade;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Menu;
@@ -76,6 +77,8 @@ public class GameStage extends BaseStage {
     private Popup popup;
 
     private Score score;
+
+    private BulletBg bulletBg;
 
     private Play play;
 
@@ -147,13 +150,19 @@ public class GameStage extends BaseStage {
             }
         });
 
-        /** score **/
+        // score
         score = new Score(getMainGame());
         addActor(score);
 
-		/*
-         * 创建player
-		 */
+        // BulletBg
+        bulletBg = new BulletBg(getMainGame());
+        bulletBg.setMode(BulletBg.MODE_ONE);
+        addActor(bulletBg);
+        bulletBg = new BulletBg(getMainGame());
+        bulletBg.setMode(BulletBg.MODE_TWO);
+        addActor(bulletBg);
+
+		// player
         playerActor = new Player(this.getMainGame());
         playerActor.setLife(3);
         addActor(playerActor);
@@ -176,6 +185,8 @@ public class GameStage extends BaseStage {
         scoreSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_SCORE);
         bgMusic = SoundHelper.getMusic(getMainGame(),Res.Audios.AUDIO_BG);
 
+        bgMusic.setLooping(true);
+        bgMusic.setVolume(0.6f);
         bgMusic.play();
 
 		/*
@@ -398,6 +409,7 @@ public class GameStage extends BaseStage {
         while (bulletIterator.hasNext()) {
             BaseBullet bullet = bulletIterator.next();
             if (bullet.getState() == Bullet.DEAD) {
+                getRoot().removeActor(bullet);
                 bulletIterator.remove();
             }
         }
@@ -421,13 +433,19 @@ public class GameStage extends BaseStage {
             Box2DManager.doPhysicsStep(world);
         }
 
+        // draw world
         drawBullets();
+
+        // remove world
+        Box2DManager.removeBodies(world);
+
 
     }
 
     private synchronized void drawBullets() {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
+        Util.log(TAG,"world = "+bodies.size);
         for (Body body : bodies) {
 
             BaseBullet e = (BaseBullet) body.getUserData();
@@ -439,7 +457,6 @@ public class GameStage extends BaseStage {
 //				e.setRotation(0);
             }
         }
-
     }
 
     @Override

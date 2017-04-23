@@ -12,6 +12,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.xqs.mypaoku.actor.Bullet;
+import com.xqs.mypaoku.actor.base.BaseBullet;
 
 /**
  * Created by Administrator on 2017/3/3 0003.
@@ -43,7 +46,17 @@ public class Box2DManager {
         Body body = world.createBody(bodyDef);
 
         return body;
+    }
 
+    public static void removeBodies(World world){
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for(Body body:bodies){
+            BaseBullet baseBullet = (BaseBullet) body.getUserData();
+            if(baseBullet.getState()== Bullet.DEAD){
+                world.destroyBody(body);
+            }
+        }
     }
 
     public static Fixture createFixture(Body body) {

@@ -35,6 +35,7 @@ public class AndroidLauncher extends AndroidApplication implements ActionService
 	protected void onDestroy() {
 		super.onDestroy();
 		Log.w(TAG,"-->onDestroy");
+		android.os.Process.killProcess(android.os.Process.myPid());
 		System.exit(0);
 	}
 
