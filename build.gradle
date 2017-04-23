@@ -45,7 +45,13 @@ project(":android") {
     configurations { natives }
 
     dependencies {
+        // core
         compile project(":core")
+
+        // facebook
+        compile 'com.facebook.android:facebook-android-sdk:4.+'
+
+        // gdx
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"

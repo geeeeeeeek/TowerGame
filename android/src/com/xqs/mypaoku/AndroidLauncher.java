@@ -1,13 +1,17 @@
 package com.xqs.mypaoku;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.facebook.FacebookSdk;
 
 public class AndroidLauncher extends AndroidApplication implements ActionService {
 	public static final String TAG = "AndroidLaucher";
@@ -48,11 +52,11 @@ public class AndroidLauncher extends AndroidApplication implements ActionService
 
 	@Override
 	public void dosomething() {
-		Intent intent=new Intent(Intent.ACTION_SEND);
-		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
-		intent.putExtra(Intent.EXTRA_TEXT, "It's a good game");
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(Intent.createChooser(intent, "Share"));
+		// https://developers.facebook.com/docs/sharing/android
+
+		ShareDialog shareDialog = new ShareDialog(this);
+		ShareLinkContent linkContent = new ShareLinkContent.Builder()
+				.setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=me.meecha")).build();
+		shareDialog.show(linkContent);
 	}
 }
