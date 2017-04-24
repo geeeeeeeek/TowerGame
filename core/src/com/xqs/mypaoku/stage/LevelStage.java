@@ -45,6 +45,11 @@ public class LevelStage extends BaseStage {
         setClick();
     }
 
+    @Override
+    public void orderAct(float delta, int counter) {
+
+    }
+
     private void initLevelIcon() {
         levelIcon01 = new LevelIcon(getMainGame(),1);
         levelIcon01.setPosition(100,550);
@@ -87,23 +92,4 @@ public class LevelStage extends BaseStage {
         });
     }
 
-    @Override
-    public void orderAct(float delta, int counter) {
-        Util.log(TAG,"counter = "+counter);
-        if(counter%10==0) {
-            updateActors();
-        }
-    }
-
-    private void updateActors() {
-        levelIcon01.updateIcon();
-        levelIcon02.updateIcon();
-        levelIcon03.updateIcon();
-        levelIcon04.updateIcon();
-        levelIcon05.updateIcon();
-        levelIcon06.updateIcon();
-        levelIcon07.updateIcon();
-        levelIcon08.updateIcon();
-        levelIcon09.updateIcon();
-    }
 }

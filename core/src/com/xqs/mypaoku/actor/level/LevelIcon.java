@@ -12,12 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.app.Prefs;
+import com.xqs.mypaoku.util.Util;
 
 /**
  * Created by Administrator on 2017/4/16 0016.
  */
 
-public class LevelIcon extends BaseImageActor {
+public class LevelIcon extends BaseImageActor implements BaseImageActor.TimerListener {
     public static final String TAG = "LevelIcon";
 
     public static final String BTN_LOCK_ON="images/btn_lock_on.png";
@@ -49,14 +50,13 @@ public class LevelIcon extends BaseImageActor {
         onRegion=new TextureRegion(onTexture);
         offRegion=new TextureRegion(offTexture);
 
-
+        setTimerListener(this);
 
         initFont();
+
+        updateIcon();
     }
 
-    public int getLevel(){
-        return level;
-    }
 
     public void initFont(){
         bitmapFont = getMainGame().getFpsBitmapFont();
@@ -82,6 +82,10 @@ public class LevelIcon extends BaseImageActor {
         });
     }
 
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -95,6 +99,13 @@ public class LevelIcon extends BaseImageActor {
             bitmapFont.setColor(Color.RED);
             bitmapFont.getData().setScale(0.4f);
             bitmapFont.draw(batch, "" + level, this.getX() + (getWidth() / 2 - textWidth / 2), this.getY() + this.getHeight() - (getHeight() / 2 - textHeight / 2));
+        }
+    }
+
+    @Override
+    public void orderAct(float delta, int counter) {
+        if(counter%4==0) {
+            updateIcon();
         }
     }
 }
