@@ -445,7 +445,6 @@ public class GameStage extends BaseStage {
     private synchronized void drawBullets() {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
-        Util.log(TAG,"world = "+bodies.size);
         for (Body body : bodies) {
 
             BaseBullet e = (BaseBullet) body.getUserData();

@@ -15,6 +15,8 @@ public class Prefs {
 
     public static final String SOUND = "sound";
 
+    public static final String LEVEL = "level";
+
     public static Prefs getPrefs(){
         return new Prefs();
     }
@@ -31,5 +33,17 @@ public class Prefs {
 
     public boolean isSoundEffectsEnabled(){
         return getInstance().getBoolean(SOUND,true);
+    }
+
+    // --- passed leves ---
+    public int getPassedLevel(){
+        return getInstance().getInteger(LEVEL,0);
+    }
+
+    public void setPassedLevel(int level){
+        int passed = getPassedLevel();
+        if(level>passed){
+            getInstance().putInteger(LEVEL,level).flush();
+        }
     }
 }

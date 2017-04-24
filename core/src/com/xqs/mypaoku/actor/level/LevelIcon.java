@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
+import com.xqs.mypaoku.app.Prefs;
 
 /**
  * Created by Administrator on 2017/4/16 0016.
@@ -34,7 +35,7 @@ public class LevelIcon extends BaseImageActor {
 
     private int level;
 
-    private int passLevelNum = 4;
+    private int passLevelNum=0;
 
 
     public LevelIcon(MyPaokuGame mainGame, final int level) {
@@ -48,6 +49,22 @@ public class LevelIcon extends BaseImageActor {
         onRegion=new TextureRegion(onTexture);
         offRegion=new TextureRegion(offTexture);
 
+
+
+        initFont();
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public void initFont(){
+        bitmapFont = getMainGame().getFpsBitmapFont();
+        bitmapFont.getData().setScale(0.5f);
+    }
+
+    public void updateIcon(){
+        passLevelNum= Prefs.getPrefs().getPassedLevel();
         if(level<=(passLevelNum+1)) {
             setRegion(onRegion);
         }else{
@@ -63,17 +80,6 @@ public class LevelIcon extends BaseImageActor {
                 }
             }
         });
-
-        initFont();
-    }
-
-    public int getLevel(){
-        return level;
-    }
-
-    public void initFont(){
-        bitmapFont = getMainGame().getFpsBitmapFont();
-        bitmapFont.getData().setScale(0.5f);
     }
 
 

@@ -9,6 +9,7 @@ import com.xqs.mypaoku.actor.level.LevelBg;
 import com.xqs.mypaoku.actor.level.LevelIcon;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.stage.base.BaseStage;
+import com.xqs.mypaoku.util.Util;
 
 /**
  * Created by Administrator on 2017/4/12 0012.
@@ -88,6 +89,21 @@ public class LevelStage extends BaseStage {
 
     @Override
     public void orderAct(float delta, int counter) {
+        Util.log(TAG,"counter = "+counter);
+        if(counter%10==0) {
+            updateActors();
+        }
+    }
 
+    private void updateActors() {
+        levelIcon01.updateIcon();
+        levelIcon02.updateIcon();
+        levelIcon03.updateIcon();
+        levelIcon04.updateIcon();
+        levelIcon05.updateIcon();
+        levelIcon06.updateIcon();
+        levelIcon07.updateIcon();
+        levelIcon08.updateIcon();
+        levelIcon09.updateIcon();
     }
 }
