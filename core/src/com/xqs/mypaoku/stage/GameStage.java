@@ -35,11 +35,13 @@ import com.xqs.mypaoku.actor.npc.BulletBg;
 import com.xqs.mypaoku.actor.npc.Fade;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Menu;
+import com.xqs.mypaoku.actor.npc.Next;
 import com.xqs.mypaoku.actor.npc.Pause;
 import com.xqs.mypaoku.actor.npc.Play;
 import com.xqs.mypaoku.actor.npc.Popup;
 import com.xqs.mypaoku.actor.npc.Replay;
 import com.xqs.mypaoku.actor.npc.Score;
+import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
 import com.xqs.mypaoku.res.Res;
@@ -84,11 +86,16 @@ public class GameStage extends BaseStage {
 
     private Replay replay;
 
+    private Next next;
+
     private Menu menu;
 
-    /** 音效 */
+    // sound
     private Sound scoreSound;
     private Music bgMusic;
+
+    // level point
+    private boolean levelPoint;
 
     private List<BaseEnemy> enemyList = new ArrayList<BaseEnemy>();
 
@@ -145,8 +152,10 @@ public class GameStage extends BaseStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                gameState = GameState.PAUSE;
-                showPopup();
+                if(gameState == GameState.GAMING) {
+                    gameState = GameState.PAUSE;
+                    showPopup();
+                }
             }
         });
 
@@ -173,13 +182,16 @@ public class GameStage extends BaseStage {
         world = Box2DManager.createWorld();
 
 
-        // mock data : don't spell mistakes
-
+        // current level data
+        enemyOrderMap.clear();
         int currentLevel[][] = Level.levels[currentLevelIndex];
         for (int i = 0; i < currentLevel.length; i++) {
             int enemy[] = currentLevel[i];
             enemyOrderMap.put(enemy[0], enemy[1]);
         }
+
+        // if reach end
+        levelPoint = false;
 
         // sounds
         scoreSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_SCORE);
@@ -189,14 +201,26 @@ public class GameStage extends BaseStage {
         bgMusic.setVolume(0.6f);
         bgMusic.play();
 
-		/*
-         * 初始为游戏准备状态
-		 */
+		// ready
         ready();
     }
 
     public void replay(){
         init(currentLevelIndex);
+    }
+
+    public void next(){
+        ++currentLevelIndex;
+        // 已通全关
+        if(currentLevelIndex>=Level.levels.length){
+            currentLevelIndex = 0;
+        }
+        init(currentLevelIndex);
+    }
+
+    public void gameOver(){
+        setGameState(GameState.GAMEOVER);
+        showPopup();
     }
 
     // update lifes
@@ -234,6 +258,10 @@ public class GameStage extends BaseStage {
             getRoot().removeActor(bullet);
         }
 
+        // 清空敌人容器
+        enemyList.clear();
+
+        // 清空子弹容器
         bulletList.clear();
 
     }
@@ -273,9 +301,7 @@ public class GameStage extends BaseStage {
     }
 
 
-    /**
-     * 生成敌人
-     */
+    // 生成敌人
     private void generateEnemy(int type) {
         if (type == EnemyType.DACONG) {
             DacongEnemy enemy = new DacongEnemy(getMainGame());
@@ -329,6 +355,9 @@ public class GameStage extends BaseStage {
         } else if (gameState == GameState.GAMEOVER) {
             replay = new Replay(this.getMainGame());
             addActor(replay);
+        } else if(gameState == GameState.PASS){
+            next = new Next(this.getMainGame());
+            addActor(next);
         }
 
         /** menu **/
@@ -354,6 +383,10 @@ public class GameStage extends BaseStage {
             replay.remove();
             replay = null;
         }
+        if(next != null){
+            next.remove();
+            next = null;
+        }
         if (menu != null) {
             menu.remove();
             menu = null;
@@ -365,6 +398,13 @@ public class GameStage extends BaseStage {
     public void act(float delta) {
         super.act(delta);
 
+        if(getGameState()!=GameState.GAMING)
+            return;
+
+        // player life
+        if(playerActor.getLife()<=0) {
+            gameOver();
+        }
 
         //子弹与其他碰撞检测
         for (BaseBullet bullet : bulletList) {
@@ -460,11 +500,24 @@ public class GameStage extends BaseStage {
 
     @Override
     public void orderAct(float delta, int counter) {
-		Util.log(TAG,"计时器="+counter);
+//		Util.log(TAG,"计时器="+counter);
         Score.score=String.valueOf(Integer.parseInt(Score.score)+1);
         if (enemyOrderMap.containsKey(counter)) {
             int type = enemyOrderMap.get(counter);
-            generateEnemy(type);
+            if(type == EnemyType.END){
+                levelPoint = true;
+            }else {
+                generateEnemy(type);
+            }
+        }
+
+        Util.log(TAG,"count="+enemyList.size());
+        if(levelPoint){
+            if(enemyList.size()<=0){
+                Prefs.getPrefs().setPassedLevel(currentLevelIndex+1);
+                setGameState(GameState.PASS);
+                showPopup();
+            }
         }
 
     }

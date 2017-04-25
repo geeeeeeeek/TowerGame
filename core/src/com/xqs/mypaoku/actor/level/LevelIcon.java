@@ -39,10 +39,10 @@ public class LevelIcon extends BaseImageActor implements BaseImageActor.TimerLis
     private int passLevelNum=0;
 
 
-    public LevelIcon(MyPaokuGame mainGame, final int level) {
+    public LevelIcon(MyPaokuGame mainGame, final int fromLevel) {
         super(mainGame);
 
-        this.level = level;
+        this.level = fromLevel;
 
         onTexture = new Texture(Gdx.files.internal(BTN_LOCK_ON));
         offTexture = new Texture(Gdx.files.internal(BTN_LOCK_OFF));
@@ -55,6 +55,16 @@ public class LevelIcon extends BaseImageActor implements BaseImageActor.TimerLis
         initFont();
 
         updateIcon();
+
+        addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(level<=(passLevelNum+1)) {
+                    getMainGame().showGameScreen(level-1);
+                }
+            }
+        });
     }
 
 
@@ -70,16 +80,6 @@ public class LevelIcon extends BaseImageActor implements BaseImageActor.TimerLis
         }else{
             setRegion(offRegion);
         }
-
-        addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                if(level<=(passLevelNum+1)) {
-                    getMainGame().showGameScreen(level-1);
-                }
-            }
-        });
     }
 
     @Override

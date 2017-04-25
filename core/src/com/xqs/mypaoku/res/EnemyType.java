@@ -8,6 +8,7 @@ public class EnemyType {
 
 
     // enemies
+
     public static final int DACONG = 20;
     public static final int CAIHUA = 21;
     public static final int MUSHU = 22;
@@ -15,5 +16,6 @@ public class EnemyType {
     public static final int HUANGGUA = 24;
     public static final int LAJIAO=25;
     public static final int WONIU = 26;
+    public static final int END = 100;
 
 }

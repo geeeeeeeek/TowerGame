@@ -9,25 +9,24 @@ import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.GameState;
-import com.xqs.mypaoku.util.Util;
 
 /**
- * Created by Administrator on 2017/4/18 0018.
+ * Created by Administrator on 2017/4/25 0025.
  */
 
-public class Replay  extends BaseImageActor {
+public class Next extends BaseImageActor {
 
-    public static final String TAG = "RePlay";
-    public static final String PICTURE_BTN_REPLAY = "images/btn_replay.png";
+    public static final String TAG = "Next";
+    public static final String PICTURE_BTN_NEXT = "images/btn_next.png";
 
 
     private Texture texture;
     private TextureRegion region;
 
-    public Replay(MyPaokuGame mainGame) {
+    public Next(MyPaokuGame mainGame) {
         super(mainGame);
 
-        texture = new Texture(Gdx.files.internal(PICTURE_BTN_REPLAY));
+        texture = new Texture(Gdx.files.internal(PICTURE_BTN_NEXT));
 
         region=new TextureRegion(texture);
 
@@ -39,10 +38,8 @@ public class Replay  extends BaseImageActor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Util.log(TAG,"clicked replay");
                 GameStage.getInstance(getMainGame()).hidePopup();
-//                GameStage.setGameState(GameState.GAMING);
-                GameStage.getInstance(getMainGame()).replay();
+                GameStage.getInstance(getMainGame()).next();
             }
         });
     }

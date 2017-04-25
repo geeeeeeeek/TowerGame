@@ -26,6 +26,10 @@ public class Prefs {
         return prefs;
     }
 
+    public void clear(){
+        getInstance().clear();
+    }
+
     // ------ sound state ------
     public void setSoundEffectsEnabled(boolean state){
         getInstance().putBoolean(SOUND,state).flush();

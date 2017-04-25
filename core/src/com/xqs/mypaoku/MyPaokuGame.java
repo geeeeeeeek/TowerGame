@@ -203,7 +203,9 @@ public class MyPaokuGame extends Game {
 	}
 
 	public void shareApp(){
-		mService.dosomething();
+		if(mService!=null) {
+			mService.dosomething();
+		}
 	}
 
 	@Override
