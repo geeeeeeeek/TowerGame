@@ -3,6 +3,7 @@ package com.xqs.mypaoku.stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.SplashActor;
+import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Util;
@@ -21,6 +22,8 @@ public class SplashStage extends BaseStage {
 
         SplashActor splashActor = new SplashActor(mainGame);
         addActor(splashActor);
+
+//        Prefs.getPrefs().clear(); // test code
     }
 
     @Override

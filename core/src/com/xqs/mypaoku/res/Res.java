@@ -15,12 +15,10 @@ public class Res {
     // sounds
     public static class Audios{
         public static final String AUDIO_BASE_DIR	= "audio/";
-        public static final String AUDIO_DIE = AUDIO_BASE_DIR + "die.ogg";
-        public static final String AUDIO_HIT = AUDIO_BASE_DIR + "hit.ogg";
-        public static final String AUDIO_TOUCH = AUDIO_BASE_DIR + "touch.ogg";
-        public static final String AUDIO_RESTART = AUDIO_BASE_DIR + "restart.ogg";
         public static final String AUDIO_SCORE = AUDIO_BASE_DIR + "score.ogg";
         public static final String AUDIO_BG = AUDIO_BASE_DIR + "bg.mp3";
+        public static final String AUDIO_PASS = AUDIO_BASE_DIR + "pass.mp3";
+        public static final String AUDIO_GAMEOVER = AUDIO_BASE_DIR + "gameover.wav";
     }
 
 

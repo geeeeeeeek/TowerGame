@@ -91,6 +91,8 @@ public class GameStage extends BaseStage {
     private Menu menu;
 
     // sound
+    private Sound passSound;
+    private Sound gameOverSound;
     private Sound scoreSound;
     private Music bgMusic;
 
@@ -194,6 +196,8 @@ public class GameStage extends BaseStage {
         levelPoint = false;
 
         // sounds
+        passSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_PASS);
+        gameOverSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_GAMEOVER);
         scoreSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_SCORE);
         bgMusic = SoundHelper.getMusic(getMainGame(),Res.Audios.AUDIO_BG);
 
@@ -219,6 +223,7 @@ public class GameStage extends BaseStage {
     }
 
     public void gameOver(){
+        gameOverSound.play();
         setGameState(GameState.GAMEOVER);
         showPopup();
     }
@@ -511,11 +516,12 @@ public class GameStage extends BaseStage {
             }
         }
 
-        Util.log(TAG,"count="+enemyList.size());
+
         if(levelPoint){
             if(enemyList.size()<=0){
                 Prefs.getPrefs().setPassedLevel(currentLevelIndex+1);
                 setGameState(GameState.PASS);
+                passSound.play();
                 showPopup();
             }
         }

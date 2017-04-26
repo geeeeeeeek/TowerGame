@@ -106,12 +106,12 @@ public class MyPaokuGame extends Game {
 
 		assetManager.load(Res.FPS_BITMAP_FONT_PATH, BitmapFont.class);
 
-		// 音效音乐
-		assetManager.load(Res.Audios.AUDIO_DIE, Sound.class);
-		assetManager.load(Res.Audios.AUDIO_HIT, Sound.class);
-		assetManager.load(Res.Audios.AUDIO_TOUCH, Sound.class);
-		assetManager.load(Res.Audios.AUDIO_RESTART, Sound.class);
+		// 音效
 		assetManager.load(Res.Audios.AUDIO_SCORE, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_PASS, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_GAMEOVER, Sound.class);
+
+		// 音乐
 		assetManager.load(Res.Audios.AUDIO_BG, Music.class);
 
 

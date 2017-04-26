@@ -39,7 +39,6 @@ public class Replay  extends BaseImageActor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Util.log(TAG,"clicked replay");
                 GameStage.getInstance(getMainGame()).hidePopup();
 //                GameStage.setGameState(GameState.GAMING);
                 GameStage.getInstance(getMainGame()).replay();
