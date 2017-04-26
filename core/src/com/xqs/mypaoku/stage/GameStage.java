@@ -196,11 +196,11 @@ public class GameStage extends BaseStage {
         levelPoint = false;
 
         // sounds
-        passSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_PASS);
+        passSound = SoundHelper.getSound(getMainGame(), Res.Audios.AUDIO_PASS);
         gameOverSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_GAMEOVER);
         scoreSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_SCORE);
+        // music
         bgMusic = SoundHelper.getMusic(getMainGame(),Res.Audios.AUDIO_BG);
-
         bgMusic.setLooping(true);
         bgMusic.setVolume(0.6f);
         bgMusic.play();
@@ -258,16 +258,21 @@ public class GameStage extends BaseStage {
     public void ready() {
         gameState = GameState.GAMING;
 
-        //清空子弹
+        // remove bullet actors
         for (BaseBullet bullet : bulletList) {
             getRoot().removeActor(bullet);
         }
 
-        // 清空敌人容器
+        // clear enemylist
         enemyList.clear();
 
-        // 清空子弹容器
+        // clear bulletlist
         bulletList.clear();
+
+        // stop all sounds
+        passSound.stop();
+        gameOverSound.stop();
+        scoreSound.stop();
 
     }
 
@@ -279,9 +284,7 @@ public class GameStage extends BaseStage {
         gameState = state;
     }
 
-    /**
-     * 生成player子弹
-     */
+    // gener player bullet
     public void generatePlayerBullet(int bulletType, int screenX, int screenY, float positionX, float positionY) {
         PlayerBullet bullet = new PlayerBullet(getMainGame(), screenX, screenY, positionX, positionY, world);
         addActor(bullet);
@@ -289,9 +292,7 @@ public class GameStage extends BaseStage {
         playerActor.shoot();
     }
 
-    /**
-     * 生成敌人子弹
-     */
+    // gener eneny bullet
     public void generateEnemyBullet(int bulletType, float positionX, float positionY) {
 
         if (bulletType == BaseBullet.CAIHUA) {
@@ -306,7 +307,7 @@ public class GameStage extends BaseStage {
     }
 
 
-    // 生成敌人
+    // generateEnemy
     private void generateEnemy(int type) {
         if (type == EnemyType.DACONG) {
             DacongEnemy enemy = new DacongEnemy(getMainGame());
