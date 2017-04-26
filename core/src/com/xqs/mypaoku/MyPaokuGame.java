@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Disposable;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
@@ -121,6 +122,9 @@ public class MyPaokuGame extends Game {
 		// 获取资源
 		atlas = assetManager.get(Res.Atlas.ATLAS_PATH, TextureAtlas.class);
 		fpsBitmapFont = assetManager.get(Res.FPS_BITMAP_FONT_PATH, BitmapFont.class);
+
+		// 初始化sound
+		SoundHelper.initSound(this);
 
 
 		// --- 场景 ---

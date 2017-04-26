@@ -90,12 +90,6 @@ public class GameStage extends BaseStage {
 
     private Menu menu;
 
-    // sound
-    private Sound passSound;
-    private Sound gameOverSound;
-    private Sound scoreSound;
-    private Music bgMusic;
-
     // level point
     private boolean levelPoint;
 
@@ -195,16 +189,6 @@ public class GameStage extends BaseStage {
         // if reach end
         levelPoint = false;
 
-        // sounds
-        passSound = SoundHelper.getSound(getMainGame(), Res.Audios.AUDIO_PASS);
-        gameOverSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_GAMEOVER);
-        scoreSound = SoundHelper.getSound(getMainGame(),Res.Audios.AUDIO_SCORE);
-        // music
-        bgMusic = SoundHelper.getMusic(getMainGame(),Res.Audios.AUDIO_BG);
-        bgMusic.setLooping(true);
-        bgMusic.setVolume(0.6f);
-        bgMusic.play();
-
 		// ready
         ready();
     }
@@ -223,7 +207,7 @@ public class GameStage extends BaseStage {
     }
 
     public void gameOver(){
-        gameOverSound.play();
+        SoundHelper.playGameOver();
         setGameState(GameState.GAMEOVER);
         showPopup();
     }
@@ -252,9 +236,7 @@ public class GameStage extends BaseStage {
         }
     }
 
-    /**
-     * 游戏状态改变方法01: 游戏准备状态
-     */
+    // gamestage ready
     public void ready() {
         gameState = GameState.GAMING;
 
@@ -270,9 +252,10 @@ public class GameStage extends BaseStage {
         bulletList.clear();
 
         // stop all sounds
-        passSound.stop();
-        gameOverSound.stop();
-        scoreSound.stop();
+        SoundHelper.stopAllSound();
+
+        // play bg music
+        SoundHelper.playBgMusic();
 
     }
 
@@ -345,7 +328,7 @@ public class GameStage extends BaseStage {
 
         hidePopup();
 
-        bgMusic.pause();
+        SoundHelper.pauseBgMusic();
 
         /** fade **/
         fade = new Fade(this.getMainGame());
@@ -372,7 +355,7 @@ public class GameStage extends BaseStage {
     }
 
     public void hidePopup() {
-        bgMusic.play();
+        SoundHelper.playBgMusic();
         if (fade != null) {
             fade.remove();
             fade = null;
@@ -422,7 +405,7 @@ public class GameStage extends BaseStage {
                             //此子弹会自爆
                             if (bullet.getState() == BaseBullet.EXPLODE) {
                                 enemy.hurt();
-                                scoreSound.play();
+                                SoundHelper.playScore();
                                 int random = MathUtils.random(1,100);
                                 Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
                             }
@@ -522,7 +505,7 @@ public class GameStage extends BaseStage {
             if(enemyList.size()<=0){
                 Prefs.getPrefs().setPassedLevel(currentLevelIndex+1);
                 setGameState(GameState.PASS);
-                passSound.play();
+                SoundHelper.playPass();
                 showPopup();
             }
         }
