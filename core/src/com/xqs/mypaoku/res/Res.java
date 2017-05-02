@@ -18,7 +18,7 @@ public class Res {
         public static final String AUDIO_SCORE = AUDIO_BASE_DIR + "score.ogg";
         public static final String AUDIO_BG = AUDIO_BASE_DIR + "bg.mp3";
         public static final String AUDIO_PASS = AUDIO_BASE_DIR + "pass.mp3";
-        public static final String AUDIO_GAMEOVER = AUDIO_BASE_DIR + "gameover.wav";
+        public static final String AUDIO_GAMEOVER = AUDIO_BASE_DIR + "gameover.mp3";
     }
 
 
