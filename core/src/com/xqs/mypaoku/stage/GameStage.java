@@ -169,7 +169,7 @@ public class GameStage extends BaseStage {
 
 		// player
         playerActor = new Player(this.getMainGame());
-        playerActor.setLife(3);
+        playerActor.setLife(5);
         addActor(playerActor);
 
         updateLifes();

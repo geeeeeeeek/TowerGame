@@ -15,7 +15,7 @@ import com.xqs.mypaoku.util.Util;
 public class SplashStage extends BaseStage {
     public static final String TAG = "SplashStage";
 
-    public static final int WAIT_SECONDS = 5;
+    public static final int WAIT_SECONDS = 25;
 
     public SplashStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);

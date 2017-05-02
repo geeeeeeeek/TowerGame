@@ -74,7 +74,7 @@ public class CaihuaEnemy extends BaseEnemy {
 
     @Override
     public void orderAct(float delta, int counter) {
-        if(counter%10==0) {
+        if(counter%20==0) {
             if(getX()>getStopX() && getState()==WALK) {
                 fire();
             }
