@@ -6,6 +6,7 @@ import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.res.Res;
+import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.TextureUtil;
 
 /**
@@ -50,6 +51,11 @@ public class YutouEnemy extends BaseEnemy {
 
     @Override
     public void orderAct(float delta, int counter) {
-
+        if(counter%20==0) {
+            // check if enemy was close to tower
+            if(getState() == WALK && getX()<=getStopX()){
+                GameStage.getInstance(mainGame).minusLife();
+            }
+        }
     }
 }

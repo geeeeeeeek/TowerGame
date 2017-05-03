@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bullet;
+import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.res.Res;
@@ -77,6 +78,10 @@ public class CaihuaEnemy extends BaseEnemy {
         if(counter%20==0) {
             if(getX()>getStopX() && getState()==WALK) {
                 fire();
+            }
+            // check if enemy was close to tower
+            if(getState() == WALK && getX()<=getStopX()){
+                GameStage.getInstance(mainGame).minusLife();
             }
         }
     }

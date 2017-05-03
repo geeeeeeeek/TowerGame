@@ -382,6 +382,9 @@ public class GameStage extends BaseStage {
         }
     }
 
+    public void minusLife(){
+        playerActor.minusLife();
+    }
 
     @Override
     public void act(float delta) {

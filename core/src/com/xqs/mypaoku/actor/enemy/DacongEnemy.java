@@ -70,6 +70,11 @@ public class DacongEnemy extends BaseEnemy {
 
     @Override
     public void orderAct(float delta, int counter) {
-
+        if(counter%20==0) {
+            // check if enemy was close to tower
+            if(getState() == WALK && getX()<=getStopX()){
+                GameStage.getInstance(mainGame).minusLife();
+            }
+        }
     }
 }
