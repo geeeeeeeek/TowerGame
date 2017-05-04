@@ -164,13 +164,13 @@ public class GameStage extends BaseStage {
         bulletTwoBg = new BulletTwoBg(getMainGame());
         addActor(bulletTwoBg);
 
-        bulletOneBg.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                Util.log(TAG,"clicked");
-            }
-        });
+//        bulletOneBg.addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                super.clicked(event, x, y);
+//                Util.log(TAG,"clicked");
+//            }
+//        });
 
 		// player
         playerActor = new Player(this.getMainGame());
@@ -273,8 +273,8 @@ public class GameStage extends BaseStage {
     }
 
     // gener player bullet
-    public void generatePlayerBullet(int bulletType, int screenX, int screenY, float positionX, float positionY) {
-        PlayerBullet bullet = new PlayerBullet(getMainGame(), screenX, screenY, positionX, positionY, world);
+    public void generatePlayerBullet(int bulletType, int clickX, int clickY, float positionX, float positionY) {
+        PlayerBullet bullet = new PlayerBullet(getMainGame(), clickX, clickY, positionX, positionY, world);
         addActor(bullet);
         bulletList.add(bullet);
         playerActor.shoot();
@@ -529,14 +529,18 @@ public class GameStage extends BaseStage {
             float x = playerActor.getRightX();
             float y = playerActor.getY() + playerActor.getHeight() / 2;
 
+            int clickX = screenX;
+            int clickY = screenY;
+
             if (screenX < (Tower.getStopX() * ratio)) {
-                screenX = (int) (Tower.getStopX() * ratio);
+                clickX = (int) (Tower.getStopX() * ratio);
             }
-            Util.log(TAG,"Click --> "+screenX+" "+screenY);
+//            Util.log(TAG,"Click --> "+clickX+" "+clickY);
             if(screenY>Gdx.graphics.getHeight()/4) {
-                generatePlayerBullet(Bullet.PLAYER, screenX, screenY, x, y);
+                generatePlayerBullet(Bullet.PLAYER, clickX, clickY, x, y);
             }
         }
+
 
         return super.touchUp(screenX, screenY, pointer, button);
     }

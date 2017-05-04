@@ -21,8 +21,8 @@ public class PlayerBullet extends BaseBullet {
 
     public static final int EXPLODE_Y = 150;
 
-    public PlayerBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
-        super(game, screenX, screenY, positionX, positionY, world);
+    public PlayerBullet(MyPaokuGame game, int clickX, int clickY, float positionX, float positionY, World world) {
+        super(game, clickX, clickY, positionX, positionY, world);
 
 
         mClickX = (int) (mClickX - positionX);

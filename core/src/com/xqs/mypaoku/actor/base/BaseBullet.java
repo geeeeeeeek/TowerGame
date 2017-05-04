@@ -77,7 +77,7 @@ public abstract class BaseBullet extends AnimationActor {
         this(game, 0, 0, positionX, positionY, world);
     }
 
-    public BaseBullet(MyPaokuGame game, int screenX, int screenY, float positionX, float positionY, World world) {
+    public BaseBullet(MyPaokuGame game, int clickX, int clickY, float positionX, float positionY, World world) {
         this.game = game;
 
         bulletType = getBulletType();
@@ -99,8 +99,8 @@ public abstract class BaseBullet extends AnimationActor {
         lastPos.x = position.x;
         lastPos.y = position.y;
 
-        this.mClickX = screenX;
-        this.mClickY = screenY;
+        this.mClickX = clickX;
+        this.mClickY = clickY;
 
         float ratio = (game.getWorldWidth()) / Gdx.graphics.getWidth();
 

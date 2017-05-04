@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
+import com.xqs.mypaoku.stage.GameStage;
+import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -28,7 +30,8 @@ public class BulletOneBg extends BaseImageActor {
 
     private TextureRegion bulletMask;
 
-    private int mode;
+    // mode: 0代表没选中 1代表选中
+    public static int mode=1;
 
     private BitmapFont bitmapFont;
     private float textWidth;
@@ -44,24 +47,25 @@ public class BulletOneBg extends BaseImageActor {
 
         // number mask
         Pixmap myPixMap = new Pixmap(80, 80, Pixmap.Format.RGBA8888);
-        myPixMap.setColor(0.2f, 0.2f, 0.2f, 0.8f);
+        myPixMap.setColor(0.2f, 0.2f, 0.2f, 0.4f);
         myPixMap.fillCircle(40, 40, 40);
 
         bulletMask = new TextureRegion(new Texture(myPixMap));
 
         setRegion(bgRegion);
-        setPosition(30,400);
+        setPosition(30, 400);
 
 
         initFont();
 
-//        addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                super.clicked(event, x, y);
-//                Util.log(TAG,"clicked");
-//            }
-//        });
+        addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                mode = 1;
+                BulletTwoBg.mode = 0;
+            }
+        });
 
 
     }
@@ -80,20 +84,24 @@ public class BulletOneBg extends BaseImageActor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        int ran = MathUtils.random(10, 19);
+        int ran = MathUtils.random(0, 9);
 
 
         batch.draw(bgRegion, 30, 400);
         batch.draw(bulletOne, 30, 400);
 
-        batch.draw(bulletMask, 40, 410);
 
-        layout.setText(bitmapFont, "" + ran);
-        textWidth = layout.width;
-        textHeight = layout.height;
-        bitmapFont.setColor(Color.WHITE);
-        bitmapFont.getData().setScale(0.5f);
-        bitmapFont.draw(batch, "" + ran, 30 + (100 / 2 - textWidth / 2), 400 + (100 / 2 + textHeight / 2));
+        if(mode==1) {
+            batch.draw(bulletMask, 40, 410);
+
+            layout.setText(bitmapFont, "" + ran);
+            textWidth = layout.width;
+            textHeight = layout.height;
+            bitmapFont.setColor(Color.WHITE);
+            bitmapFont.getData().setScale(0.5f);
+            bitmapFont.draw(batch, "" + ran, 30 + (100 / 2 - textWidth / 2), 400 + (100 / 2 + textHeight / 2));
+        }
+
     }
 
 }
