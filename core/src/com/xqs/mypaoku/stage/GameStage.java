@@ -1,8 +1,6 @@
 package com.xqs.mypaoku.stage;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -31,7 +29,8 @@ import com.xqs.mypaoku.actor.enemy.LajiaoEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
-import com.xqs.mypaoku.actor.npc.BulletBg;
+import com.xqs.mypaoku.actor.npc.BulletOneBg;
+import com.xqs.mypaoku.actor.npc.BulletTwoBg;
 import com.xqs.mypaoku.actor.npc.Fade;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Menu;
@@ -44,7 +43,6 @@ import com.xqs.mypaoku.actor.npc.Score;
 import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.EnemyType;
 import com.xqs.mypaoku.res.Level;
-import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
@@ -80,7 +78,8 @@ public class GameStage extends BaseStage {
 
     private Score score;
 
-    private BulletBg bulletBg;
+    private BulletOneBg bulletOneBg;
+    private BulletTwoBg bulletTwoBg;
 
     private Play play;
 
@@ -160,12 +159,18 @@ public class GameStage extends BaseStage {
         addActor(score);
 
         // BulletBg
-        bulletBg = new BulletBg(getMainGame());
-        bulletBg.setMode(BulletBg.MODE_ONE);
-        addActor(bulletBg);
-        bulletBg = new BulletBg(getMainGame());
-        bulletBg.setMode(BulletBg.MODE_TWO);
-        addActor(bulletBg);
+        bulletOneBg = new BulletOneBg(getMainGame());
+        addActor(bulletOneBg);
+        bulletTwoBg = new BulletTwoBg(getMainGame());
+        addActor(bulletTwoBg);
+
+        bulletOneBg.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                Util.log(TAG,"clicked");
+            }
+        });
 
 		// player
         playerActor = new Player(this.getMainGame());
