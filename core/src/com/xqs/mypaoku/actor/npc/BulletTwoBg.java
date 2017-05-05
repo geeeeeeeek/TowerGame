@@ -59,8 +59,10 @@ public class BulletTwoBg extends BaseImageActor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                mode = 1;
-                BulletOneBg.mode = 0;
+                if(GameStage.getGameState() == GameState.GAMING) {
+                    mode = 1;
+                    BulletOneBg.mode = 0;
+                }
             }
         });
 
