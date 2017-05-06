@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Disposable;
 import com.xqs.mypaoku.actor.SoundHelper;
+import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
@@ -136,6 +137,17 @@ public class MyPaokuGame extends Game {
 
 //		gameScreen.init();
 //		setScreen(gameScreen);
+
+		// pv
+		int pv = Prefs.getPrefs().getPv();
+		if(pv == 0){
+			// 首次使用设置子弹数
+			Prefs.getPrefs().setPlayerBulletOneLeftNumber(30);
+			Prefs.getPrefs().setPlayerBulletTwoLeftNumber(30);
+		}
+
+		// pv++
+		Prefs.getPrefs().addPv();
 
 		// 判断是否需要显示帧率, 如果需要, 则进行初始化
 		if (SHOW_FPS) {

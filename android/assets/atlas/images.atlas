@@ -227,3 +227,10 @@ bullet_three_fly
   orig:83,20
   offset:0,0
   index:-1
+bullet_four_fly
+  rotate:false
+  xy:612,980
+  size:85,32
+  orig:85,32
+  offset:0,0
+  index:-1

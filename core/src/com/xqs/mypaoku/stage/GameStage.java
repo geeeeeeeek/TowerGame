@@ -21,7 +21,8 @@ import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.actor.bullet.CaihuaBullet;
 import com.xqs.mypaoku.actor.bullet.PlaneBullet;
-import com.xqs.mypaoku.actor.bullet.PlayerBullet;
+import com.xqs.mypaoku.actor.bullet.PlayerOneBullet;
+import com.xqs.mypaoku.actor.bullet.PlayerTwoBullet;
 import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
 import com.xqs.mypaoku.actor.enemy.DacongEnemy;
 import com.xqs.mypaoku.actor.enemy.HuangguaEnemy;
@@ -35,6 +36,7 @@ import com.xqs.mypaoku.actor.npc.Fade;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Menu;
 import com.xqs.mypaoku.actor.npc.Next;
+import com.xqs.mypaoku.actor.npc.NoBulletPopup;
 import com.xqs.mypaoku.actor.npc.Pause;
 import com.xqs.mypaoku.actor.npc.Play;
 import com.xqs.mypaoku.actor.npc.Popup;
@@ -47,7 +49,6 @@ import com.xqs.mypaoku.stage.base.BaseStage;
 import com.xqs.mypaoku.util.Box2DManager;
 import com.xqs.mypaoku.util.CollisionUtils;
 import com.xqs.mypaoku.util.GameState;
-import com.xqs.mypaoku.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,6 +89,8 @@ public class GameStage extends BaseStage {
     private Next next;
 
     private Menu menu;
+
+    private NoBulletPopup noBulletPopup ;
 
     // level point
     private boolean levelPoint;
@@ -178,6 +181,10 @@ public class GameStage extends BaseStage {
         addActor(playerActor);
 
         updateLifes();
+
+        // nobulletpopup
+        noBulletPopup = new NoBulletPopup(getMainGame());
+        addActor(noBulletPopup);
 
         /** 子弹世界 **/
         world = Box2DManager.createWorld();
@@ -274,10 +281,17 @@ public class GameStage extends BaseStage {
 
     // gener player bullet
     public void generatePlayerBullet(int bulletType, int clickX, int clickY, float positionX, float positionY) {
-        PlayerBullet bullet = new PlayerBullet(getMainGame(), clickX, clickY, positionX, positionY, world);
-        addActor(bullet);
-        bulletList.add(bullet);
-        playerActor.shoot();
+        if(bulletType == BaseBullet.PLAYER_ONE) {
+            PlayerOneBullet bullet = new PlayerOneBullet(getMainGame(), clickX, clickY, positionX, positionY, world);
+            addActor(bullet);
+            bulletList.add(bullet);
+            playerActor.shoot();
+        }else if(bulletType == BaseBullet.PLAYER_TWO){
+            PlayerTwoBullet bullet = new PlayerTwoBullet(getMainGame(), clickX, clickY, positionX, positionY, world);
+            addActor(bullet);
+            bulletList.add(bullet);
+            playerActor.shoot();
+        }
     }
 
     // gener eneny bullet
@@ -409,12 +423,21 @@ public class GameStage extends BaseStage {
             for (BaseEnemy enemy : enemyList) {
                 if (CollisionUtils.isCollision(bullet, enemy, 12) && enemy.getState() == BaseEnemy.WALK) {
                     switch (bullet.getBulletType()) {
-                        case BaseBullet.PLAYER:
+                        case BaseBullet.PLAYER_ONE:
                             //此子弹会自爆
                             if (bullet.getState() == BaseBullet.EXPLODE) {
                                 enemy.hurt();
                                 SoundHelper.playScore();
-                                int random = MathUtils.random(1,100);
+                                int random = MathUtils.random(1,10);
+                                Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
+                            }
+                            break;
+                        case BaseBullet.PLAYER_TWO:
+                            //此子弹会自爆
+                            if (bullet.getState() == BaseBullet.EXPLODE) {
+                                enemy.hurt();
+                                SoundHelper.playScore();
+                                int random = MathUtils.random(1,10);
                                 Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
                             }
                             break;
@@ -498,7 +521,7 @@ public class GameStage extends BaseStage {
     @Override
     public void orderAct(float delta, int counter) {
 //		Util.log(TAG,"计时器="+counter);
-        Score.score=String.valueOf(Integer.parseInt(Score.score)+1);
+
         if (enemyOrderMap.containsKey(counter)) {
             int type = enemyOrderMap.get(counter);
             if(type == EnemyType.END){
@@ -535,9 +558,25 @@ public class GameStage extends BaseStage {
             if (screenX < (Tower.getStopX() * ratio)) {
                 clickX = (int) (Tower.getStopX() * ratio);
             }
-//            Util.log(TAG,"Click --> "+clickX+" "+clickY);
-            if(screenY>Gdx.graphics.getHeight()/4) {
-                generatePlayerBullet(Bullet.PLAYER, clickX, clickY, x, y);
+
+            if(clickY>Gdx.graphics.getHeight()/4 ) {
+                if(BulletOneBg.mode==1){
+                    int leftBulletNumber = Prefs.getPrefs().getPlayerBulletOneLeftNumber();
+                    if(leftBulletNumber>0){
+                        generatePlayerBullet(BaseBullet.PLAYER_ONE, clickX, clickY, x, y);
+                        Prefs.getPrefs().setPlayerBulletOneLeftNumber(leftBulletNumber-1);
+                    }else {
+                        noBulletPopup.setNoBulletPopupVisible();
+                    }
+                }else if(BulletTwoBg.mode==1){
+                    int leftBulletNumber = Prefs.getPrefs().getPlayerBulletTwoLeftNumber();
+                    if(leftBulletNumber>0) {
+                        generatePlayerBullet(BaseBullet.PLAYER_TWO, clickX, clickY, x, y);
+                        Prefs.getPrefs().setPlayerBulletTwoLeftNumber(leftBulletNumber-1);
+                    }else{
+                        noBulletPopup.setNoBulletPopupVisible();
+                    }
+                }
             }
         }
 

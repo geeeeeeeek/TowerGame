@@ -32,8 +32,8 @@ public class Score extends Actor {
     private TextureRegion mRegion8;
     private TextureRegion mRegion9;
 
-//    int score=12;
-    public static String score="12";
+    // 初始分数
+    public static String score="0";
 
     private float sx;
     private float sy;

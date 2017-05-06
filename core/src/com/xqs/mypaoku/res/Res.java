@@ -41,18 +41,18 @@ public class Res {
          **/
         public static final String IMAGE_NPC_BTN_PAUSE = "npc_btn_pause";
 
-        /**
-         * 生命
-         **/
+        // 生命
         public static final String IMAGE_PLAYER_LIFE = "player_life";
 
 
-        /**
-         * 子弹
-         **/
+        // player子弹
         public static final String IMAGE_BULLET_ONE_FLY = "bullet_one_fly";
         public static final String IMAGE_BULLET_ONE_EXPLODE = "bullet_one_explode";
 
+        public static final String IMAGE_BULLET_PLAYER_TWO_FLY = "bullet_four_fly";
+
+
+        // 敌人子弹
         public static final String IMAGE_BULLET_TWO_FLY = "bullet_two_fly";
         public static final String IMAGE_BULLET_TWO_EXPLODE = "bullet_two_explode";
 

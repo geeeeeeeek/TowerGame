@@ -21,16 +21,18 @@ import com.xqs.mypaoku.util.TextureUtil;
  */
 
 public abstract class BaseBullet extends AnimationActor {
-    public final static String TAG = "Bullet";
+    public static final String TAG = "Bullet";
 
-    public final static int FLY = 0;
-    public final static int EXPLODE = 1;
-    public final static int DEAD = 2;
+    public static final int FLY = 0;
+    public static final int EXPLODE = 1;
+    public static final int DEAD = 2;
 
-    public final static int PLAYER = 0;
-    public final static int CAIHUA = 1;
-    public final static int PLANE = 2;
-    public final static int PLAYER2 = 3;
+    public static final int PLAYER_ONE = 10;
+    public static final int PLAYER_TWO = 11;
+    
+    public static final int CAIHUA = 1;
+    public static final int PLANE = 2;
+    public static final int PLAYER2 = 3;
 
 
     //子弹位置

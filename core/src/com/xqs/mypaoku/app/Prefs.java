@@ -17,6 +17,12 @@ public class Prefs {
 
     public static final String LEVEL = "level";
 
+    public static final String PV = "pv";
+
+    public static final String PLAYER_BULLET_ONE_LEFT_NUMBER = "player_bullet_one_left_number";
+
+    public static final String PLAYER_BULLET_TWO_LEFT_NUMBER = "player_bullet_two_left_number";
+
     public static Prefs getPrefs(){
         return new Prefs();
     }
@@ -49,5 +55,32 @@ public class Prefs {
         if(level>passed){
             getInstance().putInteger(LEVEL,level).flush();
         }
+    }
+
+    // --- pv ---
+    public int getPv(){
+        return getInstance().getInteger(PV,0);
+    }
+
+    public void addPv(){
+        int pv = getPv()+1;
+        getInstance().putInteger(PV,pv).flush();
+    }
+
+    // --- left bullet number ---
+    public int getPlayerBulletOneLeftNumber(){
+        return getInstance().getInteger(PLAYER_BULLET_ONE_LEFT_NUMBER,0); // bullet one
+    }
+
+    public void setPlayerBulletOneLeftNumber(int number){
+        getInstance().putInteger(PLAYER_BULLET_ONE_LEFT_NUMBER,number).flush();
+    }
+
+    public int getPlayerBulletTwoLeftNumber(){
+        return getInstance().getInteger(PLAYER_BULLET_TWO_LEFT_NUMBER,0); // bullet two
+    }
+
+    public void setPlayerBulletTwoLeftNumber(int number){
+        getInstance().putInteger(PLAYER_BULLET_TWO_LEFT_NUMBER,number).flush();
     }
 }

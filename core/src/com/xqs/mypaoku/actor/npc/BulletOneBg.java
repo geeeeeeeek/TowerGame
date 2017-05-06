@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
+import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.Util;
@@ -86,7 +87,7 @@ public class BulletOneBg extends BaseImageActor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        int ran = MathUtils.random(0, 9);
+        int leftBulletNumber = Prefs.getPrefs().getPlayerBulletOneLeftNumber();
 
 
         batch.draw(bgRegion, 30, 400);
@@ -96,12 +97,12 @@ public class BulletOneBg extends BaseImageActor {
         if(mode==1) {
             batch.draw(bulletMask, 40, 410);
 
-            layout.setText(bitmapFont, "" + ran);
+            layout.setText(bitmapFont, "" + leftBulletNumber);
             textWidth = layout.width;
             textHeight = layout.height;
-            bitmapFont.setColor(Color.WHITE);
+            bitmapFont.setColor(Color.valueOf("#97e021"));
             bitmapFont.getData().setScale(0.5f);
-            bitmapFont.draw(batch, "" + ran, 30 + (100 / 2 - textWidth / 2), 400 + (100 / 2 + textHeight / 2));
+            bitmapFont.draw(batch, "" + leftBulletNumber, 30 + (100 / 2 - textWidth / 2), 400 + (100 / 2 + textHeight / 2));
         }
 
     }
