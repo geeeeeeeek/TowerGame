@@ -20,6 +20,7 @@ import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.screen.GameScreen;
+import com.xqs.mypaoku.screen.HelpScreen;
 import com.xqs.mypaoku.screen.LevelScreen;
 import com.xqs.mypaoku.screen.MenuScreen;
 import com.xqs.mypaoku.screen.SplashScreen;
@@ -52,6 +53,7 @@ public class MyPaokuGame extends Game {
 	/** 场景 */
 	private SplashScreen splashScreen;
 	private MenuScreen menuScreen;
+	private HelpScreen helpScreen;
 	private LevelScreen levelScreen;
 	private GameScreen gameScreen;
 
@@ -129,6 +131,7 @@ public class MyPaokuGame extends Game {
 		// --- 场景 ---
 		splashScreen = new SplashScreen(this);
 		menuScreen = new MenuScreen(this);
+		helpScreen = new HelpScreen(this);
 		levelScreen = new LevelScreen(this);
 		gameScreen = new GameScreen(this);
 
@@ -193,6 +196,20 @@ public class MyPaokuGame extends Game {
 				Actions.run(new Runnable(){
 					public void run(){
 						setScreen(levelScreen);
+						fading = false;
+					}
+				})));
+	}
+
+	public void showHelpScreen(){
+		helpScreen.init();
+		fadeActor.clearActions();
+		fading = true;
+		fadeActor.addAction(Actions.sequence(
+				Actions.alpha(0.5f,FADE_DURATION),
+				Actions.run(new Runnable(){
+					public void run(){
+						setScreen(helpScreen);
 						fading = false;
 					}
 				})));

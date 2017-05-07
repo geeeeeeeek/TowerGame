@@ -72,6 +72,14 @@ public class MenuStage extends BaseStage {
             }
         });
 
+        helpButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                mainGame.showHelpScreen();
+            }
+        });
+
         quitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

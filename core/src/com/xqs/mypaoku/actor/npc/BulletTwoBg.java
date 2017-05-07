@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.app.Prefs;
+import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.GameStage;
 import com.xqs.mypaoku.util.GameState;
 
@@ -46,7 +47,8 @@ public class BulletTwoBg extends BaseImageActor {
 
         // number mask
         Pixmap myPixMap = new Pixmap(80, 80, Pixmap.Format.RGBA8888);
-        myPixMap.setColor(0.2f, 0.2f, 0.2f, 0.4f);
+        Pixmap.setBlending(Pixmap.Blending.None);
+        myPixMap.setColor(0.2f, 0.2f, 0.2f, 0.6f);
         myPixMap.fillCircle(40, 40, 40);
 
         bulletMask = new TextureRegion(new Texture(myPixMap));
@@ -95,7 +97,7 @@ public class BulletTwoBg extends BaseImageActor {
             layout.setText(bitmapFont, "" + leftBulletNumber);
             textWidth = layout.width;
             textHeight = layout.height;
-            bitmapFont.setColor(Color.valueOf("#97e021"));
+            bitmapFont.setColor(Color.valueOf(Res.Color.FONT_MAIN));
             bitmapFont.getData().setScale(0.5f);
             bitmapFont.draw(batch, "" + leftBulletNumber, 30 + (100 / 2 - textWidth / 2), 500 + (100 / 2 + textHeight / 2));
         }

@@ -133,6 +133,10 @@ public class GameStage extends BaseStage {
         // clear counter
         clearCounter();
 
+        // init bullet number
+        Prefs.getPrefs().setPlayerBulletOneLeftNumber(30);
+        Prefs.getPrefs().setPlayerBulletTwoLeftNumber(30);
+
         // bg
         bgActor = new Bg(this.getMainGame());
         addActor(bgActor);

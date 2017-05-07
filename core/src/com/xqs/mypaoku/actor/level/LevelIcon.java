@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.app.Prefs;
+import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -96,7 +97,7 @@ public class LevelIcon extends BaseImageActor implements BaseImageActor.TimerLis
             layout.setText(bitmapFont, "" + level);
             textWidth = layout.width;
             textHeight = layout.height;
-            bitmapFont.setColor(Color.RED);
+            bitmapFont.setColor(Color.valueOf(Res.Color.FONT_LEVEL));
             bitmapFont.getData().setScale(0.4f);
             bitmapFont.draw(batch, "" + level, this.getX() + (getWidth() / 2 - textWidth / 2), this.getY() + this.getHeight() - (getHeight() / 2 - textHeight / 2));
         }

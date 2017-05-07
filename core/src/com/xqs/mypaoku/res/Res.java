@@ -21,6 +21,12 @@ public class Res {
         public static final String AUDIO_GAMEOVER = AUDIO_BASE_DIR + "gameover.mp3";
     }
 
+    // colors
+    public static class Color{
+        public static final String FONT_MAIN = "#97e021";
+        public static final String FONT_LEVEL = "#328928";
+    }
+
 
     // 图资源
     public static class Atlas {

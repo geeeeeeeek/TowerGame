@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
+import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.util.Util;
 
 /**
@@ -71,8 +72,8 @@ public class StartButton extends Button {
         layout.setText(bitmapFont,"开始游戏");
         textWidth = layout.width;
         textHeight = layout.height;
-        bitmapFont.setColor(Color.RED);
-        bitmapFont.getData().setScale(0.5f);
+        bitmapFont.setColor(Color.valueOf(Res.Color.FONT_MAIN));
+        bitmapFont.getData().setScale(0.4f);
         bitmapFont.draw(batch,"开始游戏",this.getX()+(getWidth()/2-textWidth/2),this.getY()+this.getHeight()-(getHeight()/2-textHeight/2));
 
     }
