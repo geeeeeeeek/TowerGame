@@ -27,6 +27,12 @@ public class Res {
         public static final String FONT_LEVEL = "#328928";
     }
 
+    // Text
+    public static String text_startgame = "Play";
+    public static String text_help = "Help";
+    public static String text_quit = "Quit";
+    public static String text_no_bullet = "No bullets";
+
 
     // 图资源
     public static class Atlas {

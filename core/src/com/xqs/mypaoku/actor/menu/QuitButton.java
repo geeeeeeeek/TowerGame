@@ -66,10 +66,10 @@ public class QuitButton extends Button {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         GlyphLayout layout = new GlyphLayout();
-        layout.setText(bitmapFont,"退出");
+        layout.setText(bitmapFont,Res.text_quit);
         textWidth = layout.width;
         textHeight = layout.height;
-        bitmapFont.draw(batch,"退出",this.getX()+(getWidth()/2-textWidth/2),this.getY()+this.getHeight()-(getHeight()/2-textHeight/2));
+        bitmapFont.draw(batch,Res.text_quit,this.getX()+(getWidth()/2-textWidth/2),this.getY()+this.getHeight()-(getHeight()/2-textHeight/2));
         bitmapFont.setColor(Color.valueOf(Res.Color.FONT_MAIN));
         bitmapFont.getData().setScale(0.4f);
     }

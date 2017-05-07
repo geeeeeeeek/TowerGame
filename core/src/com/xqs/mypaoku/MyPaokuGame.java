@@ -24,6 +24,7 @@ import com.xqs.mypaoku.screen.HelpScreen;
 import com.xqs.mypaoku.screen.LevelScreen;
 import com.xqs.mypaoku.screen.MenuScreen;
 import com.xqs.mypaoku.screen.SplashScreen;
+import com.xqs.mypaoku.util.LocaleUtil;
 
 public class MyPaokuGame extends Game {
 
@@ -64,13 +65,14 @@ public class MyPaokuGame extends Game {
 	private FPSDebug fpsDebug;
 
 	// Android constructor
-	public MyPaokuGame(ActionService actionService) {
+	public MyPaokuGame(ActionService actionService,int language) {
 		mService = actionService;
+		LocaleUtil.initText(language);
 	}
 
 	// desktop constructor
 	public MyPaokuGame(){
-
+		LocaleUtil.initText(0);
 	}
 
 

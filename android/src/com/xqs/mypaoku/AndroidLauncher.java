@@ -19,8 +19,10 @@ public class AndroidLauncher extends AndroidApplication implements ActionService
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.w(TAG,"-->onCreate");
+
+		int language = Util.getLanguage(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new MyPaokuGame(this), config);
+		initialize(new MyPaokuGame(this,language), config);
 	}
 
 	@Override
@@ -49,6 +51,8 @@ public class AndroidLauncher extends AndroidApplication implements ActionService
 		}
 		return false;
 	}
+
+
 
 	@Override
 	public void dosomething() {

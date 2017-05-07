@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
+import com.xqs.mypaoku.res.Res;
 
 /**
  * Created by Administrator on 2017/5/6 0006.
@@ -48,12 +49,12 @@ public class NoBulletPopup extends BaseImageActor implements BaseImageActor.Time
 
         batch.draw(bg, 0,0);
 
-        layout.setText(bitmapFont, "No Bullets");
+        layout.setText(bitmapFont, Res.text_no_bullet);
         textWidth = layout.width;
         textHeight = layout.height;
-        bitmapFont.setColor(Color.valueOf("#97e021"));
+        bitmapFont.setColor(Color.valueOf(Res.Color.FONT_MAIN));
         bitmapFont.getData().setScale(0.5f);
-        bitmapFont.draw(batch, "No Bullets", getMainGame().getWorldWidth()/2-textWidth/2,getMainGame().getWorldHeight()/2+textHeight);
+        bitmapFont.draw(batch, Res.text_no_bullet, getMainGame().getWorldWidth()/2-textWidth/2,getMainGame().getWorldHeight()/2+textHeight);
     }
 
     public void initFont() {
