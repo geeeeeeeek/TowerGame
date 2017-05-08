@@ -23,12 +23,14 @@ import com.xqs.mypaoku.actor.bullet.CaihuaBullet;
 import com.xqs.mypaoku.actor.bullet.PlaneBullet;
 import com.xqs.mypaoku.actor.bullet.PlayerOneBullet;
 import com.xqs.mypaoku.actor.bullet.PlayerTwoBullet;
+import com.xqs.mypaoku.actor.bullet.YangcongBullet;
 import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
 import com.xqs.mypaoku.actor.enemy.DacongEnemy;
 import com.xqs.mypaoku.actor.enemy.HuangguaEnemy;
 import com.xqs.mypaoku.actor.enemy.LajiaoEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
+import com.xqs.mypaoku.actor.enemy.YangcongEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.BulletOneBg;
 import com.xqs.mypaoku.actor.npc.BulletTwoBg;
@@ -181,7 +183,7 @@ public class GameStage extends BaseStage {
 
 		// player
         playerActor = new Player(this.getMainGame());
-        playerActor.setLife(5);
+        playerActor.setLife(15);
         addActor(playerActor);
 
         updateLifes();
@@ -309,6 +311,10 @@ public class GameStage extends BaseStage {
             PlaneBullet bullet = new PlaneBullet(getMainGame(), positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
+        } else if (bulletType == BaseBullet.YANGCONG){
+            YangcongBullet bullet = new YangcongBullet(getMainGame(),positionX,positionY,world);
+            addActor(bullet);
+            bulletList.add(bullet);
         }
     }
 
@@ -341,6 +347,10 @@ public class GameStage extends BaseStage {
             enemyList.add(enemy);
         } else if (type == EnemyType.WONIU) {
             WoniuEnemy enemy = new WoniuEnemy(getMainGame());
+            addActor(enemy);
+            enemyList.add(enemy);
+        } else if(type == EnemyType.YANGCONG){
+            YangcongEnemy enemy = new YangcongEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
         }
@@ -459,6 +469,10 @@ public class GameStage extends BaseStage {
                         bullet.explode();
                         break;
                     case BaseBullet.PLANE:
+                        playerActor.minusLife();
+                        bullet.explode();
+                        break;
+                    case BaseBullet.YANGCONG:
                         playerActor.minusLife();
                         bullet.explode();
                         break;

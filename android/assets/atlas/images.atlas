@@ -31,6 +31,20 @@ npc_btn_pause
   orig:50,54
   offset:0,0
   index:-1
+yangcong_walk
+  rotate:false
+  xy:1366,280
+  size:336,100
+  orig:336,100
+  offset:0,0
+  index:-1
+yangcong_dead
+  rotate:false
+  xy:1365,395
+  size:327,100
+  orig:327,100
+  offset:0,0
+  index:-1
 mushu_walk
   rotate:false
   xy:750,180
@@ -232,5 +246,12 @@ bullet_four_fly
   xy:612,980
   size:85,32
   orig:85,32
+  offset:0,0
+  index:-1
+bullet_yangcong_fly
+  rotate:false
+  xy:1000,950
+  size:200,50
+  orig:200,50
   offset:0,0
   index:-1

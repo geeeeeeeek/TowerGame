@@ -2,36 +2,26 @@ package com.xqs.mypaoku.actor.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.Bullet;
-import com.xqs.mypaoku.actor.Player;
 import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.stage.GameStage;
-import com.xqs.mypaoku.util.GameState;
 import com.xqs.mypaoku.util.TextureUtil;
-import com.xqs.mypaoku.util.Util;
 
 /**
- * Created by Administrator on 2017/3/4 0004.
+ * Created by Administrator on 2017/5/8 0008.
  */
 
-public class CaihuaEnemy extends BaseEnemy {
-
-    public final static String TAG="CaihuaEnemy";
+public class YangcongEnemy extends BaseEnemy {
+    public final static String TAG="YangcongEnemy";
 
     public final static int StartY=150;
 
-
-
-    public CaihuaEnemy(MyPaokuGame mainGame) {
+    public YangcongEnemy(MyPaokuGame mainGame) {
         super(mainGame);
-
-        this.mainGame=mainGame;
-
         position.x=this.mainGame.getWorldWidth();
         position.y=StartY;
 
@@ -45,33 +35,26 @@ public class CaihuaEnemy extends BaseEnemy {
     @Override
     public void fire() {
         super.fire();
-        GameStage.getInstance(mainGame).generateEnemyBullet(BaseBullet.CAIHUA,getX(),getY()+getHeight()/2);
+        GameStage.getInstance(mainGame).generateEnemyBullet(BaseBullet.YANGCONG,getX(),getY()+getHeight()/2);
     }
 
     @Override
     public Animation getWalkAnimation() {
-        TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_CAIHUA_WALK);
-        Animation walkAnimation = new  Animation(0.08F, TextureUtil.getTextureRegions(walkRegion,1,6));
+        TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_YANGCONG_WALK);
+        Animation walkAnimation = new  Animation(0.2F, TextureUtil.getTextureRegions(walkRegion,1,4));
         return walkAnimation;
     }
 
     @Override
     public Animation getFireAnimation() {
-        return getWalkAnimation(); // 与walk相同
+        return getWalkAnimation();
     }
 
     @Override
     public Animation getHurtAnimation() {
-        TextureAtlas.AtlasRegion deadRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_CAIHUA_DEAD);
-        Animation hurtAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(deadRegion,1,6));
-        return hurtAnimation;
-    }
-
-
-    @Override
-    public void act(float delta) {
-
-        super.act(delta);
+        TextureAtlas.AtlasRegion region=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_YANGCONG_DEAD);
+        Animation animation = new  Animation(0.2F, TextureUtil.getTextureRegions(region,1,4));
+        return animation;
     }
 
     @Override
@@ -85,5 +68,6 @@ public class CaihuaEnemy extends BaseEnemy {
                 GameStage.getInstance(mainGame).minusLife();
             }
         }
+
     }
 }
