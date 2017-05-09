@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
 import com.xqs.mypaoku.actor.level.BackButton;
 import com.xqs.mypaoku.actor.menu.MenuBg;
+import com.xqs.mypaoku.actor.npc.HelpPopup;
 import com.xqs.mypaoku.res.Constant;
 import com.xqs.mypaoku.stage.base.BaseStage;
 
@@ -25,14 +26,18 @@ public class HelpStage extends BaseStage {
 
     private BackButton backButton;
 
+    private HelpPopup helpPopup;
+
     public HelpStage(MyPaokuGame mainGame, Viewport viewport) {
         super(mainGame, viewport);
 
         menuBg = new MenuBg(getMainGame());
         backButton = new BackButton(getMainGame());
+        helpPopup = new HelpPopup(getMainGame());
 
         addActor(menuBg);
         addActor(backButton);
+        addActor(helpPopup);
 
 
         backButton.addListener(new ClickListener(){
@@ -46,6 +51,7 @@ public class HelpStage extends BaseStage {
 
     @Override
     public void orderAct(float delta, int counter) {
+
 
     }
 }

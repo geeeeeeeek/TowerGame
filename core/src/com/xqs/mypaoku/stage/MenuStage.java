@@ -11,6 +11,7 @@ import com.xqs.mypaoku.actor.menu.MenuBg;
 import com.xqs.mypaoku.actor.menu.QuitButton;
 import com.xqs.mypaoku.actor.menu.SoundButton;
 import com.xqs.mypaoku.actor.menu.StartButton;
+import com.xqs.mypaoku.actor.npc.HelpPopup;
 import com.xqs.mypaoku.stage.base.BaseStage;
 
 /**
@@ -50,6 +51,7 @@ public class MenuStage extends BaseStage {
         // quit btn
         quitButton = new QuitButton(mainGame);
         addActor(quitButton);
+
 
         // facebook share
         facebookButton = new FacebookButton(mainGame);
@@ -96,5 +98,8 @@ public class MenuStage extends BaseStage {
     public void orderAct(float delta, int counter) {
     }
 
-
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return super.touchUp(screenX, screenY, pointer, button);
+    }
 }

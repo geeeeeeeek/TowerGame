@@ -72,7 +72,7 @@ public class MyPaokuGame extends Game {
 
 	// desktop constructor
 	public MyPaokuGame(){
-		LocaleUtil.initText(0);
+		LocaleUtil.initText(1);
 	}
 
 

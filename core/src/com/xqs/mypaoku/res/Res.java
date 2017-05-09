@@ -32,6 +32,7 @@ public class Res {
     public static String text_help = "Help";
     public static String text_quit = "Quit";
     public static String text_no_bullet = "No bullets";
+    public static String text_help_content = "Player's mission is... ";
 
 
     // 图资源
