@@ -73,6 +73,7 @@ public class Player extends AnimationActor {
     public void shoot(){
         setState(SHOOTING);
         setCurrentAnimation(SHOOTING);
+        SoundHelper.playFireSound();
     }
 
 

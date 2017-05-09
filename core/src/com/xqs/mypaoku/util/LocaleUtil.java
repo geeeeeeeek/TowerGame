@@ -8,7 +8,7 @@ import com.xqs.mypaoku.res.Res;
 
 public class LocaleUtil {
 
-    // 0:english  1:chinese  2:tw
+    // 0:english  1:chinese
     public static void initText(int locale){
 
         if(locale==0){

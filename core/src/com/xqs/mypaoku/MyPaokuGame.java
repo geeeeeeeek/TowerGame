@@ -114,6 +114,9 @@ public class MyPaokuGame extends Game {
 		assetManager.load(Res.Audios.AUDIO_SCORE, Sound.class);
 		assetManager.load(Res.Audios.AUDIO_PASS, Sound.class);
 		assetManager.load(Res.Audios.AUDIO_GAMEOVER, Sound.class);
+		assetManager.load(Res.Audios.AUDIO_BUTTON,Sound.class);
+		assetManager.load(Res.Audios.AUDIO_PLAYER_FIRE,Sound.class);
+		assetManager.load(Res.Audios.AUDIO_EXPLODE,Sound.class);
 
 		// 音乐
 		assetManager.load(Res.Audios.AUDIO_BG, Music.class);

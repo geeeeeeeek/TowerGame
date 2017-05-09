@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.actor.framework.AnimationActor;
 import com.xqs.mypaoku.res.Res;
 import com.xqs.mypaoku.util.Box2DManager;
@@ -65,6 +66,7 @@ public abstract class BasePlayerBullet extends BaseBullet {
                 setRotation(degree);
                 if (position.y < EXPLODE_Y) {
                     explode();
+                    SoundHelper.playExplodeSound();
                 }
                 break;
             case EXPLODE:

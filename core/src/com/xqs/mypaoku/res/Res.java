@@ -19,6 +19,9 @@ public class Res {
         public static final String AUDIO_BG = AUDIO_BASE_DIR + "bg.mp3";
         public static final String AUDIO_PASS = AUDIO_BASE_DIR + "pass.mp3";
         public static final String AUDIO_GAMEOVER = AUDIO_BASE_DIR + "gameover.mp3";
+        public static final String AUDIO_PLAYER_FIRE = AUDIO_BASE_DIR + "player-fire.ogg";
+        public static final String AUDIO_BUTTON = AUDIO_BASE_DIR + "sound-button.mp3";
+        public static final String AUDIO_EXPLODE = AUDIO_BASE_DIR + "sound-explode.mp3";
     }
 
     // colors

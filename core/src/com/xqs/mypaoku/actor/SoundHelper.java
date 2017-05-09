@@ -16,12 +16,20 @@ public class SoundHelper {
     public static Sound passSound;
     public static Sound gameOverSound;
     public static Sound scoreSound;
+    public static Sound buttonSound;
+    public static Sound playerFireSound;
+    public static Sound explodeSound;
+
     public static Music bgMusic;
 
     public static void initSound(MyPaokuGame game){
         passSound = getSound(game, Res.Audios.AUDIO_PASS);
         gameOverSound = getSound(game, Res.Audios.AUDIO_GAMEOVER);
         scoreSound = getSound(game, Res.Audios.AUDIO_SCORE);
+        buttonSound = getSound(game, Res.Audios.AUDIO_BUTTON);
+        playerFireSound = getSound(game,Res.Audios.AUDIO_PLAYER_FIRE);
+        explodeSound = getSound(game,Res.Audios.AUDIO_EXPLODE);
+
         bgMusic = getMusic(game,Res.Audios.AUDIO_BG);
 
         stopAllSound();
@@ -73,6 +81,27 @@ public class SoundHelper {
         boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
         if(canSound){
             scoreSound.play();
+        }
+    }
+
+    public static void playButtonSound(){
+        boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
+        if(canSound){
+            buttonSound.play();
+        }
+    }
+
+    public static void playFireSound(){
+        boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
+        if(canSound){
+            playerFireSound.play();
+        }
+    }
+
+    public static void playExplodeSound(){
+        boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
+        if(canSound){
+            explodeSound.play();
         }
     }
 

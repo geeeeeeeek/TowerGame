@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.actor.menu.FacebookButton;
 import com.xqs.mypaoku.actor.menu.HelpButton;
 import com.xqs.mypaoku.actor.menu.MenuBg;
@@ -71,6 +72,7 @@ public class MenuStage extends BaseStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 mainGame.showLevelScreen();
+                SoundHelper.playButtonSound();
             }
         });
 
@@ -79,6 +81,7 @@ public class MenuStage extends BaseStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 mainGame.showHelpScreen();
+                SoundHelper.playButtonSound();
             }
         });
 
