@@ -28,7 +28,7 @@ public class PlayerTwoBullet extends BasePlayerBullet {
     @Override
     public Animation getPlayerExplodeAnimation() {
         TextureAtlas.AtlasRegion region = game.getAtlas().findRegion(Res.Atlas.IMAGE_BULLET_ONE_EXPLODE);
-        Animation animation = new Animation(0.1F, TextureUtil.getTextureRegions(region, 1, 3));
+        Animation animation = new Animation(0.15F, TextureUtil.getTextureRegions(region, 1, 3));
         return animation;
     }
 
