@@ -29,7 +29,7 @@ import com.xqs.mypaoku.util.LocaleUtil;
 public class MyPaokuGame extends Game {
 
 	public static final String TAG = "MyPaokuGame";
-	public static final float FADE_DURATION = 1f;
+	public static final float FADE_DURATION = 0.4f;
 
 	public ActionService mService;
 

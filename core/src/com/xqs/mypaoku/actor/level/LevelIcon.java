@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.Res;
@@ -62,6 +63,7 @@ public class LevelIcon extends BaseImageActor implements BaseImageActor.TimerLis
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(level<=(passLevelNum+1)) {
+                    SoundHelper.playButtonSound();
                     getMainGame().showGameScreen(level-1);
                 }
             }

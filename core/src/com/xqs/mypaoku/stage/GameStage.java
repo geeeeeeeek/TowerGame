@@ -35,6 +35,7 @@ import com.xqs.mypaoku.actor.enemy.YutouEnemy;
 import com.xqs.mypaoku.actor.npc.BulletOneBg;
 import com.xqs.mypaoku.actor.npc.BulletTwoBg;
 import com.xqs.mypaoku.actor.npc.Fade;
+import com.xqs.mypaoku.actor.npc.Finger;
 import com.xqs.mypaoku.actor.npc.Life;
 import com.xqs.mypaoku.actor.npc.Menu;
 import com.xqs.mypaoku.actor.npc.Next;
@@ -93,6 +94,8 @@ public class GameStage extends BaseStage {
     private Menu menu;
 
     private NoBulletPopup noBulletPopup ;
+
+    private Finger finger;
 
     // level point
     private boolean levelPoint;
@@ -183,7 +186,7 @@ public class GameStage extends BaseStage {
 
 		// player
         playerActor = new Player(this.getMainGame());
-        playerActor.setLife(15);
+        playerActor.setLife(5);
         addActor(playerActor);
 
         updateLifes();
@@ -191,6 +194,7 @@ public class GameStage extends BaseStage {
         // nobulletpopup
         noBulletPopup = new NoBulletPopup(getMainGame());
         addActor(noBulletPopup);
+
 
         /** 子弹世界 **/
         world = Box2DManager.createWorld();

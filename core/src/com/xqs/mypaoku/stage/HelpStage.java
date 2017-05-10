@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.actor.level.BackButton;
 import com.xqs.mypaoku.actor.menu.MenuBg;
 import com.xqs.mypaoku.actor.npc.HelpPopup;
@@ -44,6 +45,7 @@ public class HelpStage extends BaseStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                SoundHelper.playButtonSound();
                 getMainGame().showMenuScreen(Constant.SCREEN_LEVEL);
             }
         });
