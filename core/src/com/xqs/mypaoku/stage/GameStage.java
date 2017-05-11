@@ -445,7 +445,7 @@ public class GameStage extends BaseStage {
                             //此子弹会自爆
                             if (bullet.getState() == BaseBullet.EXPLODE) {
                                 enemy.hurt();
-                                SoundHelper.playScore();
+                                SoundHelper.playGetCoinSound();
                                 int random = MathUtils.random(1,10);
                                 Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
                             }
@@ -454,7 +454,7 @@ public class GameStage extends BaseStage {
                             //此子弹会自爆
                             if (bullet.getState() == BaseBullet.EXPLODE) {
                                 enemy.hurt();
-                                SoundHelper.playScore();
+                                SoundHelper.playGetCoinSound();
                                 int random = MathUtils.random(1,10);
                                 Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
                             }

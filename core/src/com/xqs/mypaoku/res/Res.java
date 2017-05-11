@@ -22,6 +22,7 @@ public class Res {
         public static final String AUDIO_PLAYER_FIRE = AUDIO_BASE_DIR + "player-fire.ogg";
         public static final String AUDIO_BUTTON = AUDIO_BASE_DIR + "sound-button.mp3";
         public static final String AUDIO_EXPLODE = AUDIO_BASE_DIR + "sound-explode.mp3";
+        public static final String AUDIO_GET_COIN = AUDIO_BASE_DIR + "get_coin.mp3";
     }
 
     // colors

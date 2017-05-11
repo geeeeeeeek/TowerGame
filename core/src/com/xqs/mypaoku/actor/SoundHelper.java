@@ -19,6 +19,7 @@ public class SoundHelper {
     public static Sound buttonSound;
     public static Sound playerFireSound;
     public static Sound explodeSound;
+    public static Sound coinSound;
 
     public static Music bgMusic;
 
@@ -29,6 +30,7 @@ public class SoundHelper {
         buttonSound = getSound(game, Res.Audios.AUDIO_BUTTON);
         playerFireSound = getSound(game,Res.Audios.AUDIO_PLAYER_FIRE);
         explodeSound = getSound(game,Res.Audios.AUDIO_EXPLODE);
+        coinSound = getSound(game,Res.Audios.AUDIO_GET_COIN);
 
         bgMusic = getMusic(game,Res.Audios.AUDIO_BG);
 
@@ -102,6 +104,13 @@ public class SoundHelper {
         boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
         if(canSound){
             explodeSound.play();
+        }
+    }
+
+    public static void playGetCoinSound(){
+        boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
+        if(canSound){
+            coinSound.play();
         }
     }
 
