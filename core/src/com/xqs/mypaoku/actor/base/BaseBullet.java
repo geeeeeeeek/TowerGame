@@ -140,6 +140,7 @@ public abstract class BaseBullet extends AnimationActor {
         if (getState() == FLY) {
             setState(EXPLODE);
             setAnimation(explodeAnimation);
+            setScale(1f);
         }
     }
 

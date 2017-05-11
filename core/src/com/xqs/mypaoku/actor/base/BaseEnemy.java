@@ -164,7 +164,7 @@ public abstract class BaseEnemy extends AnimationActor{
 
         timeCounter+=delta;
 
-        if((float)timeCounter>next){
+        if(timeCounter>next){
             next+=0.1f;
             counter++;
             orderAct(delta,counter);

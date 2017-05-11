@@ -18,6 +18,7 @@ public class Fade extends Actor {
 
     private MyPaokuGame game;
 
+
     public Fade(MyPaokuGame game){
         this.game = game;
         fadeRenderer = new ShapeRenderer(8);
@@ -31,7 +32,7 @@ public class Fade extends Actor {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         fadeRenderer.setColor(new Color(0, 0, 0, 0.5f));
-        fadeRenderer.rect(0, 0, game.getWorldWidth(),game.getWorldHeight());
+        fadeRenderer.rect(0, 0, game.getGraWidth(),game.getGraHeight());
         fadeRenderer.end();
         batch.begin();
 

@@ -40,10 +40,13 @@ public class MyPaokuGame extends Game {
 	private ShapeRenderer fadeRenderer;
 	private boolean fading;
 
-	/** 世界宽度 */
+	/** 世界宽高 */
 	private float worldWidth;
-	/** 世界高度 */
 	private float worldHeight;
+
+	/** 屏幕宽高 **/
+	public float graWidth;
+	public float graHeight;
 
 	/** 资源管理器 */
 	private AssetManager assetManager;
@@ -85,8 +88,8 @@ public class MyPaokuGame extends Game {
 		fadeActor.setColor(Color.CLEAR);
 		fadeRenderer = new ShapeRenderer(8);
 
-		float graWidth=Gdx.graphics.getWidth();
-		float graHeight=Gdx.graphics.getHeight();
+		graWidth=Gdx.graphics.getWidth();
+		graHeight=Gdx.graphics.getHeight();
 
 		float ratio=graWidth/graHeight;
 
@@ -268,7 +271,7 @@ public class MyPaokuGame extends Game {
 			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 			fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 			fadeRenderer.setColor(new Color(0, 0, 0, 0.5f));
-			fadeRenderer.rect(0, 0, getWorldWidth(),getWorldHeight());
+			fadeRenderer.rect(0, 0, graWidth , graHeight);
 			fadeRenderer.end();
 		}
 	}
@@ -298,6 +301,14 @@ public class MyPaokuGame extends Game {
 
 	public float getWorldHeight() {
 		return worldHeight;
+	}
+
+	public float getGraWidth(){
+		return graWidth;
+	}
+
+	public float getGraHeight(){
+		return graHeight;
 	}
 
 	public AssetManager getAssetManager() {
