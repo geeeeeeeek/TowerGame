@@ -32,7 +32,8 @@ public class Pause extends BaseImageActor {
 
         setRegion(region);
 
+        setScale(0.8f);
 
-        setPosition(mainGame.getWorldWidth()-80,mainGame.getWorldHeight()-80);
+        setPosition(mainGame.getWorldWidth()-60,mainGame.getWorldHeight()-60);
     }
 }

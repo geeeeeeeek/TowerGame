@@ -250,7 +250,7 @@ public class GameStage extends BaseStage {
             lifeList.add(new Life(getMainGame()));
         }
 
-        int LifeLeft = 0;
+        int LifeLeft = 20;
         for (Life life : lifeList) {
             life.setPosition(LifeLeft, getMainGame().getWorldHeight() - 50);
             addActor(life);
@@ -577,11 +577,14 @@ public class GameStage extends BaseStage {
             int clickX = screenX;
             int clickY = screenY;
 
-            if (screenX < (Tower.getStopX() * ratio)) {
-                clickX = (int) (Tower.getStopX() * ratio);
-            }
+            int stopx = (int) (Tower.getStopX()*ratio);
 
-            if(clickY>Gdx.graphics.getHeight()/4 ) {
+//            if (screenX < stopx) {
+//                clickX = stopx;
+//            }
+
+
+            if(clickY>Gdx.graphics.getHeight()/4 && screenX > (stopx-20)) {
                 if(BulletOneBg.mode==1){
                     int leftBulletNumber = Prefs.getPrefs().getPlayerBulletOneLeftNumber();
                     if(leftBulletNumber>0){

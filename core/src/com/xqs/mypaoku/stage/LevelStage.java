@@ -32,6 +32,8 @@ public class LevelStage extends BaseStage {
     private LevelIcon levelIcon08;
     private LevelIcon levelIcon09;
 
+    private int initX;
+
     public LevelStage(MyPaokuGame mainGame, Viewport viewport){
         super(mainGame,viewport);
 
@@ -40,6 +42,9 @@ public class LevelStage extends BaseStage {
 
         backButton = new BackButton(mainGame);
         addActor(backButton);
+
+        // 初始x
+        initX = (int) mainGame.getWorldWidth()/2 - 600/2;
 
         initLevelIcon();
 
@@ -53,23 +58,23 @@ public class LevelStage extends BaseStage {
 
     private void initLevelIcon() {
         levelIcon01 = new LevelIcon(getMainGame(),1);
-        levelIcon01.setPosition(100,550);
+        levelIcon01.setPosition(initX,550);
         levelIcon02 = new LevelIcon(getMainGame(),2);
-        levelIcon02.setPosition(300,550);
+        levelIcon02.setPosition(initX+200,550);
         levelIcon03 = new LevelIcon(getMainGame(),3);
-        levelIcon03.setPosition(500,550);
+        levelIcon03.setPosition(initX+400,550);
         levelIcon04 = new LevelIcon(getMainGame(),4);
-        levelIcon04.setPosition(100,400);
+        levelIcon04.setPosition(initX,400);
         levelIcon05 = new LevelIcon(getMainGame(),5);
-        levelIcon05.setPosition(300,400);
+        levelIcon05.setPosition(initX+200,400);
         levelIcon06 = new LevelIcon(getMainGame(),6);
-        levelIcon06.setPosition(500,400);
+        levelIcon06.setPosition(initX+400,400);
         levelIcon07 = new LevelIcon(getMainGame(),7);
-        levelIcon07.setPosition(100,250);
+        levelIcon07.setPosition(initX,250);
         levelIcon08 = new LevelIcon(getMainGame(),8);
-        levelIcon08.setPosition(300,250);
+        levelIcon08.setPosition(initX+200,250);
         levelIcon09 = new LevelIcon(getMainGame(),9);
-        levelIcon09.setPosition(500,250);
+        levelIcon09.setPosition(initX+400,250);
 
 
         addActor(levelIcon01);

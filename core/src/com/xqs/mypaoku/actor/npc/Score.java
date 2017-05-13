@@ -17,7 +17,7 @@ public class Score extends Actor {
     public static final float SX3 = 520;
     public static final float SX4 = 480;
 
-    public static final float SY = 650;
+    public static final float SY = 660;
 
     private MyPaokuGame game;
 

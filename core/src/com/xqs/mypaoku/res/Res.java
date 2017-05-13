@@ -23,6 +23,7 @@ public class Res {
         public static final String AUDIO_BUTTON = AUDIO_BASE_DIR + "sound-button.mp3";
         public static final String AUDIO_EXPLODE = AUDIO_BASE_DIR + "sound-explode.mp3";
         public static final String AUDIO_GET_COIN = AUDIO_BASE_DIR + "get_coin.mp3";
+        public static final String AUDIO_SWITCH_GUN = AUDIO_BASE_DIR + "switch_gun.mp3";
     }
 
     // colors

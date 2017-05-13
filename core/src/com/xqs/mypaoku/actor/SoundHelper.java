@@ -20,6 +20,7 @@ public class SoundHelper {
     public static Sound playerFireSound;
     public static Sound explodeSound;
     public static Sound coinSound;
+    public static Sound switchGunSound;
 
     public static Music bgMusic;
 
@@ -31,6 +32,7 @@ public class SoundHelper {
         playerFireSound = getSound(game,Res.Audios.AUDIO_PLAYER_FIRE);
         explodeSound = getSound(game,Res.Audios.AUDIO_EXPLODE);
         coinSound = getSound(game,Res.Audios.AUDIO_GET_COIN);
+        switchGunSound = getSound(game,Res.Audios.AUDIO_SWITCH_GUN);
 
         bgMusic = getMusic(game,Res.Audios.AUDIO_BG);
 
@@ -111,6 +113,13 @@ public class SoundHelper {
         boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
         if(canSound){
             coinSound.play();
+        }
+    }
+
+    public static void playSwitchGunSound(){
+        boolean canSound = Prefs.getPrefs().isSoundEffectsEnabled();
+        if(canSound){
+            switchGunSound.play();
         }
     }
 

@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
+import com.xqs.mypaoku.actor.SoundHelper;
 import com.xqs.mypaoku.actor.base.BaseImageActor;
 import com.xqs.mypaoku.app.Prefs;
 import com.xqs.mypaoku.res.Res;
@@ -68,6 +69,7 @@ public class BulletOneBg extends BaseImageActor {
                 if(GameStage.getGameState() == GameState.GAMING) {
                     mode = 1;
                     BulletTwoBg.mode = 0;
+                    SoundHelper.playSwitchGunSound();
                 }
             }
         });
