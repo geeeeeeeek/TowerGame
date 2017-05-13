@@ -16,16 +16,21 @@ import java.util.Iterator;
 
 public class Life extends BaseImageActor {
 
+    public static String PICTURE="images/life.png";
 
-    private TextureAtlas.AtlasRegion region;
+    private Texture texture;
+    private TextureRegion region;
 
     public Life(MyPaokuGame mainGame) {
         super(mainGame);
 
-        region=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_PLAYER_LIFE);
+        texture = new Texture(Gdx.files.internal(PICTURE));
+
+        region=new TextureRegion(texture);
 
         setRegion(region);
 
+        setScale(0.4f);
     }
 
 

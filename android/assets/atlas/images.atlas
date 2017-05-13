@@ -47,9 +47,9 @@ yangcong_dead
   index:-1
 mushu_walk
   rotate:false
-  xy:750,180
-  size:276,100
-  orig:276,100
+  xy:705,180
+  size:345,100
+  orig:345,100
   offset:0,0
   index:-1
 mushu_fire
@@ -215,9 +215,9 @@ bullet_one_fly
   index:-1
 bullet_one_explode
   rotate:false
-  xy:750,1
-  size:229,100
-  orig:229,100
+  xy:2050,1
+  size:600,100
+  orig:600,100
   offset:0,0
   index:-1
 bullet_two_fly

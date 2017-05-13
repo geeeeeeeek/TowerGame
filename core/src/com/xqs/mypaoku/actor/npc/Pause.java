@@ -1,6 +1,9 @@
 package com.xqs.mypaoku.actor.npc;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.xqs.mypaoku.MyPaokuGame;
@@ -15,15 +18,21 @@ import com.xqs.mypaoku.util.Util;
 public class Pause extends BaseImageActor {
     public static final String TAG = "Pause";
 
-    private TextureAtlas.AtlasRegion region;
+    public static String PICTURE="images/icon_pause.png";
+
+    private Texture texture;
+    private TextureRegion region;
+
     public Pause(MyPaokuGame mainGame) {
         super(mainGame);
 
-        region=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_NPC_BTN_PAUSE);
+        texture = new Texture(Gdx.files.internal(PICTURE));
+
+        region=new TextureRegion(texture);
 
         setRegion(region);
 
-        setPosition(mainGame.getWorldWidth()-getWidth(),mainGame.getWorldHeight()-getHeight());
 
+        setPosition(mainGame.getWorldWidth()-80,mainGame.getWorldHeight()-80);
     }
 }

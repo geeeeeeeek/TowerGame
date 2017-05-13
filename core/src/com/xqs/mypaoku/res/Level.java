@@ -8,7 +8,7 @@ public class Level {
 
 
     public static int level01[][]={
-            {10,EnemyType.CAIHUA},{20,EnemyType.YANGCONG},{30,EnemyType.CAIHUA},{40,EnemyType.YANGCONG},
+            {10,EnemyType.CAIHUA},{20,EnemyType.MUSHU},{30,EnemyType.CAIHUA},{40,EnemyType.YANGCONG},
             {50,EnemyType.END}
     };
 

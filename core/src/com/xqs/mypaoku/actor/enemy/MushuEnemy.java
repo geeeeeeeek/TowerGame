@@ -34,7 +34,7 @@ public class MushuEnemy extends BaseEnemy {
     @Override
     public Animation getWalkAnimation() {
         TextureAtlas.AtlasRegion walkRegion=mainGame.getAtlas().findRegion(Res.Atlas.IMAGE_ENEMY_MUSHU_WALK);
-        Animation walkAnimation = new  Animation(0.1F, TextureUtil.getTextureRegions(walkRegion,1,4));
+        Animation walkAnimation = new  Animation(0.2F, TextureUtil.getTextureRegions(walkRegion,1,4));
         return walkAnimation;
     }
 
@@ -56,7 +56,7 @@ public class MushuEnemy extends BaseEnemy {
     public void orderAct(float delta, int counter) {
         if(counter%10==0) {
             if(getX()>getStopX()) {
-                fire();
+//                fire();
             }
         }
 

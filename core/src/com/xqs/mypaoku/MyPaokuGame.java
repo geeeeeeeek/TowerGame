@@ -147,8 +147,6 @@ public class MyPaokuGame extends Game {
 		// 设置当前场景
 		setScreen(splashScreen);
 
-//		gameScreen.init();
-//		setScreen(gameScreen);
 
 		// pv
 		int pv = Prefs.getPrefs().getPv();
