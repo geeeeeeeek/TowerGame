@@ -20,9 +20,11 @@ import com.xqs.mypaoku.actor.Tower;
 import com.xqs.mypaoku.actor.base.BaseBullet;
 import com.xqs.mypaoku.actor.base.BaseEnemy;
 import com.xqs.mypaoku.actor.bullet.CaihuaBullet;
+import com.xqs.mypaoku.actor.bullet.LajiaoBullet;
 import com.xqs.mypaoku.actor.bullet.PlaneBullet;
 import com.xqs.mypaoku.actor.bullet.PlayerOneBullet;
 import com.xqs.mypaoku.actor.bullet.PlayerTwoBullet;
+import com.xqs.mypaoku.actor.bullet.QiukuiBullet;
 import com.xqs.mypaoku.actor.bullet.YangcongBullet;
 import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
 import com.xqs.mypaoku.actor.enemy.DacongEnemy;
@@ -31,6 +33,7 @@ import com.xqs.mypaoku.actor.enemy.LajiaoEnemy;
 import com.xqs.mypaoku.actor.enemy.LuoboEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
 import com.xqs.mypaoku.actor.enemy.QieziEnemy;
+import com.xqs.mypaoku.actor.enemy.QiukuiEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YangcongEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
@@ -321,6 +324,15 @@ public class GameStage extends BaseStage {
             YangcongBullet bullet = new YangcongBullet(getMainGame(),positionX,positionY,world);
             addActor(bullet);
             bulletList.add(bullet);
+        } else if(bulletType == BaseBullet.QIUKUI){
+            QiukuiBullet bullet = new QiukuiBullet(getMainGame(),positionX,positionY,world);
+            addActor(bullet);
+            bulletList.add(bullet);
+        } else if(bulletType == BaseBullet.LAJIAO){
+            LajiaoBullet bullet = new LajiaoBullet(getMainGame(),positionX,positionY,world);
+            addActor(bullet);
+            bulletList.add(bullet);
+
         }
     }
 
@@ -365,6 +377,10 @@ public class GameStage extends BaseStage {
             enemyList.add(enemy);
         } else if(type == EnemyType.QIEZI){
             QieziEnemy enemy = new QieziEnemy(getMainGame());
+            addActor(enemy);
+            enemyList.add(enemy);
+        } else if(type == EnemyType.QIUKUI){
+            QiukuiEnemy enemy = new QiukuiEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
         }
@@ -487,6 +503,10 @@ public class GameStage extends BaseStage {
                         bullet.explode();
                         break;
                     case BaseBullet.YANGCONG:
+                        playerActor.minusLife();
+                        bullet.explode();
+                        break;
+                    case BaseBullet.QIUKUI:
                         playerActor.minusLife();
                         bullet.explode();
                         break;

@@ -31,6 +31,20 @@ npc_btn_pause
   orig:50,54
   offset:0,0
   index:-1
+qiukui_walk
+  rotate:false
+  xy:1450,520
+  size:200,100
+  orig:200,100
+  offset:0,0
+  index:-1
+qiukui_dead
+  rotate:false
+  xy:1450,630
+  size:400,100
+  orig:400,100
+  offset:0,0
+  index:-1
 luobo_walk
   rotate:false
   xy:1890,150
@@ -283,3 +297,18 @@ bullet_yangcong_fly
   orig:200,50
   offset:0,0
   index:-1
+bullet_qiukui_fly
+  rotate:false
+  xy:1230,950
+  size:343,40
+  orig:343,40
+  offset:0,0
+  index:-1
+bullet_lajiao_fly
+  rotate:false
+  xy:1600,950
+  size:267,40
+  orig:267,40
+  offset:0,0
+  index:-1
+

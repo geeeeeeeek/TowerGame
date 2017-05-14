@@ -79,6 +79,10 @@ public class Res {
 
         public static final String IMAGE_BULLET_YANGCONG_FLY = "bullet_yangcong_fly";
 
+        public static final String IMAGE_BULLET_QIUKUI_FLY = "bullet_qiukui_fly";
+
+        public static final String IMAGE_BULLET_LAJIAO_FLY = "bullet_lajiao_fly";
+
         /* 洋葱 */
         public static final String IMAGE_ENEMY_YANGCONG_WALK = "yangcong_walk";
         public static final String IMAGE_ENEMY_YANGCONG_DEAD = "yangcong_dead";
@@ -115,6 +119,10 @@ public class Res {
         /* 茄子 */
         public static final String IMAGE_ENEMY_QIEZI_WALK = "qiezi_walk";
         public static final String IMAGE_ENEMY_QIEZI_DEAD = "qiezi_dead";
+
+        /* 秋葵 */
+        public static final String IMAGE_ENEMY_QIUKUI_WALK = "qiukui_walk";
+        public static final String IMAGE_ENEMY_QIUKUI_DEAD = "qiukui_dead";
 
         /* 蜗牛 */
         public static final String IMAGE_ENEMY_WONIU_WALK = "woniu_walk";

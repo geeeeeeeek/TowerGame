@@ -8,13 +8,13 @@ public class Level {
 
 
     public static int level01[][]={
-            {10,EnemyType.QIEZI},{20,EnemyType.LUOBO},{30,EnemyType.CAIHUA},{40,EnemyType.YANGCONG},
+            {10,EnemyType.LAJIAO},{20,EnemyType.LUOBO},{30,EnemyType.QIUKUI},{40,EnemyType.YANGCONG},
             {50,EnemyType.QIEZI},{60,EnemyType.LUOBO},{80,EnemyType.CAIHUA},{90,EnemyType.YANGCONG},
             {100,EnemyType.END}
     };
 
     public static int level02[][]={
-            {10,EnemyType.YANGCONG},{20,EnemyType.HUANGGUA},{30,EnemyType.DACONG},{40,EnemyType.LAJIAO},
+            {10,EnemyType.QIUKUI},{20,EnemyType.HUANGGUA},{30,EnemyType.DACONG},{40,EnemyType.LAJIAO},
             {50,EnemyType.END}
     };
 

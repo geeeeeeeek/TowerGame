@@ -30,10 +30,12 @@ public abstract class BaseBullet extends AnimationActor {
     public static final int PLAYER_ONE = 10;
     public static final int PLAYER_TWO = 11;
     
-    public static final int CAIHUA = 1;
-    public static final int PLANE = 2;
-    public static final int PLAYER2 = 3;
-    public static final int YANGCONG = 4;
+    public static final int CAIHUA = 21;
+    public static final int PLANE = 22;
+    public static final int PLAYER2 = 23;
+    public static final int YANGCONG = 24;
+    public static final int QIUKUI = 25;
+    public static final int LAJIAO = 26;
 
 
     //子弹位置
