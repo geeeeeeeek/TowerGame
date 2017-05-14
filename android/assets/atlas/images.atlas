@@ -31,6 +31,34 @@ npc_btn_pause
   orig:50,54
   offset:0,0
   index:-1
+luobo_walk
+  rotate:false
+  xy:1890,150
+  size:444,100
+  orig:444,100
+  offset:0,0
+  index:-1
+luobo_dead
+  rotate:false
+  xy:1890,260
+  size:400,110
+  orig:400,110
+  offset:0,0
+  index:-1
+qiezi_walk
+  rotate:false
+  xy:1890,400
+  size:364,100
+  orig:364,100
+  offset:0,0
+  index:-1
+qiezi_dead
+  rotate:false
+  xy:1890,510
+  size:437,100
+  orig:437,100
+  offset:0,0
+  index:-1
 yangcong_walk
   rotate:false
   xy:1366,280

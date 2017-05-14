@@ -28,7 +28,9 @@ import com.xqs.mypaoku.actor.enemy.CaihuaEnemy;
 import com.xqs.mypaoku.actor.enemy.DacongEnemy;
 import com.xqs.mypaoku.actor.enemy.HuangguaEnemy;
 import com.xqs.mypaoku.actor.enemy.LajiaoEnemy;
+import com.xqs.mypaoku.actor.enemy.LuoboEnemy;
 import com.xqs.mypaoku.actor.enemy.MushuEnemy;
+import com.xqs.mypaoku.actor.enemy.QieziEnemy;
 import com.xqs.mypaoku.actor.enemy.WoniuEnemy;
 import com.xqs.mypaoku.actor.enemy.YangcongEnemy;
 import com.xqs.mypaoku.actor.enemy.YutouEnemy;
@@ -355,6 +357,14 @@ public class GameStage extends BaseStage {
             enemyList.add(enemy);
         } else if(type == EnemyType.YANGCONG){
             YangcongEnemy enemy = new YangcongEnemy(getMainGame());
+            addActor(enemy);
+            enemyList.add(enemy);
+        } else if(type == EnemyType.LUOBO){
+            LuoboEnemy enemy = new LuoboEnemy(getMainGame());
+            addActor(enemy);
+            enemyList.add(enemy);
+        } else if(type == EnemyType.QIEZI){
+            QieziEnemy enemy = new QieziEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
         }

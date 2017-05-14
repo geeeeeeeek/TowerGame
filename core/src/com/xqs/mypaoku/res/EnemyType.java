@@ -17,6 +17,9 @@ public class EnemyType {
     public static final int LAJIAO=25;
     public static final int WONIU = 26;
     public static final int YANGCONG = 27;
+    public static final int LUOBO = 28;
+    public static final int QIEZI = 29;
+
     public static final int END = 100;
 
 }

@@ -8,8 +8,9 @@ public class Level {
 
 
     public static int level01[][]={
-            {10,EnemyType.CAIHUA},{20,EnemyType.MUSHU},{30,EnemyType.CAIHUA},{40,EnemyType.YANGCONG},
-            {50,EnemyType.END}
+            {10,EnemyType.QIEZI},{20,EnemyType.LUOBO},{30,EnemyType.CAIHUA},{40,EnemyType.YANGCONG},
+            {50,EnemyType.QIEZI},{60,EnemyType.LUOBO},{80,EnemyType.CAIHUA},{90,EnemyType.YANGCONG},
+            {100,EnemyType.END}
     };
 
     public static int level02[][]={

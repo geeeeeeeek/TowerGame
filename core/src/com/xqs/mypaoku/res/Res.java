@@ -108,6 +108,14 @@ public class Res {
         public static final String IMAGE_ENEMY_MUSHU_FIRE = "mushu_fire";
         public static final String IMAGE_ENEMY_MUSHU_DEAD = "mushu_dead";
 
+        /* 萝卜 */
+        public static final String IMAGE_ENEMY_LUOBO_WALK = "luobo_walk";
+        public static final String IMAGE_ENEMY_LUOBO_DEAD = "luobo_dead";
+
+        /* 茄子 */
+        public static final String IMAGE_ENEMY_QIEZI_WALK = "qiezi_walk";
+        public static final String IMAGE_ENEMY_QIEZI_DEAD = "qiezi_dead";
+
         /* 蜗牛 */
         public static final String IMAGE_ENEMY_WONIU_WALK = "woniu_walk";
         public static final String IMAGE_ENEMY_WONIU_DEAD = "woniu_dead";
