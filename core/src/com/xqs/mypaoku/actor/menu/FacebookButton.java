@@ -33,7 +33,7 @@ public class FacebookButton extends BaseImageActor {
 
         setRegion(onRegion);
 
-        setPosition(100,100);
+        setPosition(30,30);
 
         addListener(new ClickListener(){
             @Override

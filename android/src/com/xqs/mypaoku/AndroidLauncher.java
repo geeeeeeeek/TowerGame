@@ -60,7 +60,7 @@ public class AndroidLauncher extends AndroidApplication implements ActionService
 
 		ShareDialog shareDialog = new ShareDialog(this);
 		ShareLinkContent linkContent = new ShareLinkContent.Builder()
-				.setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=me.meecha")).build();
+				.setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.xqs.mypaoku")).build();
 		shareDialog.show(linkContent);
 	}
 }

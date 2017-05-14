@@ -29,7 +29,7 @@ public class WoniuEnemy extends BaseEnemy {
 
         setPosition(position.x,position.y);
 
-        setScale(0.5f);
+        setScale(0.9f);
 
         walk();
     }

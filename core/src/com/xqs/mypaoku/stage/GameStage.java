@@ -493,23 +493,14 @@ public class GameStage extends BaseStage {
 
             //与塔
             if (CollisionUtils.isCollision(bullet, tower, 10) && bullet.getState() == BaseBullet.FLY) {
-                switch (bullet.getBulletType()) {
-                    case BaseBullet.CAIHUA:
-                        playerActor.minusLife();
-                        bullet.explode();
-                        break;
-                    case BaseBullet.PLANE:
-                        playerActor.minusLife();
-                        bullet.explode();
-                        break;
-                    case BaseBullet.YANGCONG:
-                        playerActor.minusLife();
-                        bullet.explode();
-                        break;
-                    case BaseBullet.QIUKUI:
-                        playerActor.minusLife();
-                        bullet.explode();
-                        break;
+                if(bullet.getBulletType() == BaseBullet.CAIHUA
+                        || bullet.getBulletType() == BaseBullet.PLANE
+                        || bullet.getBulletType() == BaseBullet.YANGCONG
+                        || bullet.getBulletType() == BaseBullet.QIUKUI
+                        || bullet.getBulletType() == BaseBullet.LAJIAO){
+
+                    playerActor.minusLife();
+                    bullet.explode();
                 }
 
             }
@@ -574,11 +565,33 @@ public class GameStage extends BaseStage {
     public void orderAct(float delta, int counter) {
 //		Util.log(TAG,"计时器="+counter);
 
-        if (enemyOrderMap.containsKey(counter)) {
-            int type = enemyOrderMap.get(counter);
-            if(type == EnemyType.END){
+//        if (enemyOrderMap.containsKey(counter)) {
+//            int order = enemyOrderMap.get(counter);
+//            if(order == EnemyType.END){
+//                levelPoint = true;
+//            }else if(counter%10==0) {
+//                int type = MathUtils.random(20,30);
+//                generateEnemy(type);
+//            }
+//        }
+
+        // 结束或boss
+        if(enemyOrderMap.containsKey(counter)) {
+            int order = enemyOrderMap.get(counter);
+            if(order == EnemyType.BOSS){
+                int type = MathUtils.random(28,30);
+                generateEnemy(type);
+            }else if(order == EnemyType.END){
                 levelPoint = true;
-            }else {
+            }
+        }
+        // 普通
+        else if(!levelPoint){
+            if(currentLevelIndex<3 && counter % 20 == 0){
+                int type = MathUtils.random(20,27);
+                generateEnemy(type);
+            } else if(currentLevelIndex>=3 && counter % 10 == 0){
+                int type = MathUtils.random(20,27);
                 generateEnemy(type);
             }
         }
