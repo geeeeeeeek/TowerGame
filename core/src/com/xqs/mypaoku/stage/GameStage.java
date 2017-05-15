@@ -565,15 +565,6 @@ public class GameStage extends BaseStage {
     public void orderAct(float delta, int counter) {
 //		Util.log(TAG,"计时器="+counter);
 
-//        if (enemyOrderMap.containsKey(counter)) {
-//            int order = enemyOrderMap.get(counter);
-//            if(order == EnemyType.END){
-//                levelPoint = true;
-//            }else if(counter%10==0) {
-//                int type = MathUtils.random(20,30);
-//                generateEnemy(type);
-//            }
-//        }
 
         // 结束或boss
         if(enemyOrderMap.containsKey(counter)) {

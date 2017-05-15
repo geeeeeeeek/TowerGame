@@ -34,7 +34,7 @@ public class MyPaokuGame extends Game {
 	public ActionService mService;
 
 	/** 是否显示帧率 */
-	public static final boolean SHOW_FPS = true;
+	public static final boolean SHOW_FPS = false;
 
 	public Actor fadeActor = new Actor();
 	private ShapeRenderer fadeRenderer;

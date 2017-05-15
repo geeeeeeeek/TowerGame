@@ -36,8 +36,11 @@ public abstract class BaseEnemy extends AnimationActor{
 
     public Vector2 position=new Vector2();
 
-    //停止线
+    // 停止线
     private int stopX;
+
+    // 走路速度
+    private int deltaSpeed=100;
 
     /**计数相关**/
     private float timeCounter=0f;
@@ -62,6 +65,10 @@ public abstract class BaseEnemy extends AnimationActor{
 
     public int getStopX(){
         return this.stopX;
+    }
+
+    public void setDeltaSpeed(int speed){
+        this.deltaSpeed = speed;
     }
 
     /**
@@ -129,13 +136,13 @@ public abstract class BaseEnemy extends AnimationActor{
         super.act(delta);
         switch (this.state){
             case WALK:
-                position.x-=(delta*100);
+                position.x-=(delta*deltaSpeed);
                 if(position.x<stopX){
                     position.x=stopX;
                 }
                 break;
             case FIRE:
-                position.x-=(delta*100);
+                position.x-=(delta*deltaSpeed);
                 if(position.x<stopX){
                     position.x=stopX;
                 }

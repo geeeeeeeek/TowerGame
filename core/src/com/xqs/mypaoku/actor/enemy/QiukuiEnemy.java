@@ -31,6 +31,8 @@ public class QiukuiEnemy extends BaseEnemy {
 
         setPosition(position.x,position.y);
 
+        setDeltaSpeed(200);
+
         walk();
     }
 
