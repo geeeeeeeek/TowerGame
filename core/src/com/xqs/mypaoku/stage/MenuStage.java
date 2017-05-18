@@ -56,7 +56,7 @@ public class MenuStage extends BaseStage {
 
         // facebook share
         facebookButton = new FacebookButton(mainGame);
-        addActor(facebookButton);
+//        addActor(facebookButton);
 
         // set listeners
         soundButton.addListener(new ClickListener(){
