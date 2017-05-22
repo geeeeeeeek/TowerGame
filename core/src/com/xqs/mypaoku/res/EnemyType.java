@@ -7,22 +7,31 @@ package com.xqs.mypaoku.res;
 public class EnemyType {
 
 
-    // enemies
-    public static final int DACONG = 20;
-    public static final int CAIHUA = 21;
-    public static final int MUSHU = 22;
+
+    public static final int LUOBO = 20;
+
+    public static final int QIEZI = 21;
+
+    public static final int LAJIAO= 22;
+
     public static final int YUTOU = 23;
-    public static final int HUANGGUA = 24;
-    public static final int LAJIAO=25;
-    public static final int WONIU = 26;
-    public static final int YANGCONG = 27;
+
+    public static final int YANGCONG = 24;
+
+    public static final int QIUKUI = 25;
+
+    public static final int DACONG = 26;
+
+    public static final int CAIHUA = 27;
+
+    public static final int HUANGGUA = 28;
+
+    public static final int MUSHU = 29;
+
+    public static final int WONIU = 30;
 
     // boss
-    public static final int LUOBO = 28;
-    public static final int QIEZI = 29;
-    public static final int QIUKUI = 30;
 
-    public static final int BOSS = 101;
     public static final int END = 100;
 
 }

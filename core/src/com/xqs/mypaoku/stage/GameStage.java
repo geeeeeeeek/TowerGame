@@ -98,7 +98,7 @@ public class GameStage extends BaseStage {
 
     private Menu menu;
 
-    private NoBulletPopup noBulletPopup ;
+    private NoBulletPopup noBulletPopup;
 
     private Finger finger;
 
@@ -133,7 +133,7 @@ public class GameStage extends BaseStage {
     }
 
     public void init(int currentLevelIndex) {
-        Gdx.app.log(TAG, "init level-->"+currentLevelIndex);
+        Gdx.app.log(TAG, "init level-->" + currentLevelIndex);
 
         this.currentLevelIndex = currentLevelIndex;
 
@@ -164,7 +164,7 @@ public class GameStage extends BaseStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(gameState == GameState.GAMING) {
+                if (gameState == GameState.GAMING) {
                     gameState = GameState.PAUSE;
                     showPopup();
                 }
@@ -189,7 +189,7 @@ public class GameStage extends BaseStage {
 //            }
 //        });
 
-		// player
+        // player
         playerActor = new Player(this.getMainGame());
         playerActor.setLife(5);
         addActor(playerActor);
@@ -216,24 +216,24 @@ public class GameStage extends BaseStage {
         // if reach end
         levelPoint = false;
 
-		// ready
+        // ready
         ready();
     }
 
-    public void replay(){
+    public void replay() {
         init(currentLevelIndex);
     }
 
-    public void next(){
+    public void next() {
         ++currentLevelIndex;
         // 已通全关
-        if(currentLevelIndex>=Level.levels.length){
+        if (currentLevelIndex >= Level.levels.length) {
             currentLevelIndex = 0;
         }
         init(currentLevelIndex);
     }
 
-    public void gameOver(){
+    public void gameOver() {
         SoundHelper.playGameOver();
         setGameState(GameState.GAMEOVER);
         showPopup();
@@ -296,12 +296,12 @@ public class GameStage extends BaseStage {
 
     // gener player bullet
     public void generatePlayerBullet(int bulletType, int clickX, int clickY, float positionX, float positionY) {
-        if(bulletType == BaseBullet.PLAYER_ONE) {
+        if (bulletType == BaseBullet.PLAYER_ONE) {
             PlayerOneBullet bullet = new PlayerOneBullet(getMainGame(), clickX, clickY, positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
             playerActor.shoot();
-        }else if(bulletType == BaseBullet.PLAYER_TWO){
+        } else if (bulletType == BaseBullet.PLAYER_TWO) {
             PlayerTwoBullet bullet = new PlayerTwoBullet(getMainGame(), clickX, clickY, positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
@@ -320,16 +320,16 @@ public class GameStage extends BaseStage {
             PlaneBullet bullet = new PlaneBullet(getMainGame(), positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
-        } else if (bulletType == BaseBullet.YANGCONG){
-            YangcongBullet bullet = new YangcongBullet(getMainGame(),positionX,positionY,world);
+        } else if (bulletType == BaseBullet.YANGCONG) {
+            YangcongBullet bullet = new YangcongBullet(getMainGame(), positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
-        } else if(bulletType == BaseBullet.QIUKUI){
-            QiukuiBullet bullet = new QiukuiBullet(getMainGame(),positionX,positionY,world);
+        } else if (bulletType == BaseBullet.QIUKUI) {
+            QiukuiBullet bullet = new QiukuiBullet(getMainGame(), positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
-        } else if(bulletType == BaseBullet.LAJIAO){
-            LajiaoBullet bullet = new LajiaoBullet(getMainGame(),positionX,positionY,world);
+        } else if (bulletType == BaseBullet.LAJIAO) {
+            LajiaoBullet bullet = new LajiaoBullet(getMainGame(), positionX, positionY, world);
             addActor(bullet);
             bulletList.add(bullet);
 
@@ -367,19 +367,19 @@ public class GameStage extends BaseStage {
             WoniuEnemy enemy = new WoniuEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
-        } else if(type == EnemyType.YANGCONG){
+        } else if (type == EnemyType.YANGCONG) {
             YangcongEnemy enemy = new YangcongEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
-        } else if(type == EnemyType.LUOBO){
+        } else if (type == EnemyType.LUOBO) {
             LuoboEnemy enemy = new LuoboEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
-        } else if(type == EnemyType.QIEZI){
+        } else if (type == EnemyType.QIEZI) {
             QieziEnemy enemy = new QieziEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
-        } else if(type == EnemyType.QIUKUI){
+        } else if (type == EnemyType.QIUKUI) {
             QiukuiEnemy enemy = new QiukuiEnemy(getMainGame());
             addActor(enemy);
             enemyList.add(enemy);
@@ -407,7 +407,7 @@ public class GameStage extends BaseStage {
         } else if (gameState == GameState.GAMEOVER) {
             replay = new Replay(this.getMainGame());
             addActor(replay);
-        } else if(gameState == GameState.PASS){
+        } else if (gameState == GameState.PASS) {
             next = new Next(this.getMainGame());
             addActor(next);
         }
@@ -435,7 +435,7 @@ public class GameStage extends BaseStage {
             replay.remove();
             replay = null;
         }
-        if(next != null){
+        if (next != null) {
             next.remove();
             next = null;
         }
@@ -445,7 +445,7 @@ public class GameStage extends BaseStage {
         }
     }
 
-    public void minusLife(){
+    public void minusLife() {
         playerActor.minusLife();
     }
 
@@ -453,11 +453,11 @@ public class GameStage extends BaseStage {
     public void act(float delta) {
         super.act(delta);
 
-        if(getGameState()!=GameState.GAMING)
+        if (getGameState() != GameState.GAMING)
             return;
 
         // player life
-        if(playerActor.getLife()<=0) {
+        if (playerActor.getLife() <= 0) {
             gameOver();
         }
 
@@ -468,21 +468,30 @@ public class GameStage extends BaseStage {
                 if (CollisionUtils.isCollision(bullet, enemy, 12) && enemy.getState() == BaseEnemy.WALK) {
                     switch (bullet.getBulletType()) {
                         case BaseBullet.PLAYER_ONE:
-                            //此子弹会自爆
-                            if (bullet.getState() == BaseBullet.EXPLODE) {
-                                enemy.hurt();
-                                SoundHelper.playGetCoinSound();
-                                int random = MathUtils.random(1,10);
-                                Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
+                            if (bullet.getState() == BaseBullet.EXPLODE && bullet.getLife()>=1) {
+                                if(enemy.getLife()<=1){
+                                    enemy.hurt();
+                                    SoundHelper.playGetCoinSound();
+                                    int random = MathUtils.random(1, 10);
+                                    Score.score = String.valueOf(Integer.parseInt(Score.score) + random);
+                                }else{
+                                    enemy.setLife(enemy.getLife()-1);
+                                }
+                                bullet.setLife(bullet.getLife()-1);
+
                             }
                             break;
                         case BaseBullet.PLAYER_TWO:
-                            //此子弹会自爆
-                            if (bullet.getState() == BaseBullet.EXPLODE) {
-                                enemy.hurt();
-                                SoundHelper.playGetCoinSound();
-                                int random = MathUtils.random(1,10);
-                                Score.score=String.valueOf(Integer.parseInt(Score.score)+random);
+                            if (bullet.getState() == BaseBullet.EXPLODE && bullet.getLife()>=1) {
+                                if(enemy.getLife()<=1){
+                                    enemy.hurt();
+                                    SoundHelper.playGetCoinSound();
+                                    int random = MathUtils.random(1, 10);
+                                    Score.score = String.valueOf(Integer.parseInt(Score.score) + random);
+                                }else{
+                                    enemy.setLife(enemy.getLife()-1);
+                                }
+                                bullet.setLife(bullet.getLife()-1);
                             }
                             break;
                     }
@@ -493,11 +502,11 @@ public class GameStage extends BaseStage {
 
             //与塔
             if (CollisionUtils.isCollision(bullet, tower, 10) && bullet.getState() == BaseBullet.FLY) {
-                if(bullet.getBulletType() == BaseBullet.CAIHUA
+                if (bullet.getBulletType() == BaseBullet.CAIHUA
                         || bullet.getBulletType() == BaseBullet.PLANE
                         || bullet.getBulletType() == BaseBullet.YANGCONG
                         || bullet.getBulletType() == BaseBullet.QIUKUI
-                        || bullet.getBulletType() == BaseBullet.LAJIAO){
+                        || bullet.getBulletType() == BaseBullet.LAJIAO) {
 
                     playerActor.minusLife();
                     bullet.explode();
@@ -567,30 +576,59 @@ public class GameStage extends BaseStage {
 
 
         // 结束或boss
-        if(enemyOrderMap.containsKey(counter)) {
+        if (enemyOrderMap.containsKey(counter)) {
             int order = enemyOrderMap.get(counter);
-            if(order == EnemyType.BOSS){
-                int type = MathUtils.random(28,30);
-                generateEnemy(type);
-            }else if(order == EnemyType.END){
+            if (order == EnemyType.END) {
                 levelPoint = true;
+            } else {
+                generateEnemy(order);
             }
         }
         // 普通
-        else if(!levelPoint){
-            if(currentLevelIndex<3 && counter % 20 == 0){
-                int type = MathUtils.random(20,27);
+        else if (!levelPoint && counter % 20 == 0) {
+
+            if (currentLevelIndex == 0) {
+                int type = MathUtils.random(19, 20);
                 generateEnemy(type);
-            } else if(currentLevelIndex>=3 && counter % 10 == 0){
-                int type = MathUtils.random(20,27);
+            } else if (currentLevelIndex == 1) {
+                int type = MathUtils.random(20, 21);
                 generateEnemy(type);
+
+            } else if (currentLevelIndex == 2) {
+                int type = MathUtils.random(20, 22);
+                generateEnemy(type);
+
+            } else if (currentLevelIndex == 3) {
+                int type = MathUtils.random(20, 23);
+                generateEnemy(type);
+
+            } else if (currentLevelIndex == 4) {
+                int type = MathUtils.random(20, 24);
+                generateEnemy(type);
+            } else if (currentLevelIndex == 5) {
+                int type = MathUtils.random(20, 25);
+                generateEnemy(type);
+
+            } else if (currentLevelIndex == 6) {
+                int type = MathUtils.random(20, 26);
+                generateEnemy(type);
+
+            } else if (currentLevelIndex == 7) {
+                int type = MathUtils.random(20, 27);
+                generateEnemy(type);
+
+            } else if (currentLevelIndex == 8) {
+                int type = MathUtils.random(20, 28);
+                generateEnemy(type);
+
             }
+
         }
 
 
-        if(levelPoint){
-            if(enemyList.size()<=0){
-                Prefs.getPrefs().setPassedLevel(currentLevelIndex+1);
+        if (levelPoint) {
+            if (enemyList.size() <= 0) {
+                Prefs.getPrefs().setPassedLevel(currentLevelIndex + 1);
                 setGameState(GameState.PASS);
                 SoundHelper.playPass();
                 showPopup();
@@ -611,28 +649,28 @@ public class GameStage extends BaseStage {
             int clickX = screenX;
             int clickY = screenY;
 
-            int stopx = (int) (Tower.getStopX()*ratio);
+            int stopx = (int) (Tower.getStopX() * ratio);
 
 //            if (screenX < stopx) {
 //                clickX = stopx;
 //            }
 
 
-            if(clickY>Gdx.graphics.getHeight()/4 && screenX > (stopx-20)) {
-                if(BulletOneBg.mode==1){
+            if (clickY > Gdx.graphics.getHeight() / 4 && screenX > (stopx - 20)) {
+                if (BulletOneBg.mode == 1) {
                     int leftBulletNumber = Prefs.getPrefs().getPlayerBulletOneLeftNumber();
-                    if(leftBulletNumber>0){
+                    if (leftBulletNumber > 0) {
                         generatePlayerBullet(BaseBullet.PLAYER_ONE, clickX, clickY, x, y);
-                        Prefs.getPrefs().setPlayerBulletOneLeftNumber(leftBulletNumber-1);
-                    }else {
+                        Prefs.getPrefs().setPlayerBulletOneLeftNumber(leftBulletNumber - 1);
+                    } else {
                         noBulletPopup.setNoBulletPopupVisible();
                     }
-                }else if(BulletTwoBg.mode==1){
+                } else if (BulletTwoBg.mode == 1) {
                     int leftBulletNumber = Prefs.getPrefs().getPlayerBulletTwoLeftNumber();
-                    if(leftBulletNumber>0) {
+                    if (leftBulletNumber > 0) {
                         generatePlayerBullet(BaseBullet.PLAYER_TWO, clickX, clickY, x, y);
-                        Prefs.getPrefs().setPlayerBulletTwoLeftNumber(leftBulletNumber-1);
-                    }else{
+                        Prefs.getPrefs().setPlayerBulletTwoLeftNumber(leftBulletNumber - 1);
+                    } else {
                         noBulletPopup.setNoBulletPopupVisible();
                     }
                 }

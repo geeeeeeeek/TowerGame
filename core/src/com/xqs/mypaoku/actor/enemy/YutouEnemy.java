@@ -27,6 +27,8 @@ public class YutouEnemy extends BaseEnemy {
 
         setPosition(position.x,position.y);
 
+        setLife(2);
+
         walk();
     }
 

@@ -12,40 +12,38 @@ public class Level {
     };
 
     public static int level02[][]={
-            {300,EnemyType.END}
+            {600,EnemyType.END}
     };
 
     public static int level03[][]={
-            {300,EnemyType.END}
+            {600,EnemyType.END}
     };
 
     public static int level04[][]={
-            {200,EnemyType.BOSS},
-            {300,EnemyType.END}
+            {600,EnemyType.END}
     };
 
     public static int level05[][]={
-            {200,EnemyType.BOSS},
-            {300,EnemyType.END}
+            {600,EnemyType.END}
     };
 
     public static int level06[][]={
-            {200,EnemyType.BOSS},
-            {300,EnemyType.END}
+            {600,EnemyType.END}
     };
 
     public static int level07[][]={
-            {550,EnemyType.BOSS},
             {600,EnemyType.END}
     };
 
     public static int level08[][]={
-            {550,EnemyType.BOSS},
             {600,EnemyType.END}
     };
 
     public static int level09[][]={
-            {550,EnemyType.BOSS},
+            {510,EnemyType.MUSHU},
+            {520,EnemyType.MUSHU},
+            {530,EnemyType.MUSHU},
+            {550,EnemyType.MUSHU},
             {600,EnemyType.END}
     };
 

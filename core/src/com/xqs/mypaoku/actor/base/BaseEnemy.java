@@ -36,6 +36,9 @@ public abstract class BaseEnemy extends AnimationActor{
 
     public Vector2 position=new Vector2();
 
+    // life
+    private int life;
+
     // 停止线
     private int stopX;
 
@@ -57,6 +60,17 @@ public abstract class BaseEnemy extends AnimationActor{
             fireAnimationFrameLength=fireAnimation.getKeyFrames().length;
         }
         deadAnimationFrameLength=hurtAnimation.getKeyFrames().length;
+
+        // default life is 1
+        setLife(1);
+    }
+
+    public void setLife(int life){
+        this.life = life;
+    }
+
+    public int getLife(){
+        return life;
     }
 
     public void setStopX(int stopX){

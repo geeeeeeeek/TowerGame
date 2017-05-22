@@ -37,6 +37,8 @@ public abstract class BaseBullet extends AnimationActor {
     public static final int QIUKUI = 25;
     public static final int LAJIAO = 26;
 
+    private int life;
+
 
     //子弹位置
     public Vector2 position = new Vector2();
@@ -119,6 +121,9 @@ public abstract class BaseBullet extends AnimationActor {
 
         // 位置
         setPosition(position.x, position.y);
+
+        // 默认1次
+        setLife(1);
     }
 
     // apis
@@ -128,6 +133,14 @@ public abstract class BaseBullet extends AnimationActor {
 
     public abstract int getBulletType();
 
+
+    public void setLife(int life){
+        this.life = life;
+    }
+
+    public int getLife(){
+        return life;
+    }
 
     public void setState(int state) {
         this.state = state;
