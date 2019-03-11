@@ -25,7 +25,7 @@ public class MenuScreen extends ScreenAdapter {
 
     }
 
-    public void init(){
+    public void init() {
         Gdx.input.setInputProcessor(menuStage);
     }
 
@@ -33,7 +33,7 @@ public class MenuScreen extends ScreenAdapter {
     public void render(float delta) {
         super.render(delta);
 
-        if(null!=menuStage){
+        if (null != menuStage) {
             menuStage.draw();
             menuStage.act();
         }

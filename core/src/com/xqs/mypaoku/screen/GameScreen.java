@@ -19,13 +19,14 @@ import com.xqs.mypaoku.stage.GameStage;
 
 /**
  * 主游戏场景
- *
  */
 public class GameScreen extends ScreenAdapter {
 
     private MyPaokuGame mainGame;
 
-    /** 主游戏舞台 */
+    /**
+     * 主游戏舞台
+     */
     private GameStage gameStage;
 
 
@@ -35,13 +36,12 @@ public class GameScreen extends ScreenAdapter {
 
     public void init(int level) {
         // main game stage
-        gameStage=GameStage.getInstance(getMainGame());
+        gameStage = GameStage.getInstance(getMainGame());
         gameStage.init(level);
 
         // set input processor
         Gdx.input.setInputProcessor(gameStage);
     }
-
 
 
     @Override

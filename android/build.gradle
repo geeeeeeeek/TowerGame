@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "22.0.1"
-    compileSdkVersion 23
+    buildToolsVersion "25.0.1"
+    compileSdkVersion 27
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -20,7 +20,12 @@ android {
     defaultConfig {
         applicationId "com.xqs.mypaoku"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 27
+    }
+
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "2g" // 2g should be also OK
     }
 }
 

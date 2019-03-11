@@ -16,7 +16,7 @@ public class LevelScreen extends ScreenAdapter {
     private MyPaokuGame game;
     private LevelStage levelStage;
 
-    public LevelScreen(MyPaokuGame game){
+    public LevelScreen(MyPaokuGame game) {
         this.game = game;
         levelStage = new LevelStage(game, new ScalingViewport(Scaling.fit,
                 game.getWorldWidth(),
@@ -24,7 +24,7 @@ public class LevelScreen extends ScreenAdapter {
         ));
     }
 
-    public void init(){
+    public void init() {
         Gdx.input.setInputProcessor(levelStage);
     }
 
@@ -33,7 +33,7 @@ public class LevelScreen extends ScreenAdapter {
     public void render(float delta) {
         super.render(delta);
 
-        if(null!=levelStage){
+        if (null != levelStage) {
             levelStage.draw();
             levelStage.act();
         }

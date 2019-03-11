@@ -6,5 +6,5 @@ package com.xqs.mypaoku.res;
 
 public class EnemyOrder {
 
-    public static int one[][]={{2,1},{5,1},{30,1}};
+    public static int one[][] = {{2, 1}, {5, 1}, {30, 1}};
 }
