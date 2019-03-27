@@ -29,7 +29,8 @@ public class Res {
     // colors
     public static class Color{
         public static final String FONT_MAIN = "#97e021";
-        public static final String FONT_LEVEL = "#328928";
+//        public static final String FONT_LEVEL = "#328928";
+        public static final String FONT_LEVEL = "#111111";
     }
 
     // Text

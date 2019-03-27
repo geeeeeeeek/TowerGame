@@ -27,6 +27,28 @@ android {
         preDexLibraries = false
         javaMaxHeapSize "2g" // 2g should be also OK
     }
+
+    signingConfigs {
+        myConfig {
+            storeFile file("keystore")
+            storePassword "4643830"
+            keyAlias "xiao"
+            keyPassword "4643830"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.myConfig
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.myConfig
+        }
+    }
 }
 
 

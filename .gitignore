@@ -5,6 +5,8 @@
 *.ear
 hs_err_pid*
 
+android/keystore
+
 ## Robovm
 robovm-build/
 
